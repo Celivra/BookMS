@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org ">
 <head>
-    <meta charset="UTF-8">
-    <title>注册界面</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+    <title>注册 - 图书管理系统</title>
 </head>
 <body>
-    <p>能力额</p>
+<div class="register-box">
+    <h2>用户注册</h2>
+    <form action="/doRegister" method="post">
+        <input name="username" type="text" placeholder="用户名" required />
+        <input id="passwd1" name="password" type="password" placeholder="密码" required />
+        <input id="passwd2" name="password" type="password" placeholder="确认密码" required />
+        <input name="phone" type="text" placeholder="手机号" required />
+        <input name="email" type="email" placeholder="邮箱" required />
+        <button type="submit">注册</button>
+    </form>
+    <p>已有账号？<a th:href="@{/login}">点击登录</a></p>
+</div>
+
+<script src="js/register.js"> </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns:th="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <title>借书用户界面</title>
@@ -13,7 +13,7 @@
     <button class="nav-btn" onclick="showSection('records')">📝 借阅记录</button>
     <button class="nav-btn" onclick="showSection('renew')">🔄 续借申请</button>
     <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
-    <button class="nav-btn">🔓 退出登录</button>
+    <a th:href="@{/logout}"><button class="nav-btn">🔓 退出登录</button></a>
 </div>
 
 <div class="main-content">

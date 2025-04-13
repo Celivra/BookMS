@@ -19,7 +19,11 @@ public class PageController {
 
     @RequestMapping("/")
     public String dashboard(HttpServletRequest req) {
-        return "index";
+        if(req.getSession().getAttribute("admin") != null){
+            return "admin";
+        }else{
+            return "index";
+        }
     }
 
     @RequestMapping("/login")
@@ -37,9 +41,9 @@ public class PageController {
         if(user != null && user.getPassword().equals(password)) {
             if(user.getPower() == 10){
                 request.getSession().setAttribute("admin", user);
-                return "redirect:/admin";
+            }else {
+                request.getSession().setAttribute("user", user);
             }
-            request.getSession().setAttribute("user", user);
             return "redirect:/";
         }
         return "login";
@@ -50,11 +54,19 @@ public class PageController {
         return "register";
     }
 
-    @RequestMapping("/admin")
-    public String admin(HttpServletRequest req){
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest req){
         if(req.getSession().getAttribute("admin") != null){
-            return "admin";
+            req.getSession().setAttribute("admin", null);
+        }
+        if(req.getSession().getAttribute("user") != null){
+            req.getSession().setAttribute("user", null);
         }
         return "redirect:/";
+    }
+
+    @RequestMapping("/doRegister")
+    public String doRegister(){
+        return "redirect:/login";
     }
 }

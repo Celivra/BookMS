@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <title>借书用户界面</title>
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
-    <title>图书管理系统 - 控制台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
 <div class="sidebar">
-    <h2>功能菜单</h2>
-    <button class="nav-btn active" onclick="showSection('dashboard')">📊 控制台首页</button>
-    <button class="nav-btn" onclick="showSection('books')">📚 图书管理</button>
-    <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
-    <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
-    <button class="nav-btn" onclick="showSection('settings')">⚙️ 系统设置</button>
+    <h2>用户菜单</h2>
+    <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
+    <button class="nav-btn" onclick="showSection('records')">📝 借阅记录</button>
+    <button class="nav-btn" onclick="showSection('renew')">🔄 续借申请</button>
+    <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
+    <button class="nav-btn">🔓 退出登录</button>
 </div>
 
 <div class="main-content">
-    <div id="dashboard" class="content-section active">
-        <h3>📊 控制台首页</h3>
-        <p>欢迎登录图书管理系统，您可以从左侧菜单中选择功能。</p>
+    <div id="books" class="content-section active">
+        <h3>📚 图书目录</h3>
+        <div class="book-list">
+            <div class="book-card">
+                <h4>《活着》</h4>
+                <p>余华 - 可借</p>
+            </div>
+            <div class="book-card">
+                <h4>《三体》</h4>
+                <p>刘慈欣 - 已借出</p>
+            </div>
+            <div class="book-card">
+                <h4>《围城》</h4>
+                <p>钱钟书 - 可借</p>
+            </div>
+        </div>
     </div>
 
-    <div id="books" class="content-section">
-        <h3>📚 图书管理</h3>
-        <p>在这里您可以添加、修改、删除图书信息。</p>
+    <div id="records" class="content-section">
+        <h3>📝 借阅记录</h3>
+        <p>1.《三体》 借出日期：2025-04-01，归还日期：2025-04-10</p>
+        <p>2.《活着》 借出日期：2025-03-10，已归还</p>
     </div>
 
-    <div id="borrow" class="content-section">
-        <h3>📖 借阅记录</h3>
-        <p>查看所有图书的借出与归还记录。</p>
+    <div id="renew" class="content-section">
+        <h3>🔄 续借申请</h3>
+        <p>当前暂无可续借的图书。</p>
     </div>
 
-    <div id="users" class="content-section">
-        <h3>👤 用户管理</h3>
-        <p>添加和管理借阅用户的账户信息。</p>
-    </div>
-
-    <div id="settings" class="content-section">
-        <h3>⚙️ 系统设置</h3>
-        <p>设置系统参数，如借阅周期、最大借阅数量等。</p>
+    <div id="profile" class="content-section">
+        <h3>👤 我的信息</h3>
+        <p>用户名：user123</p>
+        <p>联系方式：user@example.com</p>
     </div>
 </div>
 

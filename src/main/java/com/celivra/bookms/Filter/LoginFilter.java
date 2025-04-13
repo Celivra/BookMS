@@ -21,9 +21,9 @@ public class LoginFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        System.out.println(path);
-        User user=(User) req.getSession().getAttribute("user");
-        if(user != null){
+        User user = (User) req.getSession().getAttribute("user");
+        User admin = (User) req.getSession().getAttribute("admin");
+        if(user != null || admin != null){
             filterChain.doFilter(servletRequest, servletResponse);
         } else{
             resp.sendRedirect("/login");

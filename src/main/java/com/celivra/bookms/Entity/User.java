@@ -4,13 +4,20 @@ public class User {
     private Long id;
     private String username;
     private String password;
+    private int power;
 
     public User(){}
-    public User(String username, String password) {
+    public User(String username, String password, int power) {
         this.username = username;
         this.password = password;
     }
 
+    public void setPower(int power) {
+        this.power = power;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public void setUsername(String username) {
         this.username = username;
     }
@@ -27,8 +34,8 @@ public class User {
         return password;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public int getPower() {
+        return power;
     }
 
     public Long getId() {

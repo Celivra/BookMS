@@ -1,15 +1,20 @@
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: 'Segoe UI', sans-serif;
-    background: #f2f4f7;
     display: flex;
     height: 100vh;
+    background: #f5f7fa;
 }
 
 .sidebar {
-    width: 200px;
-    background-color: #324a5e;
-    color: #fff;
+    width: 220px;
+    background: #2d3e50;
+    color: white;
     padding: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -22,21 +27,21 @@ body {
 }
 
 .nav-btn {
-    width: 100%;
     padding: 12px;
-    margin-bottom: 10px;
-    background-color: #3e5c76;
+    background: #3e4e63;
     border: none;
     color: white;
+    width: 100%;
+    margin-bottom: 10px;
     border-radius: 10px;
-    text-align: left;
     cursor: pointer;
+    text-align: left;
     transition: background 0.3s;
 }
 
 .nav-btn:hover,
 .nav-btn.active {
-    background-color: #5fa8d3;
+    background: #5da6e6;
 }
 
 .main-content {
@@ -54,34 +59,10 @@ body {
 }
 
 h3 {
-    color: #333;
     margin-bottom: 20px;
+    color: #333;
 }
 
 p {
     color: #555;
-}
-
-.book-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.book-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 15px;
-}
-
-.book-card h4 {
-    margin-bottom: 8px;
-    font-size: 16px;
-    color: #222;
-}
-
-.book-card p {
-    font-size: 14px;
-    color: #666;
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <title>图书管理系统 - 控制台</title>
+</head>
+<body>
+<div class="sidebar">
+    <h2>功能菜单</h2>
+    <button class="nav-btn active" onclick="showSection('dashboard')">📊 控制台首页</button>
+    <button class="nav-btn" onclick="showSection('books')">📚 图书管理</button>
+    <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
+    <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
+    <button class="nav-btn" onclick="showSection('settings')">⚙️ 系统设置</button>
+</div>
+
+<div class="main-content">
+    <div id="dashboard" class="content-section active">
+        <h3>📊 控制台首页</h3>
+        <p>欢迎登录图书管理系统，您可以从左侧菜单中选择功能。</p>
+    </div>
+
+    <div id="books" class="content-section">
+        <h3>📚 图书管理</h3>
+        <p>在这里您可以添加、修改、删除图书信息。</p>
+    </div>
+
+    <div id="borrow" class="content-section">
+        <h3>📖 借阅记录</h3>
+        <p>查看所有图书的借出与归还记录。</p>
+    </div>
+
+    <div id="users" class="content-section">
+        <h3>👤 用户管理</h3>
+        <p>添加和管理借阅用户的账户信息。</p>
+    </div>
+
+    <div id="settings" class="content-section">
+        <h3>⚙️ 系统设置</h3>
+        <p>设置系统参数，如借阅周期、最大借阅数量等。</p>
+    </div>
+</div>
+
+<script src="js/dashboard.js"> </script>
+</body>
+</html>

@@ -35,6 +35,10 @@ public class PageController {
 
         User user = userMapper.findByUsername(username);
         if(user != null && user.getPassword().equals(password)) {
+            if(user.getPower() == 10){
+                request.getSession().setAttribute("admin", user);
+                return "redirect:/admin";
+            }
             request.getSession().setAttribute("user", user);
             return "redirect:/";
         }
@@ -44,5 +48,13 @@ public class PageController {
     @RequestMapping("/register")
     public String Register(){
         return "register";
+    }
+
+    @RequestMapping("/admin")
+    public String admin(HttpServletRequest req){
+        if(req.getSession().getAttribute("admin") != null){
+            return "admin";
+        }
+        return "redirect:/";
     }
 }

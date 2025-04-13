@@ -17,11 +17,11 @@ public class LoginFilter implements Filter {
         HttpServletResponse resp= (HttpServletResponse) servletResponse;
         String path=req.getRequestURI();
 
-        if(path.contains("/login") || path.contains("/css/") || path.contains("/js/") || path.contains("/register")){
+        if(path.contains("/doLogin") || path.contains("/login") || path.contains("/css/") || path.contains("/js/") || path.contains("/register")){
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-
+        System.out.println(path);
         User user=(User) req.getSession().getAttribute("user");
         if(user != null){
             filterChain.doFilter(servletRequest, servletResponse);

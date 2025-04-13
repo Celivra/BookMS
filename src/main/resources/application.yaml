@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: BookMS
+  datasource:
+    type: com.mysql.cj.jdbc.MysqlDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/bookMS
+    username: root
+    password: 940727
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.celivra.bookms.Entity

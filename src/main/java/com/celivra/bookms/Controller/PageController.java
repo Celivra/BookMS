@@ -1,13 +1,22 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Mapper.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.FlashMapManager;
 
 @Controller
 public class PageController {
+
+    @Autowired
+    UserMapper userMapper;
+    @Autowired
+    private FlashMapManager flashMapManager;
+
     @RequestMapping("/")
     public String dashboard(HttpServletRequest req) {
         return "index";
@@ -23,9 +32,10 @@ public class PageController {
             @RequestParam String username,
             @RequestParam String password,
             HttpServletRequest request ) {
-        System.out.println(username + " " + password);
-        if("admin".equals(username) && "admin".equals(password)){
-            request.getSession().setAttribute("user", new User(username, password));
+
+        User user = userMapper.findByUsername(username);
+        if(user != null && user.getPassword().equals(password)) {
+            request.getSession().setAttribute("user", user);
             return "redirect:/";
         }
         return "login";

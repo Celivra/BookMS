@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="css/admin.css">
     <title>图书管理系统 - 控制台</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <button class="nav-btn" onclick="showSection('books')">📚 图书管理</button>
     <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
     <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
-    <button class="nav-btn" onclick="showSection('settings')">⚙️ 系统设置</button>
+    <button class="nav-btn" onclick="showSection('settings')">⚙️ 管理员账户管理</button>
     <a th:href="@{/logout}"> <button class="nav-btn">🔓 退出登录</button> </a>
 </div>
 
@@ -40,11 +40,11 @@
     </div>
 
     <div id="settings" class="content-section">
-        <h3>⚙️ 系统设置</h3>
-        <p>设置系统参数，如借阅周期、最大借阅数量等。</p>
+        <h3>⚙️ 管理员账户管理</h3>
+        <p>设置该管理员账户。</p>
     </div>
 </div>
 
-<script src="js/dashboard.js"> </script>
+<script src="js/admin.js"> </script>
 </body>
 </html>

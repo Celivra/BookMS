@@ -33,7 +33,7 @@
                 <p>钱钟书 - 可借</p>
             </div>
         </div>
-    </divth:>
+    </div>
 
     <div id="records" class="content-section">
         <h3>📝 借阅记录</h3>
@@ -48,8 +48,9 @@
 
     <div id="profile" class="content-section">
         <h3>👤 我的信息</h3>
-        <p>用户名：user123</p>
-        <p>联系方式：user@example.com</p>
+        <p>用户名：<span th:text="${session.user.username}"></span></p>
+        <p>电话：<span th:text="${session.user.phone}"></span></p>
+        <p>邮箱：<span th:text="${session.user.email}"></span></p>
     </div>
 </div>
 

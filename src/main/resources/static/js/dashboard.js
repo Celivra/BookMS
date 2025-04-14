@@ -9,8 +9,3 @@ function showSection(id) {
     });
     event.target.classList.add('active');
 }
-
-function logout() {
-    alert("已退出登录！");
-    window.location.href = "login.html";
-}

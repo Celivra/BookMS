@@ -6,7 +6,7 @@
 <mapper namespace="com.celivra.bookms.Mapper.UserMapper">
 
     <select id="findByUsername" resultType="com.celivra.bookms.Entity.User" parameterType="String">
-        SELECT id, username, password, power
+        SELECT id, username, password, phone, email, power
         FROM user
         WHERE username = #{username}
     </select>

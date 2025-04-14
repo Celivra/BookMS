@@ -1,36 +1,45 @@
+<!-- ⚠️ 替换原来的 user_dashboard.html 全部内容 -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org ">
 <head>
     <meta charset="UTF-8">
     <title>借书用户界面</title>
-    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css">
+    <style>
+    </style>
 </head>
 <body>
+<div id="overlay" style="display: none;">
+    <div id="overlay-content">
+        <h2 id="overlay-title">书名</h2>
+        <p id="overlay-author">作者：xxx</p>
+        <p id="overlay-desc">简介：xxx</p>
+        <button onclick="alert('借阅请求已发送！')">📖 借阅</button>
+        <button onclick="closeOverlay()">❌ 关闭</button>
+    </div>
+</div>
 <div class="sidebar">
     <h2>用户菜单</h2>
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
     <button class="nav-btn" onclick="showSection('records')">📝 借阅记录</button>
     <button class="nav-btn" onclick="showSection('renew')">🔄 续借申请</button>
     <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
-    <a th:href="@{/logout}"><button class="nav-btn">🔓 退出登录</button></a>
+    <a th:href="@{/logout}"><button class="nav-btn" onclick="logout()">🔓 退出登录</button></a>
 </div>
 
 <div class="main-content">
     <div id="books" class="content-section active">
         <h3>📚 图书目录</h3>
         <div class="book-list">
-            <div class="book-card">
+            <!-- 每本书一个卡片 -->
+            <div class="book-card" onclick="toggleBookDetail({title: '活着', author: '余华', desc: '描述中国底层百姓的苦难命运'})">
                 <h4>《活着》</h4>
                 <p>余华 - 可借</p>
             </div>
-            <div class="book-card">
+            <div class="book-card" onclick="toggleBookDetail({title: '三体', author: '刘慈欣',desc:'描绘了人类与三体文明的首次接触。'})">
                 <h4>《三体》</h4>
                 <p>刘慈欣 - 已借出</p>
-            </div>
-            <div class="book-card">
-                <h4>《围城》</h4>
-                <p>钱钟书 - 可借</p>
             </div>
         </div>
     </div>
@@ -51,9 +60,28 @@
         <p>用户名：<span th:text="${session.user.username}"></span></p>
         <p>电话：<span th:text="${session.user.phone}"></span></p>
         <p>邮箱：<span th:text="${session.user.email}"></span></p>
+        <button onclick="toggleEditForm()">修改信息</button>
+        <button onclick="toggleEditPasswdForm()">修改密码</button>
+        <div id="editForm" class="info-edit-form" style="display: none;">
+            <h4>修改信息</h4>
+            <form action="/doChangeInfo" method="post">
+                <input name="newPhone" type="text" placeholder="新手机号" th:value="${session.user.phone}" /><br>
+                <input name="newEmail" type="email" placeholder="新邮箱" th:value="${session.user.email}" /><br>
+                <button onclick="alert('信息已提交！');">提交</button>
+            </form>
+        </div>
+        <div id="editPasswordForm" class="info-edit-form" style="display: none;">
+            <h4>密码</h4>
+            <form action="/doChangePassword" method="post">
+                <input id="password1" name="newPasswd" type="password" placeholder="新密码" /><br>
+                <input id="password2" type="password" placeholder="确认密码" /><br>
+                <button>提交</button>
+            </form>
+        </div>
     </div>
 </div>
 
 <script src="js/dashboard.js"> </script>
 </body>
 </html>
+

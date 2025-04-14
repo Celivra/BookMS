@@ -10,5 +10,18 @@
         FROM user
         WHERE username = #{username}
     </select>
+    <update id="updateInfo" parameterType="String">
+        update user
+        set
+        phone = #{phone},
+        email = #{email}
+        where username = #{username}
+    </update>
+    <update id="updatePassword" parameterType="String">
+        update user
+        set
+        password = #{password}
+        where username = #{username}
+    </update>
 
 </mapper>

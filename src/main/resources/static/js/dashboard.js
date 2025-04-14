@@ -9,3 +9,48 @@ function showSection(id) {
     });
     event.target.classList.add('active');
 }
+
+function logout() {
+    alert("已退出登录！");
+    window.location.href = "/";
+}
+
+function toggleEditForm() {
+    const form = document.getElementById('editForm');
+    const passwdform = document.getElementById('editPasswordForm');
+    passwdform.style.display = 'none';
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+function toggleEditPasswdForm() {
+    const form = document.getElementById('editForm');
+    const passwdform = document.getElementById('editPasswordForm');
+    form.style.display = 'none';
+    passwdform.style.display = passwdform.style.display === 'none' ? 'block' : 'none';
+}
+function toggleBookDetail(bookData) {
+    // 填充内容
+    document.getElementById('overlay-title').innerText = "《"+bookData.title+"》";
+    document.getElementById('overlay-author').innerText = "作者：" + bookData.author;
+    document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
+
+    // 显示遮罩层
+    document.getElementById('overlay').style.display = 'flex';
+}
+
+function closeOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+}
+
+document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {
+    const password1 = document.getElementById("password1").value;
+    const password2 = document.getElementById("password2").value;
+
+    if (password1 !== password2) {
+        e.preventDefault(); // 阻止表单提交
+        alert("两次输入的密码不一致，请重新输入。");
+        return false;
+    }else{
+        alert("修改成功");
+        return true;
+    }
+});

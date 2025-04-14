@@ -22,7 +22,7 @@ public class PageController {
         if(req.getSession().getAttribute("admin") != null){
             return "admin";
         }else{
-            return "index";
+            return "dashboard";
         }
     }
 

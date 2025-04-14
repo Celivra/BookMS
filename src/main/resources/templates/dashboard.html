@@ -11,6 +11,9 @@
     <div id="overlay-content">
         <h2 id="overlay-title">书名</h2>
         <p id="overlay-author">作者：xxx</p>
+        <p id="overlay-type">类型：xxx</p>
+        <p id="overlay-publisher">出版社：xxx</p>
+        <p id="overlay-number">剩余数量：xxx</p>
         <p id="overlay-desc">简介：xxx</p>
         <button onclick="alert('借阅请求已发送！')">📖 借阅</button>
         <button onclick="closeOverlay()">❌ 关闭</button>
@@ -29,14 +32,17 @@
     <div id="books" class="content-section active">
         <h3>📚 图书目录</h3>
         <div class="book-list">
-            <!-- 每本书一个卡片 -->
-            <div class="book-card" onclick="toggleBookDetail({title: '活着', author: '余华', desc: '描述中国底层百姓的苦难命运'})">
-                <h4>《活着》</h4>
-                <p>余华 - 可借</p>
-            </div>
-            <div class="book-card" onclick="toggleBookDetail({title: '三体', author: '刘慈欣',desc:'描绘了人类与三体文明的首次接触。'})">
-                <h4>《三体》</h4>
-                <p>刘慈欣 - 已借出</p>
+            <div class="book-card"
+                 th:each="book : ${books}"
+                 th:attr="data-title=${book.bookName},
+                          data-author=${book.author},
+                          data-type=${book.bookType},
+                          data-publisher=${book.publisher},
+                          data-number=${book.bookNumber},
+                          data-desc=${book.description}"
+                 onclick="ClickBookCard(this)" >
+                <h4 th:text="${book.bookName}"></h4>
+                <p><span th:text="${book.author}"></span> - 数量:<span th:text="${book.bookNumber}"></span></p>
             </div>
         </div>
     </div>

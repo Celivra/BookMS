@@ -1,19 +1,30 @@
 package com.celivra.bookms.Controller;
 
+import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Mapper.BookMapper;
 import com.celivra.bookms.Mapper.UserMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.FlashMapManager;
 
+import java.util.List;
+
 @Controller
 public class PageController {
 
+    @Autowired
+    BookMapper bookMapper;
+
     @RequestMapping("/")
-    public String dashboard(HttpServletRequest req) {
+    public String dashboard(HttpServletRequest req, Model model) {
+
+        List<Book> bookList = bookMapper.getAllBooks();
+        model.addAttribute("books", bookList);
         if(req.getSession().getAttribute("admin") != null){
             return "admin";
         }else{

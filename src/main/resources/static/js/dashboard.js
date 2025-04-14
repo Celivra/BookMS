@@ -31,6 +31,9 @@ function toggleBookDetail(bookData) {
     // 填充内容
     document.getElementById('overlay-title').innerText = "《"+bookData.title+"》";
     document.getElementById('overlay-author').innerText = "作者：" + bookData.author;
+    document.getElementById('overlay-type').innerText = "类型：" + bookData.type;
+    document.getElementById('overlay-publisher').innerText = "出版社：" + bookData.publisher;
+    document.getElementById('overlay-number').innerText = "所剩数量：" + bookData.number;
     document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
 
     // 显示遮罩层
@@ -54,3 +57,12 @@ document.querySelector("#editPasswordForm form").addEventListener("submit", func
         return true;
     }
 });
+function ClickBookCard(el){
+    const title = el.dataset.title;
+    const author = el.dataset.author;
+    const type = el.dataset.type;
+    const publisher = el.dataset.publisher;
+    const number = el.dataset.number;
+    const desc = el.dataset.desc;
+    toggleBookDetail({title, author, type, publisher, number, desc});
+}

@@ -198,6 +198,15 @@ h3 {
     transition: background 0.3s;
 }
 
+#overlay-content button:disabled{
+    background-color: #818181;
+    cursor: not-allowed;
+}
+#overlay-content button:disabled:hover{
+    background-color: #818181;
+    cursor: not-allowed;
+}
+
 #overlay-content button:hover {
     background-color: #498fd3;
 }

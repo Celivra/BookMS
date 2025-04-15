@@ -40,6 +40,8 @@ function toggleBookDetail(bookData) {
 
     // 显示遮罩层
     document.getElementById('overlay').style.display = 'flex';
+    const borrowbutton =  document.getElementById('borrowButton');
+    borrowbutton.disabled = (bookData.number == 0);
 }
 
 function closeOverlay() {

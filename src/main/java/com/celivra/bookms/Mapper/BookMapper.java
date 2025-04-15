@@ -7,7 +7,10 @@ import java.util.List;
 
 @Mapper
 public interface BookMapper {
+    //根据书名获得书籍信息
     Book findBookByName(String bookName);
+    //根据书籍id获取书籍信息
     Book findBookById(String bookId);
+    //获取所有书籍的信息
     List<Book> getAllBooks();
 }

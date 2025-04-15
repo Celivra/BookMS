@@ -27,6 +27,14 @@ public class BorrowController {
         User user = (User) request.getSession().getAttribute("user");
         //根据bookid获取选中的书籍信息
         Book book = bookMapper.findBookById(bookid);
+        //如果已经借过这本书
+        Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
+        if(CheckBorrow!=null){
+            //添加attribute 标记已经借过，重定向回控制台
+            model.addAttribute("Borrowed",true);
+            return "redirect:/";
+        }
+
 
         //建立借阅记录
         Borrow borrow = new Borrow(user.getId(), book.getId(), DateUtil.getCurrentDate(), null);

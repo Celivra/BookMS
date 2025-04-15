@@ -15,7 +15,10 @@
         <p id="overlay-publisher">出版社：xxx</p>
         <p id="overlay-number">剩余数量：xxx</p>
         <p id="overlay-desc">简介：xxx</p>
-        <button onclick="alert('借阅请求已发送！')">📖 借阅</button>
+        <form action="/borrow" method="post" style="float: left; padding-left: 17%;">
+            <input id="bookid" name="bookid" type="hidden" />
+            <button onclick="alert('借阅请求已发送！')">📖 借阅</button>
+        </form>
         <button onclick="closeOverlay()">❌ 关闭</button>
     </div>
 </div>
@@ -34,7 +37,8 @@
         <div class="book-list">
             <div class="book-card"
                  th:each="book : ${books}"
-                 th:attr="data-title=${book.bookName},
+                 th:attr="data-bookid=${book.id},
+                          data-title=${book.bookName},
                           data-author=${book.author},
                           data-type=${book.bookType},
                           data-publisher=${book.publisher},

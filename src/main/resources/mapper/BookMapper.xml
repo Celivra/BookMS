@@ -7,6 +7,11 @@
         from book
         where bookname = #{bookName}
     </select>
+    <select id="findBookById" parameterType="String" resultType="com.celivra.bookms.Entity.Book">
+        select id, bookname, author, booktype, publisher, booknumber, description
+        from book
+        where id = #{bookId}
+    </select>
     <select id="getAllBooks" parameterType="String" resultType="com.celivra.bookms.Entity.Book">
         select id, bookname, author, booktype, publisher, booknumber, description
         from book

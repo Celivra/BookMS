@@ -36,6 +36,8 @@ function toggleBookDetail(bookData) {
     document.getElementById('overlay-number').innerText = "所剩数量：" + bookData.number;
     document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
 
+    document.getElementById('bookid').value = bookData.bookid;
+
     // 显示遮罩层
     document.getElementById('overlay').style.display = 'flex';
 }
@@ -58,11 +60,12 @@ document.querySelector("#editPasswordForm form").addEventListener("submit", func
     }
 });
 function ClickBookCard(el){
+    const bookid = el.dataset.bookid
     const title = el.dataset.title;
     const author = el.dataset.author;
     const type = el.dataset.type;
     const publisher = el.dataset.publisher;
     const number = el.dataset.number;
     const desc = el.dataset.desc;
-    toggleBookDetail({title, author, type, publisher, number, desc});
+    toggleBookDetail({bookid, title, author, type, publisher, number, desc});
 }

@@ -5,6 +5,7 @@ import com.celivra.bookms.Entity.Borrow;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Mapper.BookMapper;
 import com.celivra.bookms.Mapper.BorrowMapper;
+import com.celivra.bookms.Service.BorrowService;
 import com.celivra.bookms.Util.DateUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class BorrowController {
     @Autowired
-    BookMapper bookMapper;
-    @Autowired
-    BorrowMapper borrowMapper;
+    BorrowService borrowService;
 
     @RequestMapping("/borrow")
     public String borrow(@RequestParam String bookid, HttpServletRequest request, Model model) {
-        //从session里获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
-        //根据bookid获取选中的书籍信息
-        Book book = bookMapper.findBookById(bookid);
-        //如果已经借过这本书
-        Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
-        if(CheckBorrow!=null){
-            //添加attribute 标记已经借过，重定向回控制台
-            model.addAttribute("Borrowed",true);
-            return "redirect:/";
-        }
-
-
-        //建立借阅记录
-        Borrow borrow = new Borrow(user.getId(), book.getId(), DateUtil.getCurrentDate(), null);
-        //将记录插入到数据库里
-        if(borrowMapper.insertBorrow(borrow)){
-            book.setBookNumber(book.getBookNumber() - 1);
-            bookMapper.updateBookInfo(book);
+        boolean success = borrowService.borrowBook(bookid, user);
+        if (!success) {
+            model.addAttribute("Borrowed", true);
         }
         return "redirect:/";
     }

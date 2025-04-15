@@ -1,13 +1,11 @@
 package com.celivra.bookms.Entity;
 
-import java.sql.Date;
-
 public class Borrow {
     Long userid, bookid;
-    Date borrowDate, returnDate;
+    String borrowDate, returnDate;
 
-    public Borrow() {}
-    public Borrow(Long userid, Long bookid, Date borrowDate, Date returnDate) {
+    public Borrow(){}
+    public Borrow(Long userid, Long bookid, String borrowDate, String returnDate) {
         this.userid = userid;
         this.bookid = bookid;
         this.borrowDate = borrowDate;
@@ -22,11 +20,11 @@ public class Borrow {
         this.bookid = bookid;
     }
 
-    public void setBorrowDate(Date borrowDate) {
+    public void setBorrowDate(String borrowDate) {
         this.borrowDate = borrowDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 
@@ -38,21 +36,21 @@ public class Borrow {
         return bookid;
     }
 
-    public Date getBorrowDate() {
+    public String getBorrowDate() {
         return borrowDate;
     }
 
-    public Date getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
     @Override
     public String toString() {
-        return "borrow{" +
+        return "Borrow{" +
                 "userid=" + userid +
                 ", bookid=" + bookid +
-                ", borrowDate=" + borrowDate +
-                ", returnDate=" + returnDate +
+                ", borrowDate='" + borrowDate + '\'' +
+                ", returnDate='" + returnDate + '\'' +
                 '}';
     }
 }

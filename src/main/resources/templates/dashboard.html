@@ -7,34 +7,23 @@
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
 </head>
 <body>
-<div id="borrowOverlay" class="overlay" style="display: none;">
-    <div id="borrow-content" class="overlay-content">
-        <h2 id="borrow-title">书名</h2>
-        <p id="borrow-author">作者：xxx</p>
-        <p id="borrow-type">类型：xxx</p>
-        <p id="borrow-publisher">出版社：xxx</p>
-        <p id="borrow-number">剩余数量：xxx</p>
-        <p id="borrow-desc">简介：xxx</p>
-        <form action="/borrow" method="post" style="float: left; padding-left: 17%;">
+<div id="overlay" class="overlay" style="display: none;">
+    <div id="overlay-content" class="overlay-content">
+        <h2 id="overlay-title">书名</h2>
+        <p id="overlay-author">作者：xxx</p>
+        <p id="overlay-type">类型：xxx</p>
+        <p id="overlay-publisher">出版社：xxx</p>
+        <p id="overlay-number">剩余数量：xxx</p>
+        <p id="overlay-desc">简介：xxx</p>
+        <form id="borrowForm" action="/borrow" method="post" style="float: left; padding-left: 17%;">
             <input id="borrowBookId" name="bookid" type="hidden" />
             <button id="borrowButton">📖 借阅</button>
         </form>
-        <button onclick="closeBorrowOverlay()">❌ 关闭</button>
-    </div>
-</div>
-<div id="returnOverlay" class="overlay" style="display: none;">
-    <div id="return-content" class="overlay-content">
-        <h2 id="return-title">书名</h2>
-        <p id="return-author">作者：xxx</p>
-        <p id="return-type">类型：xxx</p>
-        <p id="return-publisher">出版社：xxx</p>
-        <p id="return-number">剩余数量：xxx</p>
-        <p id="return-desc">简介：xxx</p>
-        <form action="/borrow" method="post" style="float: left; padding-left: 17%;">
-            <input id="returnBookid" name="bookid" type="hidden" />
-            <button id="returnButton">📖 归还</button>
+        <form id="returnForm" action="/returnbook" method="post" style="float: left; padding-left: 17%;">
+            <input id="returnbookid" name="bookid" type="hidden" />
+            <button id="returnbutton">📖 归还</button>
         </form>
-        <button onclick="closeReturnOverlay()">❌ 关闭</button>
+        <button onclick="closeBorrowOverlay()">❌ 关闭</button>
     </div>
 </div>
 <!-- 提示框：借阅失败（已借阅） -->
@@ -67,7 +56,7 @@
                           data-publisher=${book.publisher},
                           data-number=${book.bookNumber},
                           data-desc=${book.description}"
-                 onclick="ClickBookCard(this)" >
+                 onclick="ClickBookCard(this, 'borrow')" >
                 <h4 th:text="${book.bookName}"></h4>
                 <p><span th:text="${book.author}"></span> - 数量:<span th:text="${book.bookNumber}"></span></p>
             </div>
@@ -83,7 +72,15 @@
     <div id="mybook" class="content-section">
         <h3>📚 已借到的图书</h3>
         <div class="book-list">
-            <div class="book-card" th:each="book : ${userbooks}" >
+            <div class="book-card" th:each="book : ${userbooks}"
+                 th:attr="data-bookid=${book.id},
+                          data-title=${book.bookName},
+                          data-author=${book.author},
+                          data-type=${book.bookType},
+                          data-publisher=${book.publisher},
+                          data-number=${book.bookNumber},
+                          data-desc=${book.description}"
+                 onclick="ClickBookCard(this, 'return')" >
                 <h4 th:text="${book.bookName}"></h4>
                 <p><span th:text="${book.author}"></span></span></p>
             </div>

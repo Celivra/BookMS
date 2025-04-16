@@ -27,19 +27,27 @@ function toggleEditPasswdForm() {
     form.style.display = 'none';
     passwdform.style.display = passwdform.style.display === 'none' ? 'block' : 'none';
 }
-function toggleBorrowBookDetail(bookData) {
+function toggleBookDetail(bookData, BorR) {
+    //显示哪一个form
+    document.getElementById('borrowForm').style.display = BorR==='borrow'?'block':'none';
+    document.getElementById('returnForm').style.display = BorR==='return'?'block':'none';
+
+    //当显示returnform时关闭哪些标签
+    document.getElementById('overlay-number').style.display = BorR==='borrow'?'block':'none';
+
     // 填充内容
-    document.getElementById('borrow-title').innerText = "《"+bookData.title+"》";
-    document.getElementById('borrow-author').innerText = "作者：" + bookData.author;
-    document.getElementById('borrow-type').innerText = "类型：" + bookData.type;
-    document.getElementById('borrow-publisher').innerText = "出版社：" + bookData.publisher;
-    document.getElementById('borrow-number').innerText = "所剩数量：" + bookData.number;
-    document.getElementById('borrow-desc').innerText = "简介：" + bookData.desc;
+    document.getElementById('overlay-title').innerText = "《"+bookData.title+"》";
+    document.getElementById('overlay-author').innerText = "作者：" + bookData.author;
+    document.getElementById('overlay-type').innerText = "类型：" + bookData.type;
+    document.getElementById('overlay-publisher').innerText = "出版社：" + bookData.publisher;
+    document.getElementById('overlay-number').innerText = "所剩数量：" + bookData.number;
+    document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
 
     document.getElementById('borrowBookId').value = bookData.bookid;
+    document.getElementById('returnbookid').value = bookData.bookid;
 
     // 显示遮罩层
-    document.getElementById('borrowOverlay').style.display = 'flex';
+    document.getElementById('overlay').style.display = 'flex';
     const borrowbutton =  document.getElementById('borrowButton');
     borrowbutton.disabled = (bookData.number == 0);
 }
@@ -48,7 +56,7 @@ function closeBorrowedOverlay() {
     document.getElementById('Borrowed').style.display = 'none';
 }
 function closeBorrowOverlay() {
-    document.getElementById('borrowOverlay').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
 }
 
 document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {
@@ -64,7 +72,7 @@ document.querySelector("#editPasswordForm form").addEventListener("submit", func
         return true;
     }
 });
-function ClickBookCard(el){
+function ClickBookCard(el, BorR){
     const bookid = el.dataset.bookid
     const title = el.dataset.title;
     const author = el.dataset.author;
@@ -72,5 +80,5 @@ function ClickBookCard(el){
     const publisher = el.dataset.publisher;
     const number = el.dataset.number;
     const desc = el.dataset.desc;
-    toggleBorrowBookDetail({bookid, title, author, type, publisher, number, desc});
+    toggleBookDetail({bookid, title, author, type, publisher, number, desc}, BorR);
 }

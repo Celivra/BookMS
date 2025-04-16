@@ -10,18 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 
+import java.util.List;
+
 @Service
 public class BorrowService {
     @Autowired
-    BookMapper bookMapper;
+    BookService bookService;
     @Autowired
     BorrowMapper borrowMapper;
-    @Autowired
-    private BeanNameViewResolver beanNameViewResolver;
 
+    public List<Book> getUserBorrowedBooks(String userId) {
+        return borrowMapper.getUserBorrowedBooks(userId);
+    }
     public boolean borrowBook(String bookid, User user) {
         //根据bookid获取选中的书籍信息
-        Book book = bookMapper.findBookById(bookid);
+        Book book = bookService.findBookById(bookid);
         //如果已经借过这本书
         Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
         if (CheckBorrow != null) {
@@ -33,7 +36,7 @@ public class BorrowService {
         //将记录插入到数据库里
         if(borrowMapper.insertBorrow(borrow)){
             book.setBookNumber(book.getBookNumber() - 1);
-            bookMapper.updateBookInfo(book);
+            bookService.updateBook(book);
             return true;
         }
         return false;

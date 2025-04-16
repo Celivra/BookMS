@@ -1,5 +1,6 @@
 package com.celivra.bookms.Mapper;
 
+import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.Borrow;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,4 +20,7 @@ public interface BorrowMapper {
     //获取某个用户借阅某本书的数据
     @Select("select * from borrow where userid = #{userid} and bookid = #{bookid}")
     Borrow getBorrowByUserAndBook(String userid, String bookid);
+
+    @Select("select * from book join borrow on id = borrow.bookid where borrow.userid = #{userid}")
+    List<Book> getUserBorrowedBooks(String userid);
 }

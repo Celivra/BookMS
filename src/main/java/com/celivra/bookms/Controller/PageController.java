@@ -1,7 +1,11 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
+import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Mapper.BookMapper;
+import com.celivra.bookms.Mapper.BorrowMapper;
+import com.celivra.bookms.Service.BookService;
+import com.celivra.bookms.Service.BorrowService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,20 +18,28 @@ import java.util.List;
 public class PageController {
 
     @Autowired
-    BookMapper bookMapper;
+    BookService bookService;
+    @Autowired
+    BorrowService borrowService;
 
     @RequestMapping("/")
     public String dashboard(HttpServletRequest req, Model model) {
-        //加载/页面时获取所有书籍的信息
-        List<Book> bookList = bookMapper.getAllBooks();
-        //将获取到的所有数据放到model里，供前端调用
-        model.addAttribute("books", bookList);
-        //判断当前session里的是admin还是user,分别返回各自的页面
+
+        //  如果是admin用户则跳转到admin的页面
         if(req.getSession().getAttribute("admin") != null){
             return "admin";
-        }else{
-            return "dashboard";
         }
+
+        //获取当前用户的信息
+        User user = (User) req.getSession().getAttribute("user");
+        //将当前用户所借到的书全部读取下来
+        List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
+        //加载/页面时获取所有书籍的信息
+        List<Book> bookList = bookService.getAllBooks();
+        //将获取到的所有数据放到model里，供前端调用
+        model.addAttribute("books", bookList);
+        model.addAttribute("userbooks", userbooks);
+        return "dashboard";
     }
     @RequestMapping("/login")
     public String loginPage(){

@@ -27,19 +27,19 @@ function toggleEditPasswdForm() {
     form.style.display = 'none';
     passwdform.style.display = passwdform.style.display === 'none' ? 'block' : 'none';
 }
-function toggleBookDetail(bookData) {
+function toggleBorrowBookDetail(bookData) {
     // 填充内容
-    document.getElementById('overlay-title').innerText = "《"+bookData.title+"》";
-    document.getElementById('overlay-author').innerText = "作者：" + bookData.author;
-    document.getElementById('overlay-type').innerText = "类型：" + bookData.type;
-    document.getElementById('overlay-publisher').innerText = "出版社：" + bookData.publisher;
-    document.getElementById('overlay-number').innerText = "所剩数量：" + bookData.number;
-    document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
+    document.getElementById('borrow-title').innerText = "《"+bookData.title+"》";
+    document.getElementById('borrow-author').innerText = "作者：" + bookData.author;
+    document.getElementById('borrow-type').innerText = "类型：" + bookData.type;
+    document.getElementById('borrow-publisher').innerText = "出版社：" + bookData.publisher;
+    document.getElementById('borrow-number').innerText = "所剩数量：" + bookData.number;
+    document.getElementById('borrow-desc').innerText = "简介：" + bookData.desc;
 
-    document.getElementById('bookid').value = bookData.bookid;
+    document.getElementById('borrowBookId').value = bookData.bookid;
 
     // 显示遮罩层
-    document.getElementById('overlay').style.display = 'flex';
+    document.getElementById('borrowOverlay').style.display = 'flex';
     const borrowbutton =  document.getElementById('borrowButton');
     borrowbutton.disabled = (bookData.number == 0);
 }
@@ -47,8 +47,8 @@ function toggleBookDetail(bookData) {
 function closeBorrowedOverlay() {
     document.getElementById('Borrowed').style.display = 'none';
 }
-function closeOverlay() {
-    document.getElementById('overlay').style.display = 'none';
+function closeBorrowOverlay() {
+    document.getElementById('borrowOverlay').style.display = 'none';
 }
 
 document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {
@@ -72,5 +72,5 @@ function ClickBookCard(el){
     const publisher = el.dataset.publisher;
     const number = el.dataset.number;
     const desc = el.dataset.desc;
-    toggleBookDetail({bookid, title, author, type, publisher, number, desc});
+    toggleBorrowBookDetail({bookid, title, author, type, publisher, number, desc});
 }

@@ -7,19 +7,34 @@
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
 </head>
 <body>
-<div id="overlay" style="display: none;">
-    <div id="overlay-content">
-        <h2 id="overlay-title">书名</h2>
-        <p id="overlay-author">作者：xxx</p>
-        <p id="overlay-type">类型：xxx</p>
-        <p id="overlay-publisher">出版社：xxx</p>
-        <p id="overlay-number">剩余数量：xxx</p>
-        <p id="overlay-desc">简介：xxx</p>
+<div id="borrowOverlay" class="overlay" style="display: none;">
+    <div id="borrow-content" class="overlay-content">
+        <h2 id="borrow-title">书名</h2>
+        <p id="borrow-author">作者：xxx</p>
+        <p id="borrow-type">类型：xxx</p>
+        <p id="borrow-publisher">出版社：xxx</p>
+        <p id="borrow-number">剩余数量：xxx</p>
+        <p id="borrow-desc">简介：xxx</p>
         <form action="/borrow" method="post" style="float: left; padding-left: 17%;">
-            <input id="bookid" name="bookid" type="hidden" />
+            <input id="borrowBookId" name="bookid" type="hidden" />
             <button id="borrowButton">📖 借阅</button>
         </form>
-        <button onclick="closeOverlay()">❌ 关闭</button>
+        <button onclick="closeBorrowOverlay()">❌ 关闭</button>
+    </div>
+</div>
+<div id="returnOverlay" class="overlay" style="display: none;">
+    <div id="return-content" class="overlay-content">
+        <h2 id="return-title">书名</h2>
+        <p id="return-author">作者：xxx</p>
+        <p id="return-type">类型：xxx</p>
+        <p id="return-publisher">出版社：xxx</p>
+        <p id="return-number">剩余数量：xxx</p>
+        <p id="return-desc">简介：xxx</p>
+        <form action="/borrow" method="post" style="float: left; padding-left: 17%;">
+            <input id="returnBookid" name="bookid" type="hidden" />
+            <button id="returnButton">📖 归还</button>
+        </form>
+        <button onclick="closeReturnOverlay()">❌ 关闭</button>
     </div>
 </div>
 <!-- 提示框：借阅失败（已借阅） -->
@@ -67,7 +82,12 @@
 
     <div id="mybook" class="content-section">
         <h3>📚 已借到的图书</h3>
-        <p>没有借到任何书籍。</p>
+        <div class="book-list">
+            <div class="book-card" th:each="book : ${userbooks}" >
+                <h4 th:text="${book.bookName}"></h4>
+                <p><span th:text="${book.author}"></span></span></p>
+            </div>
+        </div>
     </div>
 
     <div id="profile" class="content-section">

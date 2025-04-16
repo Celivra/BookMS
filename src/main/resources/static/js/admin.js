@@ -22,3 +22,9 @@ function toggleChangePassword(){
     cPasswdForm.style.display = cPasswdForm.style.display === 'none'? 'block':'none';
     cUnameForm.style.display = 'none';
 }
+function logout(){
+    document.getElementById('logout').style.display='flex';
+}
+function closeOverlay(id){
+    document.getElementById(id).style.display='none';
+}

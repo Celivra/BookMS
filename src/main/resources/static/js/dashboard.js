@@ -11,8 +11,7 @@ function showSection(id) {
 }
 
 function logout() {
-    alert("已退出登录！");
-    window.location.href = "/";
+    document.getElementById('logout').style.display = 'flex';
 }
 
 function toggleEditForm() {
@@ -52,11 +51,8 @@ function toggleBookDetail(bookData, BorR) {
     borrowbutton.disabled = (bookData.number == 0);
 }
 
-function closeBorrowedOverlay() {
-    document.getElementById('Borrowed').style.display = 'none';
-}
-function closeBorrowOverlay() {
-    document.getElementById('overlay').style.display = 'none';
+function closeOverlay(id) {
+    document.getElementById(id).style.display = 'none';
 }
 
 document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {

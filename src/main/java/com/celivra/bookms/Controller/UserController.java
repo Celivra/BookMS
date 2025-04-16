@@ -1,7 +1,6 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.User;
-import com.celivra.bookms.Mapper.UserMapper;
 import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 //有关提交的接口
 @Controller
-public class DoController {
+public class UserController {
     @Autowired
     UserService userService;
 

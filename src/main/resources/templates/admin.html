@@ -4,9 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/admin.css">
+    <link rel="stylesheet" type="text/css" href="css/overlay.css">
     <title>图书管理系统 - 控制台</title>
 </head>
 <body>
+<div id="logout" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <p>确认要登出吗？</p>
+        <a th:href="@{/logout}" style="text-decoration: none;">
+            <button>✅ 确认</button>
+        </a>
+        <button onclick="closeOverlay('logout')">❌ 取消</button>
+    </div>
+</div>
 <div class="sidebar">
     <h2>功能菜单</h2>
     <button class="nav-btn active" onclick="showSection('dashboard')">📊 控制台首页</button>
@@ -14,7 +24,7 @@
     <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
     <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
     <button class="nav-btn" onclick="showSection('settings')">⚙️ 管理员账户管理</button>
-    <a th:href="@{/logout}"> <button class="nav-btn">🔓 退出登录</button> </a>
+    <button class="nav-btn" onclick="logout()">🔓 退出登录</button>
 </div>
 
 <div class="main-content">

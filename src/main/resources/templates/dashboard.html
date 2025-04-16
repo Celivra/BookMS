@@ -17,16 +17,24 @@
         <p id="overlay-desc">简介：xxx</p>
         <form action="/borrow" method="post" style="float: left; padding-left: 17%;">
             <input id="bookid" name="bookid" type="hidden" />
-            <button id="borrowButton" onclick="alert('借阅请求已发送！')">📖 借阅</button>
+            <button id="borrowButton">📖 借阅</button>
         </form>
         <button onclick="closeOverlay()">❌ 关闭</button>
     </div>
 </div>
+<!-- 提示框：借阅失败（已借阅） -->
+<div id="Borrowed" th:if="${Borrowed}" class="overlay">
+    <div class="overlay-content">
+        <p> 借阅失败：您已经借阅过该书</p>
+        <button onclick="closeBorrowedOverlay()">❌ 关闭</button>
+    </div>
+</div>
+
 <div class="sidebar">
     <h2>用户菜单</h2>
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
+    <button class="nav-btn" onclick="showSection('mybook')">📚 已借到的图书</button>
     <button class="nav-btn" onclick="showSection('records')">📝 借阅记录</button>
-    <button class="nav-btn" onclick="showSection('renew')">🔄 续借申请</button>
     <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
     <a th:href="@{/logout}"><button class="nav-btn" onclick="logout()">🔓 退出登录</button></a>
 </div>
@@ -57,9 +65,9 @@
         <p>2.《活着》 借出日期：2025-03-10，已归还</p>
     </div>
 
-    <div id="renew" class="content-section">
-        <h3>🔄 续借申请</h3>
-        <p>当前暂无可续借的图书。</p>
+    <div id="mybook" class="content-section">
+        <h3>📚 已借到的图书</h3>
+        <p>没有借到任何书籍。</p>
     </div>
 
     <div id="profile" class="content-section">

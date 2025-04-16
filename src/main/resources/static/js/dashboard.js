@@ -44,6 +44,9 @@ function toggleBookDetail(bookData) {
     borrowbutton.disabled = (bookData.number == 0);
 }
 
+function closeBorrowedOverlay() {
+    document.getElementById('Borrowed').style.display = 'none';
+}
 function closeOverlay() {
     document.getElementById('overlay').style.display = 'none';
 }

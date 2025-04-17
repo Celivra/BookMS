@@ -36,8 +36,27 @@
 
     <div id="books" class="content-section">
         <h3>📚 图书管理</h3>
-        <p>在这里您可以添加、修改、删除图书信息。</p>
+        <button class="add-book-btn">➕ 添加书籍</button>
+
+        <div class="book-list">
+            <div class="book-card" th:each="book : ${books}">
+                <div class="book-info">
+                    <div class="book-title" th:text="${book.bookName}">书名</div>
+                    <div class="book-meta">
+                        <span th:text="'作者：' + ${book.author}">作者</span>
+                        <span th:text="'类型：' + ${book.bookType}">类型</span>
+                        <span th:text="'出版社：' + ${book.publisher}">出版社</span>
+                        <span th:text="'数量：' + ${book.bookNumber}">数量</span>
+                    </div>
+                </div>
+                <div class="book-actions">
+                    <button class="action-btn">✏️ 编辑</button>
+                    <button class="action-btn danger">🗑 删除</button>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <div id="borrow" class="content-section">
         <h3>📖 借阅记录</h3>
@@ -45,9 +64,26 @@
     </div>
 
     <div id="users" class="content-section">
-        <h3>👤 用户管理</h3>
-        <p>添加和管理借阅用户的账户信息。</p>
+        <h3>👥 用户管理</h3>
+        <button class="add-user-btn">➕ 添加用户</button>
+
+        <div class="user-list">
+            <div class="user-card" th:each="user : ${users}">
+                <div class="user-info">
+                    <div class="user-name" th:text="${user.username}">用户名</div>
+                    <div class="user-meta">
+                        <span th:text="'手机号：' + ${user.phone}">手机号</span>
+                        <span th:text="'邮箱：' + ${user.email}">邮箱</span>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="action-btn">🔧 编辑</button>
+                    <button class="action-btn danger">❌ 删除</button>
+                </div>
+            </div>
+        </div>
     </div>
+
 
     <div id="settings" class="content-section">
         <h3>⚙️ 管理员账户管理</h3>

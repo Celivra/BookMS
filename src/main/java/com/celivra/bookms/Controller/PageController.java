@@ -5,6 +5,7 @@ import com.celivra.bookms.Entity.BorrowInfo;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
+import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +23,18 @@ public class PageController {
     BookService bookService;
     @Autowired
     BorrowService borrowService;
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/")
     public String dashboard(HttpServletRequest req, Model model) {
-
+        //加载/页面时获取所有书籍的信息
+        List<Book> bookList = bookService.getAllBooks();
+        model.addAttribute("books", bookList);
         //  如果是admin用户则跳转到admin的页面
         if(req.getSession().getAttribute("admin") != null){
+            List<User> userList = userService.getAllUsers();
+            model.addAttribute("users", userList);
             return "admin";
         }
 
@@ -35,14 +42,11 @@ public class PageController {
         User user = (User) req.getSession().getAttribute("user");
         //将当前用户所借到的书全部读取下来
         List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
-        //加载/页面时获取所有书籍的信息
-        List<Book> bookList = bookService.getAllBooks();
         //获取当前用户的所有借阅信息
         List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
 
         req.getSession().setAttribute("borrowInfo", borrowInfos);
         //将获取到的所有数据放到model里，供前端调用
-        model.addAttribute("books", bookList);
         model.addAttribute("userbooks", userbooks);
         return "dashboard";
     }

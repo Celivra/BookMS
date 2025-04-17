@@ -1,10 +1,12 @@
 package com.celivra.bookms.Controller;
 
+import com.celivra.bookms.Entity.Borrow;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BorrowService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,7 +17,16 @@ public class BorrowController {
     @Autowired
     BorrowService borrowService;
 
-    @RequestMapping("/borrow")
+    @RequestMapping("/returnBook")
+    public String returnBook(@RequestParam String bookid, HttpServletRequest request, Model model) {
+        User user = (User) request.getSession().getAttribute("user");
+        boolean success = borrowService.returnBook(bookid, user.getId().toString());
+        if(success) {
+            model.addAttribute("Returned", true);
+        }
+        return "redirect:/";
+    }
+    @RequestMapping("/borrowBook")
     public String borrow(@RequestParam String bookid, HttpServletRequest request, RedirectAttributes reAttributes) {
         User user = (User) request.getSession().getAttribute("user");
         boolean success = borrowService.borrowBook(bookid, user);

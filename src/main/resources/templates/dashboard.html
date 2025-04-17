@@ -63,8 +63,7 @@
         <div class="book-list">
             <div class="book-card"
                  th:each="book : ${books}"
-                 th:attr="data-bookid=${book.id},
-                          data-title=${book.bookName},
+                 th:attr="data-title=${book.bookName},
                           data-author=${book.author},
                           data-type=${book.bookType},
                           data-publisher=${book.publisher},

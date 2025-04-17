@@ -9,10 +9,34 @@
 </head>
 <body>
 <!-- 添加图书遮罩层 -->
-<div id="addBookOverlay" class="overlay" style="display: none;">
-    <div class="overlay-content" style="text-align: left;">
-        <h2>📖 添加图书</h2>
-        <form id="addBookForm" th:action="@{/admin/addBook}" method="post">
+<div id="bookOverlay" class="overlay" style="display: none;">
+    <div class="overlay-content" style="text-align: left; padding: 40px 100px; width: 550px;">
+        <h2 id="addbookh2">📖 添加图书</h2>
+        <h2 id="changebookh2">📖 修改图书</h2>
+        <form id="changeBookForm" th:action="@{/changeBook}" method="post">
+            <label>书名：</label>
+            <input id="changebook-name" type="text" name="bookName" required />
+
+            <label>作者：</label>
+            <input id="changebook-author" type="text" name="author" required />
+
+            <label>类型：</label>
+            <input id="changebook-type" type="text" name="bookType" required />
+
+            <label>出版社：</label>
+            <input id="changebook-publisher" type="text" name="publisher" required />
+
+            <label>数量：</label>
+            <input id="changebook-number" type="number" name="bookNumber" min="0" required />
+
+            <label>描述：</label>
+            <input id="changebook-desc" type="text" name="description" required />
+            <div class="form-actions">
+                <button type="submit" class="confirm-btn">✅ 修改</button>
+                <button type="button" class="cancel-btn" onclick="closeOverlay('bookOverlay')">❌ 取消</button>
+            </div>
+        </form>
+        <form id="addBookForm" th:action="@{/addBook}" method="post">
             <label>书名：</label>
             <input type="text" name="bookName" required />
 
@@ -32,7 +56,7 @@
             <input type="text" name="description" required />
             <div class="form-actions">
                 <button type="submit" class="confirm-btn">✅ 添加</button>
-                <button type="button" class="cancel-btn" onclick="closeOverlay('addBookOverlay')">❌ 取消</button>
+                <button type="button" class="cancel-btn" onclick="closeOverlay('bookOverlay')">❌ 取消</button>
             </div>
         </form>
     </div>
@@ -80,7 +104,17 @@
                     </div>
                 </div>
                 <div class="book-actions">
-                    <button class="action-btn">✏️ 编辑</button>
+                    <button class="action-btn"
+                          th:each="book : ${books}"
+                          th:attr="data-bookid=${book.id},
+                          data-title=${book.bookName},
+                          data-author=${book.author},
+                          data-type=${book.bookType},
+                          data-publisher=${book.publisher},
+                          data-number=${book.bookNumber},
+                          data-desc=${book.description}"
+                          onclick="ClickBookCard(this)"
+                          >✏️ 编辑</button>
                     <button class="action-btn danger">🗑 删除</button>
                 </div>
             </div>

@@ -69,7 +69,7 @@ document.querySelector("#editPasswordForm form").addEventListener("submit", func
     }
 });
 function ClickBookCard(el, BorR){
-    const bookid = el.dataset.bookid
+    const bookid = el.dataset.id
     const title = el.dataset.title;
     const author = el.dataset.author;
     const type = el.dataset.type;

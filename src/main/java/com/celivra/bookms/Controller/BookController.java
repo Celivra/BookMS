@@ -21,6 +21,18 @@ public class BookController {
     @Autowired
     BorrowService borrowService;
 
+    @RequestMapping("/addBook")
+    public String addBook(@RequestParam String bookName,
+                          @RequestParam String author,
+                          @RequestParam String bookType,
+                          @RequestParam String publisher,
+                          @RequestParam int bookNumber,
+                          @RequestParam String description ) {
+        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description);
+        bookService.addBook(book);
+        return "redirect:/";
+    }
+
     @RequestMapping("/getBooks")
     public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
         //根据target对books的各个字段进行查找

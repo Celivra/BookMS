@@ -13,6 +13,10 @@ public class BookService {
     @Autowired
     BookMapper bookMapper;
 
+    public boolean addBook(Book book) {
+        return bookMapper.addBook(book);
+    }
+
     public Book findBookByName(String bookName){
         return bookMapper.findBookByName(bookName);
     }

@@ -10,6 +10,15 @@ public class Book {
     private String description;//书籍描述
 
     public Book() {}
+    public Book(String bookName, String author, String bookType, String publisher, int bookNumber, String description) {
+        this.id = null;
+        this.bookName = bookName;
+        this.author = author;
+        this.publisher = publisher;
+        this.bookType = bookType;
+        this.bookNumber = bookNumber;
+        this.description = description;
+    }
     public Book(Long id, String bookName, String author, String bookType, String publisher, int bookNumber, String description) {
         this.id = id;
         this.bookName = bookName;

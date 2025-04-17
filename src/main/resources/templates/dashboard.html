@@ -63,7 +63,8 @@
         <div class="book-list">
             <div class="book-card"
                  th:each="book : ${books}"
-                 th:attr="data-title=${book.bookName},
+                 th:attr="data-id=${book.id},
+                          data-title=${book.bookName},
                           data-author=${book.author},
                           data-type=${book.bookType},
                           data-publisher=${book.publisher},
@@ -87,7 +88,7 @@
         <h3>📚 已借到的图书</h3>
         <div class="book-list">
             <div class="book-card" th:each="book : ${userbooks}"
-                 th:attr="data-bookid=${book.id},
+                 th:attr="data-id=${book.id},
                           data-title=${book.bookName},
                           data-author=${book.author},
                           data-type=${book.bookType},

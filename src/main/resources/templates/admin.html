@@ -14,6 +14,8 @@
         <h2 id="addbookh2">📖 添加图书</h2>
         <h2 id="changebookh2">📖 修改图书</h2>
         <form id="changeBookForm" th:action="@{/changeBook}" method="post">
+            <input id="changebook-id" type="hidden" name="boodId" >
+
             <label>书名：</label>
             <input id="changebook-name" type="text" name="bookName" required />
 
@@ -93,7 +95,13 @@
         <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
 
         <div class="book-list">
-            <div class="book-card" th:each="book : ${books}">
+            <div class="book-card" th:each="book : ${books}"
+                 th:attr="data-title=${book.bookName},
+                 data-author=${book.author},
+                 data-type=${book.bookType},
+                 data-publisher=${book.publisher},
+                 data-number=${book.bookNumber},
+                 data-desc=${book.description}" >
                 <div class="book-info">
                     <div class="book-title" th:text="${book.bookName}">书名</div>
                     <div class="book-meta">
@@ -104,17 +112,7 @@
                     </div>
                 </div>
                 <div class="book-actions">
-                    <button class="action-btn"
-                          th:each="book : ${books}"
-                          th:attr="data-bookid=${book.id},
-                          data-title=${book.bookName},
-                          data-author=${book.author},
-                          data-type=${book.bookType},
-                          data-publisher=${book.publisher},
-                          data-number=${book.bookNumber},
-                          data-desc=${book.description}"
-                          onclick="ClickBookCard(this)"
-                          >✏️ 编辑</button>
+                    <button class="action-btn" onclick="ClickBookCard(this)" >✏️ 编辑</button>
                     <button class="action-btn danger">🗑 删除</button>
                 </div>
             </div>

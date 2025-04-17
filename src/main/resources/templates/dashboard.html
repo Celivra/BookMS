@@ -79,8 +79,9 @@
 
     <div id="records" class="content-section">
         <h3>📝 借阅记录</h3>
-        <p>1.《三体》 借出日期：2025-04-01，归还日期：2025-04-10</p>
-        <p>2.《活着》 借出日期：2025-03-10，已归还</p>
+        <div th:each="borrinfo : ${session.borrowInfo}">
+            <p th:text="${borrinfo}"></p>
+        </div>
     </div>
 
     <div id="mybook" class="content-section">

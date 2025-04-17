@@ -11,9 +11,6 @@ import java.util.List;
 
 @Mapper
 public interface BorrowMapper {
-    //获得某个用户借阅的所有信息
-    @Select("select * from borrow")
-    List<Borrow> getAllUserBorrows(String userid);
     //添加借阅记录
     @Insert("insert into borrow " +
             "values(#{userid}, #{bookid}, #{borrowDate}, #{returnDate})")
@@ -30,5 +27,8 @@ public interface BorrowMapper {
     @Select("select * from book join borrow on id = borrow.bookid where borrow.userid = #{userid} and borrow.returndate is null")
     List<Book> getUserBorrowedBooks(String userid);
 
+    //获得某个用户借阅的所有记录
+    @Select("select * from borrow where userid = #{userid}")
+    List<Borrow> getAllUserBorrows(String userid);
 
 }

@@ -2,12 +2,15 @@ package com.celivra.bookms.Service;
 
 import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.Borrow;
+import com.celivra.bookms.Entity.BorrowInfo;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Mapper.BorrowMapper;
 import com.celivra.bookms.Util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -55,5 +58,24 @@ public class BorrowService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 因为数据库借阅表里只记录了用户id和书籍id
+     * 该函数根据借阅记录转换为可读的借阅信息
+     **/
+    public List<BorrowInfo> getAllUserBorrows(String userid) {
+        //获取所有借阅记录
+        List<Borrow> borrows = borrowMapper.getAllUserBorrows(userid);
+        //建立借阅信息线性表
+        List<BorrowInfo> borrowInfos = new ArrayList<>();
+        //枚举每一个borrow记录
+        for (Borrow borrow : borrows) {
+            //获取被借阅的书籍的信息
+            Book book = bookService.findBookById(borrow.getBookid().toString());
+            //将信息添加到信息表
+            borrowInfos.add(new BorrowInfo(book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
+        }
+        return borrowInfos;
     }
 }

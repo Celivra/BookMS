@@ -1,6 +1,7 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
+import com.celivra.bookms.Entity.BorrowInfo;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.ArrayList;
 import java.util.List;
 
 //页面跳转
@@ -34,6 +37,10 @@ public class PageController {
         List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
         //加载/页面时获取所有书籍的信息
         List<Book> bookList = bookService.getAllBooks();
+        //获取当前用户的所有借阅信息
+        List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
+
+        req.getSession().setAttribute("borrowInfo", borrowInfos);
         //将获取到的所有数据放到model里，供前端调用
         model.addAttribute("books", bookList);
         model.addAttribute("userbooks", userbooks);

@@ -17,8 +17,7 @@
     width: 400px;
     max-width: 90%;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    text-align: center;
-
+    text-align: left;
 }
 .overlay-content button{
     padding: 10px 20px;
@@ -63,4 +62,44 @@
 
 .overlay-content button:hover {
     background-color: #498fd3;
+}
+.overlay-content input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+}
+/* 表单按钮 */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-btn, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.confirm-btn {
+    background-color: #5da6e6;
+    color: white;
+}
+
+.confirm-btn:hover {
+    background-color: #4a93d1;
+}
+
+.cancel-btn {
+    background-color: #eee;
+    color: #333;
+}
+
+.cancel-btn:hover {
+    background-color: #ddd;
 }

@@ -8,6 +8,34 @@
     <title>图书管理系统 - 控制台</title>
 </head>
 <body>
+<!-- 添加图书遮罩层 -->
+<div id="addBookOverlay" class="overlay" >
+    <div class="overlay-content">
+        <h2>📖 添加图书</h2>
+        <form id="addBookForm" th:action="@{/admin/addBook}" method="post">
+            <label>书名：</label>
+            <input type="text" name="bookName" required />
+
+            <label>作者：</label>
+            <input type="text" name="author" required />
+
+            <label>类型：</label>
+            <input type="text" name="bookType" required />
+
+            <label>出版社：</label>
+            <input type="text" name="publisher" required />
+
+            <label>数量：</label>
+            <input type="number" name="bookNumber" min="1" required />
+
+            <div class="form-actions">
+                <button type="submit" class="confirm-btn">✅ 添加</button>
+                <button type="button" class="cancel-btn" onclick="closeAddBookOverlay()">❌ 取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div id="logout" class="overlay" style="display: none;">
     <div class="overlay-content">
         <p>确认要登出吗？</p>

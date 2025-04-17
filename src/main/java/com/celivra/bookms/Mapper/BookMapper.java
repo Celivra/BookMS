@@ -23,4 +23,17 @@ public interface BookMapper {
     //获取所有书籍的信息
     @Select("select * from book;")
     List<Book> getAllBooks();
+
+    @Select("select * from book where bookname like concat('%', #{target}, '%')")
+    List<Book> getBookByName(String target);
+    @Select("select * from book where author like concat('%', #{target}, '%')")
+    List<Book> getBookByAuthor(String target);
+    @Select("select * from book where booktype like concat('%', #{target}, '%')")
+    List<Book> getBookByType(String target);
+    @Select("select * from book where publisher like concat('%', #{target}, '%')")
+    List<Book> getBookByPublisher(String target);
+    @Select("select * from book where booknumber like concat('%', #{target}, '%')")
+    List<Book> getBookByNumber(String target);
+    @Select("select * from book where description like concat('%', #{target}, '%')")
+    List<Book> getBookByDesc(String target);
 }

@@ -56,6 +56,10 @@
 <div class="main-content">
     <div id="books" class="content-section active">
         <h3>📚 图书目录</h3>
+        <form action="/getBooks" style="display: flex; justify-content: flex-end;">
+            <input type="text" name="target" style=" border-radius: 40px; border: 1px solid; padding: 10px; "/>
+            <button type="submit">查找</button>
+        </form>
         <div class="book-list">
             <div class="book-card"
                  th:each="book : ${books}"

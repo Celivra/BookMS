@@ -28,3 +28,6 @@ function logout(){
 function closeOverlay(id){
     document.getElementById(id).style.display='none';
 }
+function toggleAddBook(){
+    document.getElementById('addBookOverlay').style.display = 'flex';
+}

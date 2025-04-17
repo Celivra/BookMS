@@ -9,8 +9,8 @@
 </head>
 <body>
 <!-- 添加图书遮罩层 -->
-<div id="addBookOverlay" class="overlay" >
-    <div class="overlay-content">
+<div id="addBookOverlay" class="overlay" style="display: none;">
+    <div class="overlay-content" style="text-align: left;">
         <h2>📖 添加图书</h2>
         <form id="addBookForm" th:action="@{/admin/addBook}" method="post">
             <label>书名：</label>
@@ -26,11 +26,13 @@
             <input type="text" name="publisher" required />
 
             <label>数量：</label>
-            <input type="number" name="bookNumber" min="1" required />
+            <input type="number" name="bookNumber" min="0" required />
 
+            <label>描述：</label>
+            <input type="text" name="description" required />
             <div class="form-actions">
                 <button type="submit" class="confirm-btn">✅ 添加</button>
-                <button type="button" class="cancel-btn" onclick="closeAddBookOverlay()">❌ 取消</button>
+                <button type="button" class="cancel-btn" onclick="closeOverlay('addBookOverlay')">❌ 取消</button>
             </div>
         </form>
     </div>
@@ -64,7 +66,7 @@
 
     <div id="books" class="content-section">
         <h3>📚 图书管理</h3>
-        <button class="add-book-btn">➕ 添加书籍</button>
+        <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
 
         <div class="book-list">
             <div class="book-card" th:each="book : ${books}">

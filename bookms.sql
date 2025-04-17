@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 9.2.0, for macos15 (arm64)
 --
--- Host: localhost    Database: bookMS
+-- Host: localhost    Database: bookms
 -- ------------------------------------------------------
 -- Server version	9.2.0
 
@@ -40,8 +40,37 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'C++从入门到入坟','王海燕','🐔算计','电子工业出版社',10,'我大C++天下无敌啊！'),(2,'JavaEE从精通到忘记','从先生','🐔算计','电子工业出版社',4,'JavaEE就tm不是给人学的啊tmd');
+INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算计','电子工业出版社',10,'我大C++天下无敌啊！'),(2,'JavaEE从精通到忘记','从先生','🐔算计','电子工业出版社',17,'JavaEE就tm不是给人学的啊tmd');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `borrow`
+--
+
+DROP TABLE IF EXISTS `borrow`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `borrow` (
+  `userid` bigint DEFAULT NULL,
+  `bookid` bigint DEFAULT NULL,
+  `borrowdate` date DEFAULT NULL,
+  `returndate` date DEFAULT NULL,
+  KEY `userid` (`userid`),
+  KEY `bookid` (`bookid`),
+  CONSTRAINT `borrow_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `user` (`id`),
+  CONSTRAINT `borrow_ibfk_2` FOREIGN KEY (`bookid`) REFERENCES `book` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `borrow`
+--
+
+LOCK TABLES `borrow` WRITE;
+/*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
+INSERT INTO `borrow` VALUES (2,2,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17');
+/*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -81,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-14 23:01:12
+-- Dump completed on 2025-04-17 12:53:45

@@ -4,6 +4,7 @@ import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.Borrow;
 import com.celivra.bookms.Entity.BorrowInfo;
 import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Mapper.BookMapper;
 import com.celivra.bookms.Mapper.BorrowMapper;
 import com.celivra.bookms.Util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public class BorrowService {
     @Autowired
-    BookService bookService;
+    BookMapper bookMapper;
     @Autowired
     BorrowMapper borrowMapper;
 
@@ -23,7 +24,18 @@ public class BorrowService {
         return borrowMapper.getUserBorrowedBooks(userId);
     }
 
-    public boolean deleteBorrow(Borrow borrow) {
+    //根据用户id删除记录
+    //当删除用户时需要的函数
+    public boolean deleteBorrowByUser(String userId) {
+        borrowMapper.deleteBorrowByUser(userId);
+        return true;
+    }
+
+
+    //根据图书id删除记录
+    //当删除图书的时候需要的函数
+    public boolean deleteBorrowByBook(String bookId) {
+        borrowMapper.deleteBorrowByBook(bookId);
         return true;
     }
 
@@ -37,11 +49,11 @@ public class BorrowService {
         //判断是否更新成功
         if(borrowMapper.updateBorrow(borrow)){
             //获取当前要还的书籍信息
-            Book book = bookService.findBookById(bookid);
+            Book book = bookMapper.findBookById(bookid);
             //修改书籍数量
             book.setBookNumber(book.getBookNumber() + 1);
             //更新书籍
-            bookService.updateBook(book);
+            bookMapper.updateBookInfo(book);
             return true;
         }
         return false;
@@ -50,7 +62,7 @@ public class BorrowService {
     //添加借阅记录
     public boolean borrowBook(String bookid, User user) {
         //根据bookid获取选中的书籍信息
-        Book book = bookService.findBookById(bookid);
+        Book book = bookMapper.findBookById(bookid);
         //如果已经借过这本书
         Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
         if (CheckBorrow != null) {
@@ -62,7 +74,7 @@ public class BorrowService {
         //将记录插入到数据库里
         if(borrowMapper.insertBorrow(borrow)){
             book.setBookNumber(book.getBookNumber() - 1);
-            bookService.updateBook(book);
+            bookMapper.updateBookInfo(book);
             return true;
         }
         return false;
@@ -81,7 +93,7 @@ public class BorrowService {
         //枚举每一个borrow记录
         for (Borrow borrow : borrows) {
             //获取被借阅的书籍的信息
-            Book book = bookService.findBookById(borrow.getBookid().toString());
+            Book book = bookMapper.findBookById(borrow.getBookid().toString());
             //将信息添加到信息表
             borrowInfos.add(new BorrowInfo(book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }

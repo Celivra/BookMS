@@ -2,10 +2,7 @@ package com.celivra.bookms.Mapper;
 
 import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.Borrow;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -15,6 +12,13 @@ public interface BorrowMapper {
     @Insert("insert into borrow " +
             "values(#{userid}, #{bookid}, #{borrowDate}, #{returnDate})")
     boolean insertBorrow(Borrow borrow);
+
+    @Delete("delete from borrow where userid = #{userId}")
+    boolean deleteBorrowByUser(String userId);
+
+    @Delete("delete from borrow where bookid = #{bookId}")
+    boolean deleteBorrowByBook(String bookId);
+
     //获取某个用户借阅某本书的数据
     @Select("select * from borrow where userid = #{userid} and bookid = #{bookid} and returndate is null")
     Borrow getBorrowByUserAndBook(String userid, String bookid);

@@ -2,6 +2,7 @@ package com.celivra.bookms.Service;
 
 import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Mapper.BookMapper;
+import com.celivra.bookms.Mapper.BorrowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,16 @@ public class BookService {
 
     @Autowired
     BookMapper bookMapper;
+    @Autowired
+    BorrowMapper borrowMapper;
 
     public boolean addBook(Book book) {
         return bookMapper.addBook(book);
     }
 
     public boolean deleteBook(String bookId) {
-        //要把有关这本书的所有借阅记录设为已归还，或者删除借阅记录
+        //要把有关这本书的所有借阅记录删除
+        borrowMapper.deleteBorrowByBook(bookId);
         return bookMapper.deleteBook(bookId);
     }
 

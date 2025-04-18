@@ -17,6 +17,11 @@ public class BookService {
         return bookMapper.addBook(book);
     }
 
+    public boolean deleteBook(String bookId) {
+        //要把有关这本书的所有借阅记录设为已归还，或者删除借阅记录
+        return bookMapper.deleteBook(bookId);
+    }
+
     public Book findBookByName(String bookName){
         return bookMapper.findBookByName(bookName);
     }

@@ -52,6 +52,11 @@ function toggleChangeBook(bookData){
     document.getElementById('changebookh2').style.display = 'block';
     document.getElementById('changeBookForm').style.display = 'block';
 }
+function toggleDeleteBook(id){
+    document.getElementById('deleteBook').style.display = 'flex';
+    document.getElementById('deleteBookId').value = id;
+    console.log(id);
+}
 function ClickBookCard(el){
     const card = el.closest('.book-card');
     const title = card.dataset.title;
@@ -61,4 +66,10 @@ function ClickBookCard(el){
     const number = card.dataset.number;
     const desc = card.dataset.desc;
     toggleChangeBook({title, author, type, publisher, number, desc});
+}
+
+function ClickDeleteBook(el){
+    const card = el.closest('.book-card');
+    const id = card.dataset.id;
+    toggleDeleteBook(id);
 }

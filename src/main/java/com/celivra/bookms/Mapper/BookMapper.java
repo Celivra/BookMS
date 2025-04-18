@@ -1,10 +1,7 @@
 package com.celivra.bookms.Mapper;
 
 import com.celivra.bookms.Entity.Book;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -13,6 +10,10 @@ public interface BookMapper {
     @Insert("insert into book(bookname, author, booktype, publisher, booknumber, description) " +
             "values(#{bookName}, #{author}, #{bookType}, #{publisher}, #{bookNumber}, #{description})")
     boolean addBook(Book book);
+
+    @Delete("delete from book where id = #{bookId}")
+    boolean deleteBook(String bookId);
+
     //根据书名获得书籍信息
     @Select("select * from book where bookname = #{bookName}")
     Book findBookByName(String bookName);

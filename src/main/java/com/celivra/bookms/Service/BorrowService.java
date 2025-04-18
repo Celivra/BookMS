@@ -22,6 +22,13 @@ public class BorrowService {
     public List<Book> getUserBorrowedBooks(String userId) {
         return borrowMapper.getUserBorrowedBooks(userId);
     }
+
+    public boolean deleteBorrow(Borrow borrow) {
+        return true;
+    }
+
+
+    //归还图书
     public boolean returnBook(String bookid, String userid) {
         //获取当前借阅记录
         Borrow borrow = borrowMapper.getBorrowByUserAndBook(userid, bookid);
@@ -39,6 +46,8 @@ public class BorrowService {
         }
         return false;
     }
+
+    //添加借阅记录
     public boolean borrowBook(String bookid, User user) {
         //根据bookid获取选中的书籍信息
         Book book = bookService.findBookById(bookid);
@@ -63,6 +72,7 @@ public class BorrowService {
      * 因为数据库借阅表里只记录了用户id和书籍id
      * 该函数根据借阅记录转换为可读的借阅信息
      **/
+    //列出这个用户的所有借阅记录
     public List<BorrowInfo> getAllUserBorrows(String userid) {
         //获取所有借阅记录
         List<Borrow> borrows = borrowMapper.getAllUserBorrows(userid);

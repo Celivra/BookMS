@@ -63,6 +63,16 @@
         </form>
     </div>
 </div>
+<div id="deleteBook" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <p>确认要删除吗？</p>
+        <form action="/deleteBook" method="post">
+            <input id="deleteBookId" name="bookId" type="hidden" />
+            <button style="float: left; margin-left: 16%;">✅ 确认</button>
+        </form>
+        <button onclick="closeOverlay('deleteBook')">❌ 取消</button>
+    </div>
+</div>
 
 <div id="logout" class="overlay" style="display: none;">
     <div class="overlay-content">
@@ -96,7 +106,9 @@
 
         <div class="book-list">
             <div class="book-card" th:each="book : ${books}"
-                 th:attr="data-title=${book.bookName},
+                 th:attr="
+                 data-id=${book.id},
+                 data-title=${book.bookName},
                  data-author=${book.author},
                  data-type=${book.bookType},
                  data-publisher=${book.publisher},
@@ -113,7 +125,7 @@
                 </div>
                 <div class="book-actions">
                     <button class="action-btn" onclick="ClickBookCard(this)" >✏️ 编辑</button>
-                    <button class="action-btn danger">🗑 删除</button>
+                    <button class="action-btn danger" onclick="ClickDeleteBook(this)">🗑 删除</button>
                 </div>
             </div>
         </div>

@@ -33,6 +33,12 @@ public class BookController {
         return "redirect:/";
     }
 
+    @RequestMapping("/deleteBook")
+    public String deleteBook(@RequestParam String bookId){
+        bookService.deleteBook(bookId);
+        return "redirect:/";
+    }
+
     @RequestMapping("/getBooks")
     public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
         //根据target对books的各个字段进行查找

@@ -51,9 +51,9 @@ public class UserController {
             RedirectAttributes reAttributes) {
         User user = new User(username, password, phone, email, 1);
         if(userService.addUser(user) == 1){
-            reAttributes.addFlashAttribute("RegSuccess", true);
+            reAttributes.addFlashAttribute("RegSuccess", "注册成功");
         }else if(userService.addUser(user) == 2){
-            reAttributes.addFlashAttribute("UserIsExist", true);
+            reAttributes.addFlashAttribute("RegUserIsExist", "用户已存在");
         }
         return "redirect:/register";
     }

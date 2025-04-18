@@ -8,12 +8,6 @@
     <title>注册 - 图书管理系统</title>
 </head>
 <body>
-<div th:if="${RegSuccess}" id="regSuccess-overlay" class="overlay">
-    <div class="overlay-content">
-        <p>注册成功</p>
-        <button onclick="closeOverlay('regSuccess-overlay')">❌ 关闭</button>
-    </div>
-</div>
 <div class="register-box">
     <h2>用户注册</h2>
     <form action="/doRegister" method="post">
@@ -22,6 +16,10 @@
         <input id="passwd2" type="password" placeholder="确认密码" required />
         <input name="phone" type="text" placeholder="手机号" required />
         <input name="email" type="email" placeholder="邮箱" required />
+        <div class="RegMsg">
+            <div id="RegSuccess" th:if="${RegSuccess}" th:text="${RegSuccess}">注册成功</div>
+            <div id="RegUserIsExist" th:if="${RegUserIsExist}" th:text="${RegUserIsExist}">这个用户名已经被注册过了</div>
+        </div>
         <button type="submit">注册</button>
     </form>
     <p>已有账号？<a th:href="@{/login}">点击登录</a></p>

@@ -62,3 +62,21 @@ body {
 .register-box a:hover {
     text-decoration: underline;
 }
+.RegMsg{
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    justify-content: center; /* 垂直居中 */
+    align-items: center; /* 水平居中 */
+}
+#RegSuccess{
+    background: #ccffbb;
+    color: #27be00;
+    width: 100px;
+    border-radius: 30px;
+}
+#RegUserIsExist{
+    background: #ffbbbb;
+    color: #b90000;
+    width: 250px;
+    border-radius: 30px;
+}

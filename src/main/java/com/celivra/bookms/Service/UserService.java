@@ -13,8 +13,10 @@ public class UserService {
     UserMapper userMapper;
 
     //添加用户
-    //1：成功  2:用户已存在  0:数据库错误
+    //1：成功  2:用户已存在  0:数据库错误 3:用户名格式不正确
     public int addUser(User user) {
+        String username = user.getUsername();
+
         User CheckUser = userMapper.findByUsername(user.getUsername());
         if(CheckUser != null){
             return 2;

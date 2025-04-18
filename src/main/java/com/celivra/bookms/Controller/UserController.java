@@ -5,9 +5,9 @@ import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 //有关提交的接口
 @Controller
@@ -20,7 +20,7 @@ public class UserController {
             @RequestParam String username,
             @RequestParam String password,
             HttpServletRequest request,
-            Model model) {
+            RedirectAttributes reAttributes) {
 
         //根据用户名获取用户数据
         User user = userService.findByUsername(username);
@@ -37,9 +37,9 @@ public class UserController {
         }
         //若没有进入if里，则密码错误
         //创建passworderror错误
-        model.addAttribute("PasswordError", true);
+        reAttributes.addFlashAttribute("PasswordError", true);
         //重定向到login页面
-        return "login";
+        return "redirect:/login";
     }
 
     @RequestMapping("/doRegister")

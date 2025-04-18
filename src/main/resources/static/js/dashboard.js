@@ -1,19 +1,3 @@
-//点击右侧功能按钮后显示不同的功能界面
-function showSection(id) {
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    document.getElementById(id).classList.add('active');
-
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
-}
-//显示确认登出界面
-function logout() {
-    document.getElementById('logout').style.display = 'flex';
-}
 function toggleEditUserForm(flag){
     const form = document.getElementById('editForm');
     const passwdform = document.getElementById('editPasswordForm');
@@ -49,11 +33,6 @@ function toggleBookDetail(bookData, BorR) {
     document.getElementById('overlay').style.display = 'flex';
     const borrowbutton =  document.getElementById('borrowButton');
     borrowbutton.disabled = (bookData.number == 0);
-}
-
-//关闭id为“id”的标签
-function closeOverlay(id) {
-    document.getElementById(id).style.display = 'none';
 }
 //判断输入的两个密码是否相同
 document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {

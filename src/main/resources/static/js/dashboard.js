@@ -1,3 +1,4 @@
+//点击右侧功能按钮后显示不同的功能界面
 function showSection(id) {
     document.querySelectorAll('.content-section').forEach(section => {
         section.classList.remove('active');
@@ -9,23 +10,22 @@ function showSection(id) {
     });
     event.target.classList.add('active');
 }
-
+//显示确认登出界面
 function logout() {
     document.getElementById('logout').style.display = 'flex';
 }
-
-function toggleEditForm() {
+function toggleEditUserForm(flag){
     const form = document.getElementById('editForm');
     const passwdform = document.getElementById('editPasswordForm');
-    passwdform.style.display = 'none';
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    if(flag === 'password'){
+        form.style.display = 'none';
+        passwdform.style.display = passwdform.style.display === 'none' ? 'block' : 'none';
+    }else{
+        passwdform.style.display = 'none';
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
 }
-function toggleEditPasswdForm() {
-    const form = document.getElementById('editForm');
-    const passwdform = document.getElementById('editPasswordForm');
-    form.style.display = 'none';
-    passwdform.style.display = passwdform.style.display === 'none' ? 'block' : 'none';
-}
+//显示借阅书籍跟归还书籍的界面
 function toggleBookDetail(bookData, BorR) {
     //显示哪一个form
     document.getElementById('borrowForm').style.display = BorR==='borrow'?'block':'none';
@@ -51,10 +51,11 @@ function toggleBookDetail(bookData, BorR) {
     borrowbutton.disabled = (bookData.number == 0);
 }
 
+//关闭id为“id”的标签
 function closeOverlay(id) {
     document.getElementById(id).style.display = 'none';
 }
-
+//判断输入的两个密码是否相同
 document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {
     const password1 = document.getElementById("password1").value;
     const password2 = document.getElementById("password2").value;
@@ -68,6 +69,7 @@ document.querySelector("#editPasswordForm form").addEventListener("submit", func
         return true;
     }
 });
+//点击书籍卡片时接受点击的书籍的信息
 function ClickBookCard(el, BorR){
     const bookid = el.dataset.id
     const title = el.dataset.title;

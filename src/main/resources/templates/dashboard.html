@@ -107,8 +107,8 @@
         <p>用户名：<span th:text="${session.user.username}"></span></p>
         <p>电话：<span th:text="${session.user.phone}"></span></p>
         <p>邮箱：<span th:text="${session.user.email}"></span></p>
-        <button onclick="toggleEditForm()">修改信息</button>
-        <button onclick="toggleEditPasswdForm()">修改密码</button>
+        <button onclick="toggleEditUserForm('info')">修改信息</button>
+        <button onclick="toggleEditUserForm('password')">修改密码</button>
         <div id="editForm" class="info-edit-form" style="display: none;">
             <h4>修改信息</h4>
             <form action="/doChangeInfo" method="post">

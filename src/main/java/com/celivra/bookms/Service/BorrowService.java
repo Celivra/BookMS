@@ -25,15 +25,12 @@ public class BorrowService {
     }
 
     //根据用户id删除记录
-    //当删除用户时需要的函数
     public boolean deleteBorrowByUser(String userId) {
         borrowMapper.deleteBorrowByUser(userId);
         return true;
     }
 
-
     //根据图书id删除记录
-    //当删除图书的时候需要的函数
     public boolean deleteBorrowByBook(String bookId) {
         borrowMapper.deleteBorrowByBook(bookId);
         return true;

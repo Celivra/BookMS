@@ -22,7 +22,7 @@ public class LoginFilter implements Filter {
         String path=req.getRequestURI();
 
         //判断访问的接口是否为dologin、login...等
-        if(path.contains("/doLogin") || path.contains("/login") || path.contains("/css/") || path.contains("/js/") || path.contains("/register")){
+        if(path.contains("/doLogin") || path.contains("/login") || path.contains("/css/") || path.contains("/js/") || path.contains("/register") || path.contains("/doRegister")){
             //直接放行
             filterChain.doFilter(servletRequest, servletResponse);
             return;

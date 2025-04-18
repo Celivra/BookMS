@@ -1,6 +1,7 @@
 package com.celivra.bookms.Mapper;
 
 import com.celivra.bookms.Entity.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -12,6 +13,10 @@ public interface UserMapper {
     //根据username获取用户信息
     @Select("select * from user where username = #{username}")
     User findByUsername(String username);
+
+    @Insert("insert into user(username, password, phone, email, power)" +
+            "values(#{username}, #{password}, #{phone}, #{email}, #{power})")
+    boolean addUser(User user);
 
     @Select("select * from user")
     List<User> getAllUsers();

@@ -43,8 +43,19 @@ public class UserController {
     }
 
     @RequestMapping("/doRegister")
-    public String doRegister(){
-        return "redirect:/login";
+    public String doRegister(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String phone,
+            @RequestParam String email,
+            RedirectAttributes reAttributes) {
+        User user = new User(username, password, phone, email, 1);
+        if(userService.addUser(user) == 1){
+            reAttributes.addFlashAttribute("RegSuccess", true);
+        }else if(userService.addUser(user) == 2){
+            reAttributes.addFlashAttribute("UserIsExist", true);
+        }
+        return "redirect:/register";
     }
 
     @RequestMapping("/doChangeInfo")

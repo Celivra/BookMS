@@ -12,6 +12,19 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
+    //添加用户
+    //1：成功  2:用户已存在  0:数据库错误
+    public int addUser(User user) {
+        User CheckUser = userMapper.findByUsername(user.getUsername());
+        if(CheckUser != null){
+            return 2;
+        }
+        if(userMapper.addUser(user)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
     public List<User> getAllUsers() {
         return userMapper.getAllUsers();
     }

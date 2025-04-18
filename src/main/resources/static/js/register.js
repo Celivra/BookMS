@@ -8,3 +8,6 @@ document.querySelector("form").addEventListener("submit", function (e) {
         return false;
     }
 });
+function closeOverlay(id){
+    document.getElementById(id).style.display='none';
+}

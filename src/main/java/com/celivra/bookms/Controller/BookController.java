@@ -39,6 +39,25 @@ public class BookController {
         return "redirect:/";
     }
 
+    @RequestMapping("/updateBook")
+    public String updateBook(@RequestParam String bookId,
+                             @RequestParam String bookName,
+                             @RequestParam String author,
+                             @RequestParam String bookType,
+                             @RequestParam String publisher,
+                             @RequestParam String bookNumber,
+                             @RequestParam String description ){
+        Book book = bookService.findBookById(bookId);
+        book.setBookName(bookName);
+        book.setAuthor(author);
+        book.setBookType(bookType);
+        book.setPublisher(publisher);
+        book.setBookNumber(Integer.parseInt(bookNumber));
+        book.setDescription(description);
+        bookService.updateBook(book);
+        return "redirect:/";
+    }
+
     @RequestMapping("/getBooks")
     public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
         //根据target对books的各个字段进行查找

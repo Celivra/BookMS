@@ -1,11 +1,9 @@
 package com.celivra.bookms.Service;
 
-import com.celivra.bookms.Entity.Book;
-import com.celivra.bookms.Entity.Borrow;
-import com.celivra.bookms.Entity.BorrowInfo;
-import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Entity.*;
 import com.celivra.bookms.Mapper.BookMapper;
 import com.celivra.bookms.Mapper.BorrowMapper;
+import com.celivra.bookms.Mapper.UserMapper;
 import com.celivra.bookms.Util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +17,8 @@ public class BorrowService {
     BookMapper bookMapper;
     @Autowired
     BorrowMapper borrowMapper;
+    @Autowired
+    UserMapper userMapper;
 
     public List<Book> getUserBorrowedBooks(String userId) {
         return borrowMapper.getUserBorrowedBooks(userId);
@@ -93,6 +93,21 @@ public class BorrowService {
             Book book = bookMapper.findBookById(borrow.getBookid().toString());
             //将信息添加到信息表
             borrowInfos.add(new BorrowInfo(book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
+        }
+        return borrowInfos;
+    }
+    public List<BorrowInfoAdmin> getAllBorrows() {
+        //最后保存的结果
+        List<BorrowInfoAdmin> borrowInfos = new ArrayList<>();
+        //读取所有借阅记录
+        List<Borrow> borrows = borrowMapper.getAllBorrows();
+
+        for (Borrow borrow : borrows) {
+            //根据记录生成user跟book的数据
+            User user = userMapper.findByUserId(borrow.getUserid().toString());
+            Book book = bookMapper.findBookById(borrow.getBookid().toString());
+            //将信息添加到list里
+            borrowInfos.add(new BorrowInfoAdmin(user.getUsername(), book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }
         return borrowInfos;
     }

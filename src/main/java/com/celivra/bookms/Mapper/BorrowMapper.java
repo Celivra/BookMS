@@ -35,4 +35,6 @@ public interface BorrowMapper {
     @Select("select * from borrow where userid = #{userid}")
     List<Borrow> getAllUserBorrows(String userid);
 
+    @Select("select * from borrow")
+    List<Borrow> getAllBorrows();
 }

@@ -135,7 +135,9 @@
 
     <div id="borrow" class="content-section">
         <h3>📖 借阅记录</h3>
-        <p>查看所有图书的借出与归还记录。</p>
+        <div th:each="borrowinfo : ${borrowInfo}">
+            <div th:text="${borrowinfo}"></div>
+        </div>
     </div>
 
     <div id="users" class="content-section">

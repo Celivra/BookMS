@@ -2,6 +2,7 @@ package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.BorrowInfo;
+import com.celivra.bookms.Entity.BorrowInfoAdmin;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
@@ -32,7 +33,9 @@ public class PageController {
         //  如果是admin用户则跳转到admin的页面
         if(req.getSession().getAttribute("admin") != null){
             List<User> userList = userService.getAllUsers();
+            List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
             model.addAttribute("users", userList);
+            model.addAttribute("borrowInfo", borrowInfoAdmins);
             return "admin";
         }
 

@@ -33,6 +33,9 @@ public class UserService {
     public User findByUsername(String username) {
         return userMapper.findByUsername(username);
     }
+    public User findByUserId(String userId) {
+        return userMapper.findByUserId(userId);
+    }
     public boolean updateInfo(String username, String newPhone, String newEmail) {
         return userMapper.updateInfo(username, newPhone, newEmail);
     }

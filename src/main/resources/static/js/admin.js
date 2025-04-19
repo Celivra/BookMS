@@ -37,7 +37,6 @@ function toggleChangeBook(bookData){
 function toggleDeleteBook(id){
     document.getElementById('deleteBook').style.display = 'flex';
     document.getElementById('deleteBookId').value = id;
-    console.log(id);
 }
 function toggleUpdateUser(userData){
     document.getElementById('updateUser-id').value = userData.id;
@@ -47,6 +46,10 @@ function toggleUpdateUser(userData){
     document.getElementById('updateUser-power').checked = (userData.power ==='10')
     document.getElementById('UserOverlay').style.display = 'flex'
 
+}
+function toggleDeleteUser(id){
+    document.getElementById('deleteUser').style.display = 'flex';
+    document.getElementById('deleteUserId').value = id;
 }
 function ClickBookCard(el){
     const card = el.closest('.book-card');
@@ -63,6 +66,11 @@ function ClickDeleteBook(el){
     const card = el.closest('.book-card');
     const id = card.dataset.id;
     toggleDeleteBook(id);
+}
+function ClickDeleteUser(el){
+    const card = el.closest('.user-card');
+    const id = card.dataset.id;
+    toggleDeleteUser(id);
 }
 
 function ClickUser(el){

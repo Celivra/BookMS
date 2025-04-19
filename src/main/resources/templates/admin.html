@@ -92,6 +92,16 @@
     </div>
 </div>
 
+<div id="deleteUser" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <p>确认要删除该用户吗？</p>
+        <form action="/deleteUser" method="post">
+            <input id="deleteUserId" name="userId" type="hidden" />
+            <button style="float: left; margin-left: 16%;">✅ 确认</button>
+        </form>
+        <button onclick="closeOverlay('deleteUser')">❌ 取消</button>
+    </div>
+</div>
 <div id="deleteBook" class="overlay" style="display: none;">
     <div class="overlay-content">
         <p>确认要删除吗？</p>
@@ -186,7 +196,7 @@
                 </div>
                 <div class="user-actions">
                     <button class="action-btn" onclick="ClickUser(this)">🔧 编辑</button>
-                    <button class="action-btn danger">❌ 删除</button>
+                    <button class="action-btn danger" onclick="ClickDeleteUser(this)">❌ 删除</button>
                 </div>
             </div>
         </div>

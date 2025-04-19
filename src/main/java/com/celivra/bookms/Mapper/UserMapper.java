@@ -1,10 +1,7 @@
 package com.celivra.bookms.Mapper;
 
 import com.celivra.bookms.Entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -33,4 +30,7 @@ public interface UserMapper {
 
     @Update("update user set phone = #{phone}, email = #{email}, power = #{power} where id = #{id}")
     boolean updateUser(User user);
+
+    @Delete("delete from user where id = #{id}")
+    boolean deleteUser(String id);
 }

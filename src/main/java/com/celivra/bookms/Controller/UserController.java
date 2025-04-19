@@ -104,5 +104,10 @@ public class UserController {
         return "redirect:/";
     }
 
+    @RequestMapping("/deleteUser")
+    public String deleteUser( @RequestParam String userId ){
+        userService.deleteUser(userId);
+        return "redirect:/";
+    }
 
 }

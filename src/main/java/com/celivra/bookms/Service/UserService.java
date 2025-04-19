@@ -27,6 +27,9 @@ public class UserService {
             return 0;
         }
     }
+    public boolean updateUser(User user) {
+        return userMapper.updateUser(user);
+    }
     public List<User> getAllUsers() {
         return userMapper.getAllUsers();
     }

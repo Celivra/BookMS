@@ -64,6 +64,34 @@
         </form>
     </div>
 </div>
+
+
+<div id="UserOverlay" class="overlay" style="display: none;">
+    <div class="overlay-content" style="text-align: left; padding: 40px 100px; width: 550px;">
+        <h2 id="updateUserh2">📖 编辑用户</h2>
+        <form id="updateUser" th:action="@{/updateUser}" method="post">
+            <input id="updateUser-id" type="hidden" name="userId" >
+
+            <label>用户名</label>
+            <input id="updateUser-username" type="text" name="userUsername" required disabled />
+
+            <label>手机</label>
+            <input id="updateUser-phone" type="text" name="userPhone" required />
+
+            <label>邮件</label>
+            <input id="updateUser-email" type="text" name="userEmail" required />
+
+            <label style="margin-left: 30%;">是否为管理员</label>
+            <input id="updateUser-power" type="checkbox" name="userPower" style="width: 50px" />
+
+            <div class="form-actions">
+                <button type="submit" class="confirm-btn">✅ 修改</button>
+                <button type="button" class="cancel-btn" onclick="closeOverlay('UserOverlay')">❌ 取消</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <div id="deleteBook" class="overlay" style="display: none;">
     <div class="overlay-content">
         <p>确认要删除吗？</p>
@@ -132,20 +160,23 @@
         </div>
     </div>
 
-
     <div id="borrow" class="content-section">
         <h3>📖 借阅记录</h3>
         <div th:each="borrowinfo : ${borrowInfo}">
-            <div th:text="${borrowinfo}"></div>
+            <div th:text="${borrowinfo}" style="margin: 10px;"></div>
         </div>
     </div>
 
     <div id="users" class="content-section">
         <h3>👥 用户管理</h3>
-        <button class="add-user-btn">➕ 添加用户</button>
-
+<!--        <button class="add-user-btn">➕ 添加用户</button>-->
         <div class="user-list">
-            <div class="user-card" th:each="user : ${users}">
+            <div class="user-card" th:each="user : ${users}"
+                 th:attr="data-id=${user.id},
+                          data-username=${user.username},
+                          data-phone=${user.phone},
+                          data-email=${user.email},
+                          data-power=${user.power}">
                 <div class="user-info">
                     <div class="user-name" th:text="${user.username}">用户名</div>
                     <div class="user-meta">
@@ -154,7 +185,7 @@
                     </div>
                 </div>
                 <div class="user-actions">
-                    <button class="action-btn">🔧 编辑</button>
+                    <button class="action-btn" onclick="ClickUser(this)">🔧 编辑</button>
                     <button class="action-btn danger">❌ 删除</button>
                 </div>
             </div>

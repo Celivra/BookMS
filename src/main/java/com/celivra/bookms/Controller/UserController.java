@@ -58,6 +58,24 @@ public class UserController {
         return "redirect:/register";
     }
 
+    @RequestMapping("/updateUser")
+    public String updateUser(
+            @RequestParam String userId,
+            @RequestParam String userPhone,
+            @RequestParam String userEmail,
+            @RequestParam(required = false, defaultValue = "false") boolean userPower ){
+        User user = userService.findByUserId(userId);
+        user.setPhone(userPhone);
+        user.setEmail(userEmail);
+        if(userPower == true){
+            user.setPower(10);
+        }else{
+            user.setPower(1);
+        }
+        userService.updateUser(user);
+        return "redirect:/";
+    }
+
     @RequestMapping("/doChangeInfo")
     public String doChangeInfo(
             @RequestParam String newPhone,

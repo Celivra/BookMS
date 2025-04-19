@@ -30,4 +30,7 @@ public interface UserMapper {
     //修改用户密码
     @Update("update user set password = #{password} where username = #{username}")
     boolean updatePassword(String username, String password);
+
+    @Update("update user set phone = #{phone}, email = #{email}, power = #{power} where id = #{id}")
+    boolean updateUser(User user);
 }

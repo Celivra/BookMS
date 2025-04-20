@@ -47,6 +47,7 @@ public class BookController {
                              @RequestParam String publisher,
                              @RequestParam String bookNumber,
                              @RequestParam String description ){
+        System.out.println("bookid:"+bookId);
         Book book = bookService.findBookById(bookId);
         book.setBookName(bookName);
         book.setAuthor(author);

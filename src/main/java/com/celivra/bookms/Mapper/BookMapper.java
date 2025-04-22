@@ -7,8 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface BookMapper {
-    @Insert("insert into book(bookname, author, booktype, publisher, booknumber, description) " +
-            "values(#{bookName}, #{author}, #{bookType}, #{publisher}, #{bookNumber}, #{description})")
+    @Insert("insert into book(bookname, author, booktype, publisher, booknumber, description, isbn, published_date) " +
+            "values(#{bookName}, #{author}, #{bookType}, #{publisher}, #{bookNumber}, #{description}, #{ISBN}, #{publishedDate})")
     boolean addBook(Book book);
 
     @Delete("delete from book where id = #{bookId}")
@@ -23,6 +23,7 @@ public interface BookMapper {
     //更新书籍信息
     @Update("update book set id = #{id}, bookname = #{bookName}, author = #{author}," +
             "booktype = #{bookType}, publisher = #{publisher}, booknumber = #{bookNumber}, description = #{description}" +
+            "isbn = #{ISBN}, published_date = #{publishedDate}" +
             "where id = #{id}")
     boolean updateBookInfo(Book book);
     //获取所有书籍的信息
@@ -41,4 +42,6 @@ public interface BookMapper {
     List<Book> getBookByNumber(String target);
     @Select("select * from book where description like concat('%', #{target}, '%')")
     List<Book> getBookByDesc(String target);
+    @Select("select * from book where isbn like concat('%', #{target}, '%')")
+    List<Book> getBookByISBN(String target);
 }

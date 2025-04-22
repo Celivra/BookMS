@@ -48,6 +48,7 @@ public class BookService {
         List<Book> bookByPublisher = bookMapper.getBookByPublisher(target);
         List<Book> bookByNumber = bookMapper.getBookByNumber(target);
         List<Book> bookByDesc= bookMapper.getBookByDesc(target);
+        List<Book> bookByISBN = bookMapper.getBookByDesc(target);
 
         // 用 LinkedHashMap 保证顺序，key 是 Book 的 id
         Map<Long, Book> bookMap = new LinkedHashMap<>();
@@ -68,6 +69,9 @@ public class BookService {
             bookMap.put(book.getId(), book);
         }
         for (Book book : bookByDesc) {
+            bookMap.put(book.getId(), book);
+        }
+        for (Book book : bookByISBN) {
             bookMap.put(book.getId(), book);
         }
 

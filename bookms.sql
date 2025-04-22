@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 9.2.0, for macos15 (arm64)
 --
--- Host: localhost    Database: bookms
+-- Host: localhost    Database: bookMS
 -- ------------------------------------------------------
 -- Server version	9.2.0
 
@@ -30,8 +30,10 @@ CREATE TABLE `book` (
   `publisher` varchar(255) DEFAULT NULL,
   `booknumber` int DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
+  `isbn` varchar(255) DEFAULT NULL,
+  `published_date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +42,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算计','电子工业出版社',10,'我大C++天下无敌啊！'),(2,'JavaEE从精通到忘记','从先生','🐔算计','电子工业出版社',17,'JavaEE就tm不是给人学的啊tmd');
+INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算计','电子工业出版社',9,'我大C++天下无敌啊！',NULL,NULL),(2,'JavaEE从精通到忘记','从先生','🐔算计','103出版社',17,'JavaEE就tm不是给人学的啊tmd',NULL,NULL);
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +71,7 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
-INSERT INTO `borrow` VALUES (2,2,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17');
+INSERT INTO `borrow` VALUES (2,2,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(3,1,'2025-04-19',NULL);
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +90,7 @@ CREATE TABLE `user` (
   `email` varchar(255) DEFAULT NULL,
   `power` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +99,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','123','18766971045','52xiaozhai@gmail.com',10),(2,'test','123','13573302175','celivra@gmail.com',1);
+INSERT INTO `user` VALUES (1,'admin','123','18766971045','52xiaozhai@gmail.com',10),(2,'test','123','13573302175','celivra@gmail.com',1),(3,'hahha','123','10086','wuji@kun.com',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -110,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-17 12:53:45
+-- Dump completed on 2025-04-22 20:08:57

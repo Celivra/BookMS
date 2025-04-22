@@ -8,9 +8,11 @@ public class Book {
     private String bookType;//书籍类型
     private int bookNumber;//书籍数量
     private String description;//书籍描述
+    private String ISBN;
+    private String publishedDate;
 
     public Book() {}
-    public Book(String bookName, String author, String bookType, String publisher, int bookNumber, String description) {
+    public Book(String bookName, String author, String bookType, String publisher, int bookNumber, String description, String ISBN, String publishedDate) {
         this.id = null;
         this.bookName = bookName;
         this.author = author;
@@ -18,8 +20,10 @@ public class Book {
         this.bookType = bookType;
         this.bookNumber = bookNumber;
         this.description = description;
+        this.ISBN = ISBN;
+        this.publishedDate = publishedDate;
     }
-    public Book(Long id, String bookName, String author, String bookType, String publisher, int bookNumber, String description) {
+    public Book(Long id, String bookName, String author, String bookType, String publisher, int bookNumber, String description, String ISBN, String publishedDate) {
         this.id = id;
         this.bookName = bookName;
         this.author = author;
@@ -27,6 +31,24 @@ public class Book {
         this.bookType = bookType;
         this.bookNumber = bookNumber;
         this.description = description;
+        this.ISBN = ISBN;
+        this.publishedDate = publishedDate;
+    }
+
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public String getISBN() {
+        return ISBN;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
     }
 
     public void setId(Long id) {

@@ -17,6 +17,9 @@
         <form id="changeBookForm" th:action="@{/updateBook}" method="post">
             <input id="changebook-id" type="hidden" name="bookId" >
 
+            <label>ISBN：</label>
+            <input id="changebook-isbn" type="text" name="isbn" required maxlength="13"/>
+
             <label>书名：</label>
             <input id="changebook-name" type="text" name="bookName" required />
 
@@ -29,6 +32,9 @@
             <label>出版社：</label>
             <input id="changebook-publisher" type="text" name="publisher" required />
 
+            <label>出版时间：</label>
+            <input id="changebook-publishedDate" type="date" name="publishedDate" required />
+
             <label>数量：</label>
             <input id="changebook-number" type="number" name="bookNumber" min="0" required />
 
@@ -40,6 +46,9 @@
             </div>
         </form>
         <form id="addBookForm" th:action="@{/addBook}" method="post">
+            <label>ISBN：</label>
+            <input type="text" name="isbn" required maxlength="13" placeholder="仅输入数字即可，不需要'-'"/>
+
             <label>书名：</label>
             <input type="text" name="bookName" required />
 
@@ -51,6 +60,9 @@
 
             <label>出版社：</label>
             <input type="text" name="publisher" required />
+
+            <label>出版时间：</label>
+            <input type="date" name="publishedDate" required />
 
             <label>数量：</label>
             <input type="number" name="bookNumber" min="0" required />
@@ -147,10 +159,12 @@
             <div class="book-card" th:each="book : ${books}"
                  th:attr="
                  data-id=${book.id},
+                 data-isbn=${book.ISBN},
                  data-title=${book.bookName},
                  data-author=${book.author},
                  data-type=${book.bookType},
                  data-publisher=${book.publisher},
+                 data-publishedDate=${book.publishedDate},
                  data-number=${book.bookNumber},
                  data-desc=${book.description}" >
                 <div class="book-info">
@@ -159,7 +173,9 @@
                         <span th:text="'作者：' + ${book.author}">作者</span>
                         <span th:text="'类型：' + ${book.bookType}">类型</span>
                         <span th:text="'出版社：' + ${book.publisher}">出版社</span>
+                        <span th:text="'出版时间：' + ${book.publishedDate}">出版社</span>
                         <span th:text="'数量：' + ${book.bookNumber}">数量</span>
+                        <span th:text="'ISBN：' + ${book.ISBN}">ISBN</span>
                     </div>
                 </div>
                 <div class="book-actions">

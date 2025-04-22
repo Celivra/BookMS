@@ -39,7 +39,12 @@ public class BookService {
     }
 
     public List<Book> getAllBooks() {
-        return bookMapper.getAllBooks();
+        List<Book> books = bookMapper.getAllBooks();
+        for (Book book : books) {
+            System.out.println(book.getPublishedDate().toString());
+        }
+        return books;
+//        return bookMapper.getAllBooks();
     }
     public List<Book> findAllBookByTarget(String target) {
         List<Book> bookByName= bookMapper.getBookByName(target);

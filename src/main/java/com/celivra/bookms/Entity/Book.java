@@ -1,5 +1,7 @@
 package com.celivra.bookms.Entity;
 
+import java.time.LocalDate;
+
 public class Book {
     private Long id;//图书id
     private String bookName;//书名
@@ -9,10 +11,10 @@ public class Book {
     private int bookNumber;//书籍数量
     private String description;//书籍描述
     private String ISBN;
-    private String publishedDate;
+    private LocalDate publishedDate;
 
     public Book() {}
-    public Book(String bookName, String author, String bookType, String publisher, int bookNumber, String description, String ISBN, String publishedDate) {
+    public Book(String bookName, String author, String bookType, String publisher, int bookNumber, String description, String ISBN, LocalDate publishedDate) {
         this.id = null;
         this.bookName = bookName;
         this.author = author;
@@ -23,7 +25,7 @@ public class Book {
         this.ISBN = ISBN;
         this.publishedDate = publishedDate;
     }
-    public Book(Long id, String bookName, String author, String bookType, String publisher, int bookNumber, String description, String ISBN, String publishedDate) {
+    public Book(Long id, String bookName, String author, String bookType, String publisher, int bookNumber, String description, String ISBN, LocalDate publishedDate) {
         this.id = id;
         this.bookName = bookName;
         this.author = author;
@@ -39,7 +41,7 @@ public class Book {
         this.ISBN = ISBN;
     }
 
-    public void setPublishedDate(String publishedDate) {
+    public void setPublishedDate(LocalDate publishedDate) {
         this.publishedDate = publishedDate;
     }
 
@@ -47,7 +49,7 @@ public class Book {
         return ISBN;
     }
 
-    public String getPublishedDate() {
+    public LocalDate getPublishedDate() {
         return publishedDate;
     }
 
@@ -105,6 +107,10 @@ public class Book {
 
     public String getDescription() {
         return description;
+    }
+
+    public LocalDate publishedDate() {
+        return publishedDate;
     }
 
     @Override

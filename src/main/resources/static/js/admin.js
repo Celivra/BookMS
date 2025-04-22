@@ -22,10 +22,12 @@ function toggleChangeBook(bookData){
 
     //填充内容
     document.getElementById('changebook-id').value= bookData.id;
+    document.getElementById('changebook-isbn').value= bookData.isbn;
     document.getElementById('changebook-name').value= bookData.title;
     document.getElementById('changebook-author').value = bookData.author;
     document.getElementById('changebook-type').value = bookData.type;
     document.getElementById('changebook-publisher').value = bookData.publisher;
+    document.getElementById('changebook-publishedDate').value = bookData.publishedDate;
     document.getElementById('changebook-number').value = bookData.number;
     document.getElementById('changebook-desc').value = bookData.desc;
 
@@ -54,14 +56,16 @@ function toggleDeleteUser(id){
 }
 function ClickBookCard(el){
     const card = el.closest('.book-card');
+    const isbn = card.dataset.isbn
     const id = card.dataset.id
     const title = card.dataset.title;
     const author = card.dataset.author;
     const type = card.dataset.type;
     const publisher = card.dataset.publisher;
+    const publishedDate = card.dataset.publishedDate;
     const number = card.dataset.number;
     const desc = card.dataset.desc;
-    toggleChangeBook({id, title, author, type, publisher, number, desc});
+    toggleChangeBook({id, isbn,title, author, type, publisher, publishedDate, number, desc});
 }
 
 function ClickDeleteBook(el){

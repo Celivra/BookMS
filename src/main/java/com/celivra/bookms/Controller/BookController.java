@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.util.List;
 
 //有关书籍操作的接口
@@ -29,7 +30,7 @@ public class BookController {
                           @RequestParam int bookNumber,
                           @RequestParam String description,
                           @RequestParam String isbn,
-                          @RequestParam String publishedDate ) {
+                          @RequestParam LocalDate publishedDate) {
         Book book = new Book(bookName, author, bookType, publisher, bookNumber, description, isbn, publishedDate);
         bookService.addBook(book);
         return "redirect:/";
@@ -48,7 +49,9 @@ public class BookController {
                              @RequestParam String bookType,
                              @RequestParam String publisher,
                              @RequestParam String bookNumber,
-                             @RequestParam String description ){
+                             @RequestParam String description,
+                             @RequestParam String isbn,
+                             @RequestParam LocalDate publishedDate) {
         System.out.println("bookid:"+bookId);
         Book book = bookService.findBookById(bookId);
         book.setBookName(bookName);
@@ -57,6 +60,8 @@ public class BookController {
         book.setPublisher(publisher);
         book.setBookNumber(Integer.parseInt(bookNumber));
         book.setDescription(description);
+        book.setISBN(isbn);
+        book.setPublishedDate(publishedDate);
         bookService.updateBook(book);
         return "redirect:/";
     }

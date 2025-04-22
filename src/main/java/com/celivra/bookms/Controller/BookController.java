@@ -27,8 +27,10 @@ public class BookController {
                           @RequestParam String bookType,
                           @RequestParam String publisher,
                           @RequestParam int bookNumber,
-                          @RequestParam String description ) {
-        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description);
+                          @RequestParam String description,
+                          @RequestParam String isbn,
+                          @RequestParam String publishedDate ) {
+        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description, isbn, publishedDate);
         bookService.addBook(book);
         return "redirect:/";
     }

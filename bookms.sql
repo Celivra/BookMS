@@ -31,9 +31,9 @@ CREATE TABLE `book` (
   `booknumber` int DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `isbn` varchar(255) DEFAULT NULL,
-  `published_date` date DEFAULT NULL,
+  `publishedDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算计','电子工业出版社',9,'我大C++天下无敌啊！',NULL,NULL),(2,'JavaEE从精通到忘记','从先生','🐔算计','103出版社',17,'JavaEE就tm不是给人学的啊tmd',NULL,NULL);
+INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算计','电子工业出版社',9,'我大C++天下无敌啊！','1234567890123','2025-04-09'),(2,'JavaEE从精通到忘记','从先生','🐔算计','103出版社',17,'JavaEE就tm不是给人学的啊tmd','0987654321321','2004-04-08'),(5,'能力额','捏','数学','捏出版社',1145,'123123123','8976712418927','1999-01-09'),(6,'你妈','你妈','你妈','你妈出版社',123,'123213123123','7834657834634','2025-04-09');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-22 20:08:57
+-- Dump completed on 2025-04-22 22:43:05

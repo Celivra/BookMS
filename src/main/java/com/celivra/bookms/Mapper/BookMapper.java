@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface BookMapper {
-    @Insert("insert into book(bookname, author, booktype, publisher, booknumber, description, isbn, published_date) " +
+    @Insert("insert into book(bookname, author, booktype, publisher, booknumber, description, isbn, publishedDate) " +
             "values(#{bookName}, #{author}, #{bookType}, #{publisher}, #{bookNumber}, #{description}, #{ISBN}, #{publishedDate})")
     boolean addBook(Book book);
 
@@ -23,7 +23,7 @@ public interface BookMapper {
     //更新书籍信息
     @Update("update book set id = #{id}, bookname = #{bookName}, author = #{author}," +
             "booktype = #{bookType}, publisher = #{publisher}, booknumber = #{bookNumber}, description = #{description}" +
-            "isbn = #{ISBN}, published_date = #{publishedDate}" +
+            "isbn = #{ISBN}, publishedDate = #{publishedDate}" +
             "where id = #{id}")
     boolean updateBookInfo(Book book);
     //获取所有书籍的信息

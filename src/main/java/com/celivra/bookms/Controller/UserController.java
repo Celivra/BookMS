@@ -5,6 +5,7 @@ import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,13 +44,7 @@ public class UserController {
     }
 
     @RequestMapping("/doRegister")
-    public String doRegister(
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam String phone,
-            @RequestParam String email,
-            RedirectAttributes reAttributes) {
-        User user = new User(username, password, phone, email, 1);
+    public String doRegister(@ModelAttribute User user, RedirectAttributes reAttributes) {
         if(userService.addUser(user) == 1){
             reAttributes.addFlashAttribute("RegSuccess", "注册成功");
         }else if(userService.addUser(user) == 2){

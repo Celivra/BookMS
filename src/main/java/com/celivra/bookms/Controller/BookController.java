@@ -8,10 +8,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
 import java.util.List;
 
 //有关书籍操作的接口
@@ -23,15 +22,8 @@ public class BookController {
     BorrowService borrowService;
 
     @RequestMapping("/addBook")
-    public String addBook(@RequestParam String bookName,
-                          @RequestParam String author,
-                          @RequestParam String bookType,
-                          @RequestParam String publisher,
-                          @RequestParam int bookNumber,
-                          @RequestParam String description,
-                          @RequestParam String isbn,
-                          @RequestParam LocalDate publishedDate) {
-        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description, isbn, publishedDate);
+    public String addBook(@ModelAttribute Book book, Model model) {
+//        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description, isbn, publishedDate);
         bookService.addBook(book);
         return "redirect:/";
     }
@@ -43,26 +35,17 @@ public class BookController {
     }
 
     @RequestMapping("/updateBook")
-    public String updateBook(@RequestParam String bookId,
-                             @RequestParam String bookName,
-                             @RequestParam String author,
-                             @RequestParam String bookType,
-                             @RequestParam String publisher,
-                             @RequestParam String bookNumber,
-                             @RequestParam String description,
-                             @RequestParam String isbn,
-                             @RequestParam LocalDate publishedDate) {
-        System.out.println("bookid:"+bookId);
-        Book book = bookService.findBookById(bookId);
-        book.setBookName(bookName);
-        book.setAuthor(author);
-        book.setBookType(bookType);
-        book.setPublisher(publisher);
-        book.setBookNumber(Integer.parseInt(bookNumber));
-        book.setDescription(description);
-        book.setISBN(isbn);
-        book.setPublishedDate(publishedDate);
-        bookService.updateBook(book);
+    public String updateBook(@ModelAttribute Book book, Model model) {
+        Book originbook = bookService.findBookById(book.getId().toString());
+        originbook.setBookName(book.getBookName());
+        originbook.setAuthor(book.getAuthor());
+        originbook.setBookType(book.getBookType());
+        originbook.setPublisher(book.getPublisher());
+        originbook.setBookNumber(book.getBookNumber());
+        originbook.setDescription(book.getDescription());
+        originbook.setISBN(book.getISBN());
+        originbook.setPublishedDate(book.getPublishedDate());
+        bookService.updateBook(originbook);
         return "redirect:/";
     }
 

@@ -15,10 +15,10 @@
         <h2 id="addbookh2">📖 添加图书</h2>
         <h2 id="changebookh2">📖 修改图书</h2>
         <form id="changeBookForm" th:action="@{/updateBook}" method="post">
-            <input id="changebook-id" type="hidden" name="bookId" >
+            <input id="changebook-id" type="hidden" name="id" >
 
             <label>ISBN：</label>
-            <input id="changebook-isbn" type="text" name="isbn" required maxlength="13"/>
+            <input id="changebook-isbn" type="text" name="ISBN" required maxlength="13"/>
 
             <label>书名：</label>
             <input id="changebook-name" type="text" name="bookName" required />
@@ -47,7 +47,7 @@
         </form>
         <form id="addBookForm" th:action="@{/addBook}" method="post">
             <label>ISBN：</label>
-            <input type="text" name="isbn" required maxlength="13" placeholder="仅输入数字即可，不需要'-'"/>
+            <input type="text" name="ISBN" required maxlength="13" placeholder="仅输入数字即可，不需要'-'"/>
 
             <label>书名：</label>
             <input type="text" name="bookName" required />

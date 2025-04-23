@@ -16,6 +16,13 @@ public class User {
         this.email = email;
         this.power = power;
     }
+    public User(String username, String password,String phone, String email) {
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.power = 0;
+    }
 
     public void setPhone(String phone) {
         this.phone = phone;

@@ -14,7 +14,9 @@
         <h2 id="overlay-title">书名</h2>
         <p id="overlay-author">作者：xxx</p>
         <p id="overlay-type">类型：xxx</p>
+        <p id="overlay-ISBN">ISBN：xxx</p>
         <p id="overlay-publisher">出版社：xxx</p>
+        <p id="overlay-publishedDate">出版日期：xxx</p>
         <p id="overlay-number">剩余数量：xxx</p>
         <p id="overlay-desc">简介：xxx</p>
         <form id="borrowForm" action="/borrowBook" method="post" style="float: left; padding-left: 17%;">
@@ -69,7 +71,9 @@
                           data-author=${book.author},
                           data-type=${book.bookType},
                           data-publisher=${book.publisher},
+                          data-publishedDate=${book.publishedDate},
                           data-number=${book.bookNumber},
+                          data-isbn=${book.ISBN},
                           data-desc=${book.description}"
                  onclick="ClickBookCard(this, 'borrow')" >
                 <h4 th:text="${book.bookName}"></h4>
@@ -90,11 +94,13 @@
         <div class="book-list">
             <div class="book-card" th:each="book : ${userbooks}"
                  th:attr="data-id=${book.id},
+                          data-isbn=${book.ISBN},
                           data-title=${book.bookName},
                           data-author=${book.author},
                           data-type=${book.bookType},
                           data-publisher=${book.publisher},
                           data-number=${book.bookNumber},
+                          data-publishedDate=${book.publishedDate},
                           data-desc=${book.description}"
                  onclick="ClickBookCard(this, 'return')" >
                 <h4 th:text="${book.bookName}"></h4>

@@ -20,9 +20,19 @@ function toggleBookDetail(bookData, BorR) {
 
     // 填充内容
     document.getElementById('overlay-title').innerText = "《"+bookData.title+"》";
+    document.getElementById('overlay-ISBN').innerText = "ISBN:"+bookData.isbn;
     document.getElementById('overlay-author').innerText = "作者：" + bookData.author;
     document.getElementById('overlay-type').innerText = "类型：" + bookData.type;
     document.getElementById('overlay-publisher').innerText = "出版社：" + bookData.publisher;
+    const dateStr =  bookData.publisheddate;
+    console.log("second:"+dateStr);
+    if (dateStr) {
+        const [year, month, day] = dateStr.split("-");
+        document.getElementById("overlay-publishedDate").innerText =
+            `出版日期：${year}年${month}月${day}日`;
+    } else {
+        document.getElementById("overlay-publishedDate").innerText = "出版日期：暂无";
+    }
     document.getElementById('overlay-number').innerText = "所剩数量：" + bookData.number;
     document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
 
@@ -51,11 +61,14 @@ document.querySelector("#editPasswordForm form").addEventListener("submit", func
 //点击书籍卡片时接受点击的书籍的信息
 function ClickBookCard(el, BorR){
     const bookid = el.dataset.id
+    const isbn = el.dataset.isbn
     const title = el.dataset.title;
     const author = el.dataset.author;
     const type = el.dataset.type;
     const publisher = el.dataset.publisher;
+    const publisheddate = el.dataset.publisheddate;
     const number = el.dataset.number;
     const desc = el.dataset.desc;
-    toggleBookDetail({bookid, title, author, type, publisher, number, desc}, BorR);
+    console.log("first:"+publisheddate);
+    toggleBookDetail({bookid, isbn, title, author, type, publisher, publisheddate, number, desc}, BorR);
 }

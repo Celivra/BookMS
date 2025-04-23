@@ -72,6 +72,7 @@ public class BookController {
         List<Book> books = null;
         if(target != null) books = bookService.findAllBookByTarget(target);
         else books = bookService.getAllBooks();
+
         // 获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
         // 获取当前用户所借的书

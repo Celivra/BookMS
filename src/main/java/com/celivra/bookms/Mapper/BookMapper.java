@@ -22,8 +22,8 @@ public interface BookMapper {
     Book findBookById(String bookId);
     //更新书籍信息
     @Update("update book set id = #{id}, bookname = #{bookName}, author = #{author}," +
-            "booktype = #{bookType}, publisher = #{publisher}, booknumber = #{bookNumber}, description = #{description}" +
-            "isbn = #{ISBN}, publishedDate = #{publishedDate}" +
+            "booktype = #{bookType}, publisher = #{publisher}, booknumber = #{bookNumber}, description = #{description}," +
+            "isbn = #{ISBN}, publishedDate = #{publishedDate} " +
             "where id = #{id}")
     boolean updateBookInfo(Book book);
     //获取所有书籍的信息

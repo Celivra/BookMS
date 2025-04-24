@@ -80,10 +80,12 @@ public class UserController {
 
         //从session里拿到当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
+        user.setPhone(newPhone);
+        user.setEmail(newEmail);
         //判断是否修改成功
-        if(userService.updateInfo(user.getUsername(), newPhone, newEmail)) {
+        if(userService.updateUser(user)) {
             //将新的user数据加载到session里
-            request.getSession().setAttribute("user", userService.findByUsername(user.getUsername()));
+            request.getSession().setAttribute("user", user);
         }
         return "redirect:/";
     }
@@ -92,10 +94,11 @@ public class UserController {
     public String doChangePassword(@RequestParam String newPasswd, HttpServletRequest request){
         //从session里获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
+        user.setPassword(newPasswd);
         //判断修改是否成功
-        if(userService.updatePassword(user.getUsername(), newPasswd)) {
+        if(userService.updateUser(user)) {
             //将新的user数据加载到session里
-            request.getSession().setAttribute("user", userService.findByUsername(user.getUsername()));
+            request.getSession().setAttribute("user", user);
         }
         return "redirect:/";
     }
@@ -108,8 +111,9 @@ public class UserController {
     @PostMapping("/changeAdminPassword")
     public String changeAdminPassword(@RequestParam String newPasswd, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("admin");
-        if(userService.updatePassword(user.getUsername(), newPasswd)) {
-            request.getSession().setAttribute("admin", userService.findByUsername(user.getUsername()));
+        user.setPassword(newPasswd);
+        if(userService.updateUser(user)) {
+            request.getSession().setAttribute("admin", user);
         }
         return "redirect:/";
     }

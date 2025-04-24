@@ -42,14 +42,14 @@ public class UserService {
     public User findByUserId(String userId) {
         return userMapper.findByUserId(userId);
     }
-    public boolean updateInfo(String username, String newPhone, String newEmail) {
-        return userMapper.updateInfo(username, newPhone, newEmail);
-    }
-    public boolean updatePassword(String username, String newPassword) {
-        return userMapper.updatePassword(username, newPassword);
-    }
     public boolean deleteUser(String userId) {
         borrowMapper.deleteBorrowByUser(userId);
         return userMapper.deleteUser(userId);
     }
+    //public boolean updateInfo(String username, String newPhone, String newEmail) {
+    //    return userMapper.updateInfo(username, newPhone, newEmail);
+    //}
+    //public boolean updatePassword(String username, String newPassword) {
+    //    return userMapper.updatePassword(username, newPassword);
+    //}
 }

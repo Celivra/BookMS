@@ -17,6 +17,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //登入操作
     @PostMapping("/doLogin")
     public String login(
             @RequestParam String username,
@@ -44,6 +45,7 @@ public class UserController {
         return "redirect:/login";
     }
 
+    //注册操作
     @PostMapping("/doRegister")
     public String doRegister(@ModelAttribute User user, RedirectAttributes reAttributes) {
         if(userService.addUser(user) == 1){
@@ -54,6 +56,7 @@ public class UserController {
         return "redirect:/register";
     }
 
+    //更新用户
     @PostMapping("/updateUser")
     public String updateUser(
             @RequestParam String userId,
@@ -72,6 +75,7 @@ public class UserController {
         return "redirect:/";
     }
 
+    //更新用户信息（准备弃用
     @PostMapping("/doChangeInfo")
     public String doChangeInfo(
             @RequestParam String newPhone,
@@ -90,6 +94,7 @@ public class UserController {
         return "redirect:/";
     }
 
+    //更新用户密码（准备弃用
     @PostMapping("/doChangePassword")
     public String doChangePassword(@RequestParam String newPasswd, HttpServletRequest request){
         //从session里获取当前用户的信息
@@ -108,6 +113,7 @@ public class UserController {
         userService.deleteUser(userId);
         return "redirect:/";
     }
+    //更新admin密码
     @PostMapping("/changeAdminPassword")
     public String changeAdminPassword(@RequestParam String newPasswd, HttpServletRequest request){
         User user = (User) request.getSession().getAttribute("admin");

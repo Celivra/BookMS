@@ -27,6 +27,7 @@ public class PageController {
     @Autowired
     UserService userService;
 
+    //控制台页面
     @GetMapping("/")
     public String dashboard(HttpServletRequest req, Model model) {
         //加载/页面时获取所有书籍的信息
@@ -53,16 +54,19 @@ public class PageController {
         model.addAttribute("userbooks", userbooks);
         return "dashboard";
     }
+    //登入界面
     @GetMapping("/login")
     public String loginPage(){
         return "login";
     }
 
+    //注册界面
     @GetMapping("/register")
     public String Register(){
         return "register";
     }
 
+    //登出
     @GetMapping("/logout")
     public String logout(HttpServletRequest req){
         //首先判断session里是否存在admin或者user的attribute，如果存在就设为null

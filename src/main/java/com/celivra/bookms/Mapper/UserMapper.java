@@ -21,13 +21,6 @@ public interface UserMapper {
     @Select("select * from user")
     List<User> getAllUsers();
 
-    ////根据用户名更新用户信息
-    //@Update("update user set phone = #{phone}, email = #{email} where username = #{username}")
-    //boolean updateInfo(String username, String phone, String email);
-    ////修改用户密码
-    //@Update("update user set password = #{password} where username = #{username}")
-    //boolean updatePassword(String username, String password);
-
     @Update("update user set username = #{username}, password = #{password},  phone = #{phone}, email = #{email}, power = #{power} where id = #{id}")
     boolean updateUser(User user);
 

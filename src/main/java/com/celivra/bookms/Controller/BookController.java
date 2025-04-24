@@ -22,7 +22,6 @@ public class BookController {
 
     @PostMapping("/addBook")
     public String addBook(@ModelAttribute Book book, Model model) {
-//        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description, isbn, publishedDate);
         bookService.addBook(book);
         return "redirect:/";
     }
@@ -35,7 +34,9 @@ public class BookController {
 
     @PostMapping("/updateBook")
     public String updateBook(@ModelAttribute Book book, Model model) {
+        //获取要修改的书籍信息
         Book originbook = bookService.findBookById(book.getId().toString());
+        //修改信息
         originbook.setBookName(book.getBookName());
         originbook.setAuthor(book.getAuthor());
         originbook.setBookType(book.getBookType());
@@ -44,6 +45,7 @@ public class BookController {
         originbook.setDescription(book.getDescription());
         originbook.setISBN(book.getISBN());
         originbook.setPublishedDate(book.getPublishedDate());
+        //更新
         bookService.updateBook(originbook);
         return "redirect:/";
     }

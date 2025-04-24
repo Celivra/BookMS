@@ -30,26 +30,25 @@ public class UserService {
             return 0;
         }
     }
+    //更新用户
     public boolean updateUser(User user) {
         return userMapper.updateUser(user);
     }
+    //获取所有用户信息
     public List<User> getAllUsers() {
         return userMapper.getAllUsers();
     }
+    //根据用户名查找
     public User findByUsername(String username) {
         return userMapper.findByUsername(username);
     }
+    //根据id查找
     public User findByUserId(String userId) {
         return userMapper.findByUserId(userId);
     }
+    //删除用户
     public boolean deleteUser(String userId) {
         borrowMapper.deleteBorrowByUser(userId);
         return userMapper.deleteUser(userId);
     }
-    //public boolean updateInfo(String username, String newPhone, String newEmail) {
-    //    return userMapper.updateInfo(username, newPhone, newEmail);
-    //}
-    //public boolean updatePassword(String username, String newPassword) {
-    //    return userMapper.updatePassword(username, newPassword);
-    //}
 }

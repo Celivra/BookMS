@@ -16,31 +16,33 @@ public class BookService {
     @Autowired
     private BorrowMapper borrowMapper;
 
+    //添加图书
     public boolean addBook(Book book) {
         return bookMapper.addBook(book);
     }
 
+    //删除图书
     public boolean deleteBook(String bookId) {
         //要把有关这本书的所有借阅记录删除
         borrowMapper.deleteBorrowByBook(bookId);
         return bookMapper.deleteBook(bookId);
     }
 
-    public Book findBookByName(String bookName){
-        return bookMapper.findBookByName(bookName);
-    }
-
+    //根据id查找图书
     public Book findBookById(String bookId){
         return bookMapper.findBookById(bookId);
     }
 
+    //更新图书
     public boolean updateBook(Book book){
         return bookMapper.updateBookInfo(book);
     }
 
+    //获取所有图书
     public List<Book> getAllBooks() {
         return bookMapper.getAllBooks();
     }
+    //根据关键字查找图书
     public List<Book> findAllBookByTarget(String target) {
         List<Book> bookByName= bookMapper.getBookByName(target);
         List<Book> bookByAuthor = bookMapper.getBookByAuthor(target);

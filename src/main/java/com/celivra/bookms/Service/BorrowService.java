@@ -20,6 +20,7 @@ public class BorrowService {
     @Autowired
     private UserMapper userMapper;
 
+    //根据用户获取借阅信息
     public List<Book> getUserBorrowedBooks(String userId) {
         return borrowMapper.getUserBorrowedBooks(userId);
     }

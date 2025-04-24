@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -21,8 +22,15 @@ public class BookController {
     BorrowService borrowService;
 
     @PostMapping("/addBook")
-    public String addBook(@ModelAttribute Book book, Model model) {
-        bookService.addBook(book);
+    public String addBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
+        int flag = bookService.addBook(book);
+        if(flag == 2){
+            reAModel.addFlashAttribute("AddSameBook","已经有一本同样的书籍存在!");
+        }else if(flag == 0){
+            reAModel.addFlashAttribute("AddBookError","因为系统原因添加失败!");
+        }else{
+            reAModel.addFlashAttribute("AddBookSuccess","添加图书成功");
+        }
         return "redirect:/";
     }
 

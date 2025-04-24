@@ -17,8 +17,19 @@ public class BookService {
     private BorrowMapper borrowMapper;
 
     //添加图书
-    public boolean addBook(Book book) {
-        return bookMapper.addBook(book);
+    //1：添加成功 0:系统原因添加失败 2：因为是相同的书籍, 添加失败
+    public short addBook(Book book) {
+        //通过要添加的书籍的isbn从数据库里搜索。
+        Book check = bookMapper.findBookByISBN(book.getISBN());
+        //如果存在名字相同的书籍且isbn相同，则判定为同一本书，返回2
+        if(check != null) return 2;
+
+        //若没有找到，则正常插入
+        if(bookMapper.addBook(book)){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     //删除图书

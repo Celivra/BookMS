@@ -27,7 +27,7 @@ public class PageController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String dashboard(HttpServletRequest req, Model model) {
         //加载/页面时获取所有书籍的信息
         List<Book> bookList = bookService.getAllBooks();
@@ -53,12 +53,12 @@ public class PageController {
         model.addAttribute("userbooks", userbooks);
         return "dashboard";
     }
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String loginPage(){
         return "login";
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String Register(){
         return "register";
     }

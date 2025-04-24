@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/doLogin")
+    @PostMapping("/doLogin")
     public String login(
             @RequestParam String username,
             @RequestParam String password,
@@ -44,7 +44,7 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @RequestMapping("/doRegister")
+    @PostMapping("/doRegister")
     public String doRegister(@ModelAttribute User user, RedirectAttributes reAttributes) {
         if(userService.addUser(user) == 1){
             reAttributes.addFlashAttribute("RegSuccess", "注册成功");
@@ -72,7 +72,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/doChangeInfo")
+    @PostMapping("/doChangeInfo")
     public String doChangeInfo(
             @RequestParam String newPhone,
             @RequestParam String newEmail,
@@ -88,7 +88,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/doChangePassword")
+    @PostMapping("/doChangePassword")
     public String doChangePassword(@RequestParam String newPasswd, HttpServletRequest request){
         //从session里获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");

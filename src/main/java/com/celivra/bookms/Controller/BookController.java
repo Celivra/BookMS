@@ -8,10 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 //有关书籍操作的接口
@@ -50,7 +48,7 @@ public class BookController {
         return "redirect:/";
     }
 
-    @RequestMapping("/getBooks")
+    @GetMapping("/getBooks")
     public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
         //根据target对books的各个字段进行查找
         List<Book> books = null;

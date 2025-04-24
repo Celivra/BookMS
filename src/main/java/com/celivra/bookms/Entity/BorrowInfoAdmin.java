@@ -4,11 +4,7 @@ import lombok.Data;
 
 @Data
 public class BorrowInfoAdmin {
-    String username;
-    String bookName;
-    String bookAuthor;
-    String borrowDate;
-    String returnDate;
+    private String username, bookName, bookAuthor, borrowDate, returnDate;
 
     public BorrowInfoAdmin(String username, String bookName, String bookAuthor, String borrowDate, String returnDate) {
         this.username = username;

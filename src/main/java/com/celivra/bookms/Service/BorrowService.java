@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class BorrowService {
     @Autowired
-    BookMapper bookMapper;
+    private BookMapper bookMapper;
     @Autowired
-    BorrowMapper borrowMapper;
+    private BorrowMapper borrowMapper;
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
 
     public List<Book> getUserBorrowedBooks(String userId) {
         return borrowMapper.getUserBorrowedBooks(userId);

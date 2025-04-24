@@ -12,9 +12,9 @@ import java.util.*;
 public class BookService {
 
     @Autowired
-    BookMapper bookMapper;
+    private BookMapper bookMapper;
     @Autowired
-    BorrowMapper borrowMapper;
+    private BorrowMapper borrowMapper;
 
     public boolean addBook(Book book) {
         return bookMapper.addBook(book);

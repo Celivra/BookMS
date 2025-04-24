@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
@@ -61,7 +63,7 @@ public class PageController {
         return "register";
     }
 
-    @RequestMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest req){
         //首先判断session里是否存在admin或者user的attribute，如果存在就设为null
         if(req.getSession().getAttribute("admin") != null){

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
@@ -21,20 +22,20 @@ public class BookController {
     @Autowired
     BorrowService borrowService;
 
-    @RequestMapping("/addBook")
+    @PostMapping("/addBook")
     public String addBook(@ModelAttribute Book book, Model model) {
 //        Book book = new Book(bookName, author, bookType, publisher, bookNumber, description, isbn, publishedDate);
         bookService.addBook(book);
         return "redirect:/";
     }
 
-    @RequestMapping("/deleteBook")
+    @PostMapping("/deleteBook")
     public String deleteBook(@RequestParam String bookId){
         bookService.deleteBook(bookId);
         return "redirect:/";
     }
 
-    @RequestMapping("/updateBook")
+    @PostMapping("/updateBook")
     public String updateBook(@ModelAttribute Book book, Model model) {
         Book originbook = bookService.findBookById(book.getId().toString());
         originbook.setBookName(book.getBookName());

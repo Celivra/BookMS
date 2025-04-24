@@ -222,15 +222,15 @@
 
     <div id="settings" class="content-section">
         <h3>⚙️ 管理员账户管理</h3>
-        <button onclick="toggleChangeUsername()">修改用户名</button>
+<!--        <button onclick="toggleChangeUsername()">修改用户名</button>-->
         <button onclick="toggleChangePassword()">修改密码</button>
-        <form id="changeUsername" action="/changeAdminUsername" method="post" style="display: none;">
-            <input id="username" type="text" placeholder="新用户名"/>
-            <button type="submit">提交</button>
-        </form>
+<!--        <form id="changeUsername" action="/changeAdminUsername" method="post" style="display: none;">-->
+<!--            <input id="username" name="username" type="text" placeholder="新用户名"/>-->
+<!--            <button type="submit">提交</button>-->
+<!--        </form>-->
         <form id="changePassword" action="/changeAdminPassword" method="post" style="display: none;">
             <input id="password1" type="password" placeholder="新密码" /><br>
-            <input id="password2" type="password" placeholder="确认密码" /><br>
+            <input id="password2" name="newPasswd" type="password" placeholder="确认密码" /><br>
             <button type="submit">提交</button>
         </form>
     </div>

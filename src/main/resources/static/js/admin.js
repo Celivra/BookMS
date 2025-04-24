@@ -5,10 +5,10 @@ function toggleChangeUsername(){
     cUnameForm.style.display = cUnameForm.style.display === 'none'? 'block':'none';
 }
 function toggleChangePassword(){
-    const cUnameForm = document.getElementById("changeUsername");
+    // const cUnameForm = document.getElementById("changeUsername");
     const cPasswdForm = document.getElementById("changePassword");
     cPasswdForm.style.display = cPasswdForm.style.display === 'none'? 'block':'none';
-    cUnameForm.style.display = 'none';
+    // cUnameForm.style.display = 'none';
 }
 //开启overlay界面
 function toggleAddBook(){

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -53,7 +54,7 @@ public class UserController {
         return "redirect:/register";
     }
 
-    @RequestMapping("/updateUser")
+    @PostMapping("/updateUser")
     public String updateUser(
             @RequestParam String userId,
             @RequestParam String userPhone,
@@ -65,7 +66,7 @@ public class UserController {
         if(userPower == true){
             user.setPower(10);
         }else{
-            user.setPower(1);
+            user.setPower(0);
         }
         userService.updateUser(user);
         return "redirect:/";
@@ -99,10 +100,17 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping("/deleteUser")
+    @PostMapping("/deleteUser")
     public String deleteUser( @RequestParam String userId ){
         userService.deleteUser(userId);
         return "redirect:/";
     }
-
+    @PostMapping("/changeAdminPassword")
+    public String changeAdminPassword(@RequestParam String newPasswd, HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("admin");
+        if(userService.updatePassword(user.getUsername(), newPasswd)) {
+            request.getSession().setAttribute("admin", userService.findByUsername(user.getUsername()));
+        }
+        return "redirect:/";
+    }
 }

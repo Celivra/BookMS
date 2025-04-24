@@ -59,52 +59,30 @@ public class UserController {
     //更新用户
     @PostMapping("/updateUser")
     public String updateUser(
-            @RequestParam String userId,
-            @RequestParam String userPhone,
-            @RequestParam String userEmail,
-            @RequestParam(required = false, defaultValue = "false") boolean userPower ){
-        User user = userService.findByUserId(userId);
-        user.setPhone(userPhone);
-        user.setEmail(userEmail);
-        if(userPower == true){
+            @RequestParam(required = false) String userId,
+            @RequestParam(required = false) String newPassword,
+            @RequestParam(required = false) String newPhone,
+            @RequestParam(required = false) String newEmail,
+            @RequestParam(required = false, defaultValue = "false") boolean newPower,
+            HttpServletRequest request){
+        User user = null;
+        if(userId == null){
+            user = (User) request.getSession().getAttribute("user");
+        }else{
+            user = userService.findByUserId(userId);
+        }
+        //如果newPassword为null则认为没有传password，所以不设置password
+        //其他的一样
+        if(newPassword != null) user.setPassword(newPassword);
+        if(newPhone != null) user.setPhone(newPhone);
+        if(newEmail != null) user.setEmail(newEmail);
+
+        if(newPower == true){
             user.setPower(10);
         }else{
             user.setPower(0);
         }
         userService.updateUser(user);
-        return "redirect:/";
-    }
-
-    //更新用户信息（准备弃用
-    @PostMapping("/doChangeInfo")
-    public String doChangeInfo(
-            @RequestParam String newPhone,
-            @RequestParam String newEmail,
-            HttpServletRequest request ){
-
-        //从session里拿到当前用户的信息
-        User user = (User) request.getSession().getAttribute("user");
-        user.setPhone(newPhone);
-        user.setEmail(newEmail);
-        //判断是否修改成功
-        if(userService.updateUser(user)) {
-            //将新的user数据加载到session里
-            request.getSession().setAttribute("user", user);
-        }
-        return "redirect:/";
-    }
-
-    //更新用户密码（准备弃用
-    @PostMapping("/doChangePassword")
-    public String doChangePassword(@RequestParam String newPasswd, HttpServletRequest request){
-        //从session里获取当前用户的信息
-        User user = (User) request.getSession().getAttribute("user");
-        user.setPassword(newPasswd);
-        //判断修改是否成功
-        if(userService.updateUser(user)) {
-            //将新的user数据加载到session里
-            request.getSession().setAttribute("user", user);
-        }
         return "redirect:/";
     }
 

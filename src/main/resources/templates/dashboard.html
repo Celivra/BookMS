@@ -118,7 +118,7 @@
         <button onclick="toggleEditUserForm('password')">修改密码</button>
         <div id="editForm" class="info-edit-form" style="display: none;">
             <h4>修改信息</h4>
-            <form action="/doChangeInfo" method="post">
+            <form action="/updateUser" method="post">
                 <input name="newPhone" type="text" placeholder="新手机号" th:value="${session.user.phone}" /><br>
                 <input name="newEmail" type="email" placeholder="新邮箱" th:value="${session.user.email}" /><br>
                 <button onclick="alert('信息已提交！');">提交</button>
@@ -126,8 +126,8 @@
         </div>
         <div id="editPasswordForm" class="info-edit-form" style="display: none;">
             <h4>密码</h4>
-            <form action="/doChangePassword" method="post">
-                <input id="password1" name="newPasswd" type="password" placeholder="新密码" /><br>
+            <form action="/updateUser" method="post">
+                <input id="password1" name="newPassword" type="password" placeholder="新密码" /><br>
                 <input id="password2" type="password" placeholder="确认密码" /><br>
                 <button>提交</button>
             </form>

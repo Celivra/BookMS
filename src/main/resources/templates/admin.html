@@ -86,16 +86,16 @@
             <input id="updateUser-id" type="hidden" name="userId" >
 
             <label>用户名</label>
-            <input id="updateUser-username" type="text" name="userUsername" required disabled />
+            <input id="updateUser-username" type="text" disabled />
 
             <label>手机</label>
-            <input id="updateUser-phone" type="text" name="userPhone" required />
+            <input id="updateUser-phone" type="text" name="newPhone" required />
 
             <label>邮件</label>
-            <input id="updateUser-email" type="text" name="userEmail" required />
+            <input id="updateUser-email" type="text" name="newEmail" required />
 
             <label style="margin-left: 30%;">是否为管理员</label>
-            <input id="updateUser-power" type="checkbox" name="userPower" style="width: 50px" />
+            <input id="updateUser-power" type="checkbox" name="newPower" style="width: 50px" />
 
             <div class="form-actions">
                 <button type="submit" class="confirm-btn">✅ 修改</button>
@@ -230,12 +230,7 @@
 
     <div id="settings" class="content-section">
         <h3>⚙️ 管理员账户管理</h3>
-<!--        <button onclick="toggleChangeUsername()">修改用户名</button>-->
         <button onclick="toggleChangePassword()">修改密码</button>
-<!--        <form id="changeUsername" action="/changeAdminUsername" method="post" style="display: none;">-->
-<!--            <input id="username" name="username" type="text" placeholder="新用户名"/>-->
-<!--            <button type="submit">提交</button>-->
-<!--        </form>-->
         <form id="changePassword" action="/changeAdminPassword" method="post" style="display: none;">
             <input id="password1" type="password" placeholder="新密码" /><br>
             <input id="password2" name="newPasswd" type="password" placeholder="确认密码" /><br>

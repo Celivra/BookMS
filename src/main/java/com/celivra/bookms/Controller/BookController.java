@@ -1,9 +1,11 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
+import com.celivra.bookms.Entity.BorrowInfoAdmin;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
+import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,8 @@ public class BookController {
     BookService bookService;
     @Autowired
     BorrowService borrowService;
+    @Autowired
+    UserService userService;
 
     @PostMapping("/addBook")
     public String addBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
@@ -73,6 +77,10 @@ public class BookController {
             model.addAttribute("userbooks", userbooks);
             return "dashboard";
         }
+        List<User> userList = userService.getAllUsers();
+        List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
+        model.addAttribute("users", userList);
+        model.addAttribute("borrowInfo", borrowInfoAdmins);
         model.addAttribute("activeSection", "books");
         model.addAttribute("books", books);
         return "admin";

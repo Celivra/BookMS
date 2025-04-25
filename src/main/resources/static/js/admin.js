@@ -87,3 +87,8 @@ function ClickUser(el){
     toggleUpdateUser({id, username, phone, email, power})
 
 }
+window.onload = function () {
+    if (typeof activeSection !== "undefined" && activeSection !== null) {
+        showSection(activeSection);
+    }
+};

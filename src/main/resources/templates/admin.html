@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="css/admin.css">
     <link rel="stylesheet" type="text/css" href="css/common/overlay.css">
     <link rel="stylesheet" type="text/css" href="css/common/framework.css">
+    <script th:inline="javascript">
+        let activeSection = [[${activeSection}]];
+    </script>
     <title>图书管理系统 - 控制台</title>
 </head>
 <body>
@@ -206,7 +209,6 @@
 
     <div id="users" class="content-section">
         <h3>👥 用户管理</h3>
-<!--        <button class="add-user-btn">➕ 添加用户</button>-->
         <div class="user-list">
             <div class="user-card" th:each="user : ${users}"
                  th:attr="data-id=${user.id},

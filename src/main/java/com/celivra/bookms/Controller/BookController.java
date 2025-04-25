@@ -73,6 +73,7 @@ public class BookController {
             model.addAttribute("userbooks", userbooks);
             return "dashboard";
         }
+        model.addAttribute("activeSection", "books");
         model.addAttribute("books", books);
         return "admin";
     }

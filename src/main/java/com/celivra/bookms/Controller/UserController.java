@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,11 +18,8 @@ public class UserController {
 
     //登入操作
     @PostMapping("/doLogin")
-    public String login(
-            @RequestParam String username,
-            @RequestParam String password,
-            HttpServletRequest request,
-            RedirectAttributes reAttributes) {
+    public String login( @RequestParam String username, @RequestParam String password,
+            HttpServletRequest request, RedirectAttributes reAttributes) {
 
         //根据用户名获取用户数据
         User user = userService.findByUsername(username);
@@ -38,8 +34,7 @@ public class UserController {
             //重定向到/目录
             return "redirect:/";
         }
-        //若没有进入if里，则密码错误
-        //创建passworderror错误
+        //若没有进入if里，则密码错误 创建passworderror错误
         reAttributes.addFlashAttribute("PasswordError", true);
         //重定向到login页面
         return "redirect:/login";
@@ -65,7 +60,7 @@ public class UserController {
             @RequestParam(required = false) String newEmail,
             @RequestParam(required = false, defaultValue = "false") boolean newPower,
             HttpServletRequest request){
-        User user = null;
+        User user;
         if(userId == null){
             user = (User) request.getSession().getAttribute("user");
         }else{

@@ -25,19 +25,6 @@ public class BorrowService {
         return borrowMapper.getUserBorrowedBooks(userId);
     }
 
-    //根据用户id删除记录
-    public boolean deleteBorrowByUser(String userId) {
-        borrowMapper.deleteBorrowByUser(userId);
-        return true;
-    }
-
-    //根据图书id删除记录
-    public boolean deleteBorrowByBook(String bookId) {
-        borrowMapper.deleteBorrowByBook(bookId);
-        return true;
-    }
-
-
     //归还图书
     public boolean returnBook(String bookid, String userid) {
         //获取当前借阅记录

@@ -14,14 +14,9 @@ public interface BookMapper {
     @Delete("delete from book where id = #{bookId}")
     boolean deleteBook(String bookId);
 
-    //根据书名获得书籍信息
-    @Select("select * from book where bookname = #{bookName}")
-    Book findBookByName(String bookName);
-
     //根据ISBN获得书籍信息
     @Select("select * from book where isbn = #{isbn}")
     Book findBookByISBN(String isbn);
-
 
     //根据书籍id获取书籍信息
     @Select("select * from book where id=#{bookId}")

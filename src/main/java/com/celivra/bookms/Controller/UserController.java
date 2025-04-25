@@ -77,11 +77,7 @@ public class UserController {
         if(newPhone != null) user.setPhone(newPhone);
         if(newEmail != null) user.setEmail(newEmail);
 
-        if(newPower == true){
-            user.setPower(10);
-        }else{
-            user.setPower(0);
-        }
+        user.setPower(newPower?10:0);
         userService.updateUser(user);
         return "redirect:/";
     }

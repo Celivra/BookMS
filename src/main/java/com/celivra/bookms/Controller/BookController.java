@@ -68,10 +68,12 @@ public class BookController {
         // 获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
         // 获取当前用户所借的书
-        List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
-
-        model.addAttribute("userbooks", userbooks);
+        if(user != null){
+            List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
+            model.addAttribute("userbooks", userbooks);
+            return "dashboard";
+        }
         model.addAttribute("books", books);
-        return "dashboard";
+        return "admin";
     }
 }

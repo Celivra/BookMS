@@ -163,7 +163,9 @@
     <div id="books" class="content-section">
         <h3>📚 图书管理</h3>
         <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
-
+        <form action="/getBooks" style="display: flex; justify-content: flex-end; margin: 15px 0px; float: right;">
+            <input type="text" name="target" placeholder="🔍搜索图书" style=" height: 10px; border-radius: 40px; border: 1px solid; padding: 10px;"/>
+        </form>
         <div class="book-list">
             <div class="book-card" th:each="book : ${books}"
                  th:attr="

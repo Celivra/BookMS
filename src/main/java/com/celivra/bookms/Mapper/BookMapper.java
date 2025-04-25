@@ -36,18 +36,12 @@ public interface BookMapper {
     @Select("select * from book;")
     List<Book> getAllBooks();
 
-    @Select("select * from book where bookname like concat('%', #{target}, '%')")
-    List<Book> getBookByName(String target);
-    @Select("select * from book where author like concat('%', #{target}, '%')")
-    List<Book> getBookByAuthor(String target);
-    @Select("select * from book where booktype like concat('%', #{target}, '%')")
-    List<Book> getBookByType(String target);
-    @Select("select * from book where publisher like concat('%', #{target}, '%')")
-    List<Book> getBookByPublisher(String target);
-    @Select("select * from book where booknumber like concat('%', #{target}, '%')")
-    List<Book> getBookByNumber(String target);
-    @Select("select * from book where description like concat('%', #{target}, '%')")
-    List<Book> getBookByDesc(String target);
-    @Select("select * from book where isbn like concat('%', #{target}, '%')")
-    List<Book> getBookByISBN(String target);
+    @Select("select * from book where bookname like concat('%', #{target}, '%') or " +
+            "author like concat('%', #{target}, '%') or " +
+            "booktype like concat('%', #{target}, '%') or " +
+            "publisher like concat('%', #{target}, '%') or " +
+            "booknumber like concat('%', #{target}, '%') or " +
+            "description like concat('%', #{target}, '%') or " +
+            "isbn like concat('%', #{target}, '%')")
+    List<Book> findBookByTarget(String target);
 }

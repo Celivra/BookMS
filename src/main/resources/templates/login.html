@@ -5,9 +5,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/common/overlay.css">
     <title>图书管理系统 - 登录</title>
 </head>
 <body>
+<div id="message" th:if="${UpdatePasswd}" class="overlay" style="font-size: 20px;">
+    <div class="overlay-content">
+        <p th:if="${UpdatePasswd}" th:text="${UpdatePasswd}"></p>
+        <button onclick="closeOverlay('message')">关闭</button>
+    </div>
+</div>
 <div class="login-container">
     <h2>图书管理系统</h2>
     <form th:action="@{/doLogin}" method="post">
@@ -19,4 +26,5 @@
     <a th:href="@{/register}" ><button type="submit" >注册</button> </a>
 </div>
 </body>
+<script src="js/common.js"></script>
 </html>

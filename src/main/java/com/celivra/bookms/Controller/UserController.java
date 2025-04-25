@@ -59,7 +59,8 @@ public class UserController {
             @RequestParam(required = false) String newPhone,
             @RequestParam(required = false) String newEmail,
             @RequestParam(required = false, defaultValue = "false") boolean newPower,
-            HttpServletRequest request){
+            HttpServletRequest request,
+            RedirectAttributes reAttributes) {
         User user;
         if(userId == null){
             user = (User) request.getSession().getAttribute("user");
@@ -71,9 +72,13 @@ public class UserController {
         if(newPassword != null) user.setPassword(newPassword);
         if(newPhone != null) user.setPhone(newPhone);
         if(newEmail != null) user.setEmail(newEmail);
-
         user.setPower(newPower?10:0);
         userService.updateUser(user);
+        if(newPassword != null){
+            request.getSession().removeAttribute("user");
+            reAttributes.addFlashAttribute("UpdatePasswd", "检测到密码更改，请重新登入。");
+            return "redirect:/login";
+        }
         return "redirect:/";
     }
 

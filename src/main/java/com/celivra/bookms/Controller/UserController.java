@@ -97,8 +97,9 @@ public class UserController {
     }
 
     @PostMapping("/deleteUser")
-    public String deleteUser( @RequestParam String userId ){
+    public String deleteUser( @RequestParam String userId, RedirectAttributes model) {
         userService.deleteUser(userId);
+        model.addFlashAttribute("activeSection", "users");
         return "redirect:/";
     }
     //更新admin密码

@@ -20,7 +20,10 @@
     <form th:action="@{/doLogin}" method="post">
         <input type="text" name="username" placeholder="用户名" required>
         <input type="password" name="password" placeholder="密码" required>
-        <div th:if="${PasswordError}" style="color: red; text-align: center;">密码错误</div>
+        <div th:if="${PasswordError} or ${NoUsername}" style="color: red; text-align: center;">
+            <span th:if="${PasswordError}" th:text="${PasswordError}"></span>
+            <span th:if="${NoUsername}" th:text="${NoUsername}"></span>
+        </div>
         <button type="submit">登录</button>
     </form>
     <a th:href="@{/register}" ><button type="submit" >注册</button> </a>

@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/admin.css">
     <link rel="stylesheet" type="text/css" href="css/common/overlay.css">
     <link rel="stylesheet" type="text/css" href="css/common/framework.css">
+    <link rel="stylesheet" type="text/css" href="css/common/searchText.css">
     <script th:inline="javascript">
         let activeSection = [[${activeSection}]];
     </script>
@@ -166,8 +167,8 @@
     <div id="books" class="content-section">
         <h3>📚 图书管理</h3>
         <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
-        <form action="/getBooks" style="display: flex; justify-content: flex-end; margin: 15px 0px; float: right;">
-            <input type="text" name="target" placeholder="🔍搜索图书" style=" height: 10px; border-radius: 40px; border: 1px solid; padding: 10px;"/>
+        <form action="/getBooks" class="search-form" >
+            <input type="text" name="target" placeholder="🔍搜索图书" class="search-input"/>
         </form>
         <div class="book-list">
             <div class="book-card" th:each="book : ${books}"
@@ -209,8 +210,8 @@
 
     <div id="users" class="content-section">
         <h3>👥 用户管理</h3>
-        <form action="/getUsers" style="display: flex; justify-content: flex-end; margin: 15px 0px;">
-            <input type="text" name="target" placeholder="🔍输入用户名" style=" height: 10px; border-radius: 40px; border: 1px solid; padding: 10px;"/>
+        <form action="/getUsers" class="search-form">
+            <input type="text" name="target" placeholder="🔍 输入用户名" class="search-input" />
         </form>
         <div class="user-list">
             <div class="user-card" th:each="user : ${users}"

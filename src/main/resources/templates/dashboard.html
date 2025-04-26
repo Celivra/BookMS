@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="css/common/overlay.css">
     <link rel="stylesheet" type="text/css" href="css/common/framework.css">
+    <link rel="stylesheet" type="text/css" href="css/common/searchText.css">
 </head>
 <body>
 <div id="overlay" class="overlay" style="display: none;">
@@ -59,8 +60,8 @@
 <div class="main-content">
     <div id="books" class="content-section active">
         <h3>📚 图书目录</h3>
-        <form action="/getBooks" style="display: flex; justify-content: flex-end; margin: 15px 0px;">
-            <input type="text" name="target" placeholder="🔍搜索图书" style=" height: 7px; border-radius: 40px; border: 1px solid; padding: 10px; "/>
+        <form action="/getBooks" class="search-form">
+            <input type="text" name="target" class="search-input"/>
         </form>
         <div class="book-list">
             <div class="book-card"

@@ -1,0 +1,22 @@
+.search-form {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 0;
+}
+
+.search-input {
+    height: 40px;
+    width: 250px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    padding: 0 20px;
+    font-size: 14px;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+}

@@ -35,21 +35,24 @@ public class UserController {
 
         //根据用户名获取用户数据
         User user = userService.findByUsername(username);
-        //判断有无这个用户或者密码是否匹配
-        if(user != null && user.getPassword().equals(password)) {
-            //判断是否为管理员账户, 创建不同的attribute
-            if(user.getPower() == 10){
-                request.getSession().setAttribute("admin", user);
-            }else {
-                request.getSession().setAttribute("user", user);
-            }
-            //重定向到/目录
-            return "redirect:/";
+
+        if(user == null){
+            reAttributes.addFlashAttribute("NoUsername", "没有这个用户!");
+            return "redirect:/login";
         }
-        //若没有进入if里，则密码错误 创建passworderror错误
-        reAttributes.addFlashAttribute("PasswordError", true);
-        //重定向到login页面
-        return "redirect:/login";
+        if(!user.getPassword().equals(password)) {
+            reAttributes.addFlashAttribute("PasswordError", "密码错误!");
+            return "redirect:/login";
+        }
+
+        //判断是否为管理员账户, 创建不同的attribute
+        if(user.getPower() == 10){
+            request.getSession().setAttribute("admin", user);
+        }else {
+            request.getSession().setAttribute("user", user);
+        }
+        //重定向到/目录
+        return "redirect:/";
     }
 
     //注册操作

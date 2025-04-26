@@ -31,7 +31,7 @@ public class UserController {
     //登入操作
     @PostMapping("/doLogin")
     public String login( @RequestParam String username, @RequestParam String password,
-            HttpServletRequest request, RedirectAttributes reAttributes) {
+                         HttpServletRequest request, RedirectAttributes reAttributes) {
 
         //根据用户名获取用户数据
         User user = userService.findByUsername(username);

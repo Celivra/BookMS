@@ -49,4 +49,8 @@ public class UserService {
         borrowMapper.deleteBorrowByUser(userId);
         return userMapper.deleteUser(userId);
     }
+
+    public List<User> searchUser(String keyword) {
+        return userMapper.getAllUsersByTarget(keyword);
+    }
 }

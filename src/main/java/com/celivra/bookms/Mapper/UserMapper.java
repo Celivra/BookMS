@@ -18,12 +18,17 @@ public interface UserMapper {
             "values(#{username}, #{password}, #{phone}, #{email}, #{power})")
     boolean addUser(User user);
 
-    @Select("select * from user")
-    List<User> getAllUsers();
-
     @Update("update user set username = #{username}, password = #{password},  phone = #{phone}, email = #{email}, power = #{power} where id = #{id}")
     boolean updateUser(User user);
 
     @Delete("delete from user where id = #{id}")
     boolean deleteUser(String id);
+
+    @Select("select * from user")
+    List<User> getAllUsers();
+
+    //根据关键字查找用户名
+    @Select("select * from user where username like concat('%',#{target},'%') ")
+    List<User> getAllUsersByTarget(String target);
+
 }

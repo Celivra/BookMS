@@ -1,20 +1,32 @@
 package com.celivra.bookms.Controller;
 
+import com.celivra.bookms.Entity.Book;
+import com.celivra.bookms.Entity.BorrowInfoAdmin;
 import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Service.BookService;
+import com.celivra.bookms.Service.BorrowService;
 import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 //有关提交的接口
 @Controller
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    BookService bookService;
+    @Autowired
+    BorrowService borrowService;
 
     //登入操作
     @PostMapping("/doLogin")
@@ -96,5 +108,30 @@ public class UserController {
             request.getSession().setAttribute("admin", user);
         }
         return "redirect:/";
+    }
+
+    @GetMapping("/getUsers")
+    public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
+        //根据target对books的各个字段进行查找
+        List<User> userList= null;
+        if(target != null) userList= userService.searchUser(target);
+        else userList = userService.getAllUsers();
+
+        // 获取当前用户的信息
+        User user = (User) request.getSession().getAttribute("user");
+        // 获取当前用户所借的书
+        if(user != null){
+            List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
+            model.addAttribute("userbooks", userbooks);
+            return "dashboard";
+        }
+
+        List<Book> books = bookService.getAllBooks();
+        List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
+        model.addAttribute("users", userList);
+        model.addAttribute("borrowInfo", borrowInfoAdmins);
+        model.addAttribute("activeSection", "users");
+        model.addAttribute("books", books);
+        return "admin";
     }
 }

@@ -209,6 +209,9 @@
 
     <div id="users" class="content-section">
         <h3>👥 用户管理</h3>
+        <form action="/getUsers" style="display: flex; justify-content: flex-end; margin: 15px 0px;">
+            <input type="text" name="target" placeholder="🔍输入用户名" style=" height: 10px; border-radius: 40px; border: 1px solid; padding: 10px;"/>
+        </form>
         <div class="user-list">
             <div class="user-card" th:each="user : ${users}"
                  th:attr="data-id=${user.id},

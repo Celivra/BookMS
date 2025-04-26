@@ -58,11 +58,10 @@ public class UserController {
     //注册操作
     @PostMapping("/doRegister")
     public String doRegister(@ModelAttribute User user, RedirectAttributes reAttributes) {
-        if(userService.addUser(user) == 1){
-            reAttributes.addFlashAttribute("RegSuccess", "注册成功");
-        }else if(userService.addUser(user) == 2){
-            reAttributes.addFlashAttribute("RegUserIsExist", "用户已存在");
-        }
+        int returnValue = userService.addUser(user);
+        String key = returnValue==1?"RegSuccess":"RegUserIsExist";
+        String value = returnValue == 1? "注册成功":"用户已存在";
+        reAttributes.addFlashAttribute(key, value);
         return "redirect:/register";
     }
 

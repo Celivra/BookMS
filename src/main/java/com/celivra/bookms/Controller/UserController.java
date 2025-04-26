@@ -93,6 +93,7 @@ public class UserController {
             reAttributes.addFlashAttribute("UpdatePasswd", "检测到密码更改，请重新登入。");
             return "redirect:/login";
         }
+        reAttributes.addFlashAttribute("activeSection", "users");
         return "redirect:/";
     }
 

@@ -18,7 +18,7 @@ public class BorrowController {
 
     //归还图书
     @PostMapping("/returnBook")
-    public String returnBook(@RequestParam String bookid, HttpServletRequest request, Model model) {
+    public String returnBook(@RequestParam String bookid, HttpServletRequest request, Model model, RedirectAttributes reAModel) {
         //获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
         //调用归还图书的Service
@@ -27,6 +27,7 @@ public class BorrowController {
         if(success) {
             model.addAttribute("Returned", true);
         }
+        reAModel.addFlashAttribute("activeSection", "mybook");
         return "redirect:/";
     }
     //借阅图书

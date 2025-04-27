@@ -1,6 +1,7 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
+import com.celivra.bookms.Entity.BorrowInfo;
 import com.celivra.bookms.Entity.BorrowInfoAdmin;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;
@@ -35,17 +36,19 @@ public class BookController {
         }else{
             reAModel.addFlashAttribute("AddBookSuccess","添加图书成功");
         }
+        reAModel.addFlashAttribute("activeSection", "books");
         return "redirect:/";
     }
 
     @PostMapping("/deleteBook")
-    public String deleteBook(@RequestParam String bookId){
+    public String deleteBook(@RequestParam String bookId, RedirectAttributes reAModel) {
         bookService.deleteBook(bookId);
+        reAModel.addFlashAttribute("activeSection", "books");
         return "redirect:/";
     }
 
     @PostMapping("/updateBook")
-    public String updateBook(@ModelAttribute Book book, Model model) {
+    public String updateBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
         //获取要修改的书籍信息
         Book originbook = bookService.findBookById(book.getId().toString());
         //修改信息
@@ -58,6 +61,7 @@ public class BookController {
         originbook.setISBN(book.getISBN());
         originbook.setPublishedDate(book.getPublishedDate());
         //更新
+        reAModel.addFlashAttribute("activeSection", "books");
         bookService.updateBook(originbook);
         return "redirect:/";
     }
@@ -68,6 +72,7 @@ public class BookController {
         List<Book> books = null;
         if(target != null) books = bookService.findAllBookByTarget(target);
         else books = bookService.getAllBooks();
+        model.addAttribute("books", books);
 
         // 获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
@@ -82,7 +87,6 @@ public class BookController {
         model.addAttribute("users", userList);
         model.addAttribute("borrowInfo", borrowInfoAdmins);
         model.addAttribute("activeSection", "books");
-        model.addAttribute("books", books);
         return "admin";
     }
 }

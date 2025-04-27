@@ -1,7 +1,6 @@
 package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
-import com.celivra.bookms.Entity.BorrowInfo;
 import com.celivra.bookms.Entity.BorrowInfoAdmin;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;

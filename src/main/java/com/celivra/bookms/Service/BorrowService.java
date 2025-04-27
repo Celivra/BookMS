@@ -31,17 +31,17 @@ public class BorrowService {
         Borrow borrow = borrowMapper.getBorrowByUserAndBook(userid, bookid);
         //设置返回日期为当前日期
         borrow.setReturnDate(DateUtil.getCurrentDate());
+
         //判断是否更新成功
-        if(borrowMapper.updateBorrow(borrow)){
-            //获取当前要还的书籍信息
-            Book book = bookMapper.findBookById(bookid);
-            //修改书籍数量
-            book.setBookNumber(book.getBookNumber() + 1);
-            //更新书籍
-            bookMapper.updateBookInfo(book);
-            return true;
-        }
-        return false;
+        if(!borrowMapper.updateBorrow(borrow)) return false;
+
+        //获取当前要还的书籍信息
+        Book book = bookMapper.findBookById(bookid);
+        //修改书籍数量
+        book.setBookNumber(book.getBookNumber() + 1);
+        //更新书籍
+        bookMapper.updateBookInfo(book);
+        return true;
     }
 
     //添加借阅记录
@@ -57,12 +57,11 @@ public class BorrowService {
         //建立借阅记录
         Borrow borrow = new Borrow(user.getId(), book.getId(), DateUtil.getCurrentDate(), null);
         //将记录插入到数据库里
-        if(borrowMapper.insertBorrow(borrow)){
-            book.setBookNumber(book.getBookNumber() - 1);
-            bookMapper.updateBookInfo(book);
-            return true;
-        }
-        return false;
+        if(!borrowMapper.insertBorrow(borrow)) return false;
+
+        book.setBookNumber(book.getBookNumber() - 1);
+        bookMapper.updateBookInfo(book);
+        return true;
     }
 
     /**

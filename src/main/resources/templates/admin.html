@@ -184,9 +184,12 @@
                  data-number=${book.bookNumber},
                  data-desc=${book.description}" >
                 <div class="book-info">
-                    <div class="book-title" th:text="${book.bookName}">书名</div>
+                    <div class="book-title" >
+                        <span th:text="${book.bookName} "></span>
+                        <span>-</span>
+                        <span th:text="${book.author}">作者</span>
+                    </div>
                     <div class="book-meta">
-                        <span th:text="'作者：' + ${book.author}">作者</span>
                         <span th:text="'类型：' + ${book.bookType}">类型</span>
                         <span th:text="'出版社：' + ${book.publisher}">出版社</span>
                         <span th:text="'出版时间：' + ${book.publishedDate}">出版社</span>

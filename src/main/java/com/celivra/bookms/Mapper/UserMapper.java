@@ -28,7 +28,10 @@ public interface UserMapper {
     List<User> getAllUsers();
 
     //根据关键字查找用户名
-    @Select("select * from user where username like concat('%',#{target},'%') ")
+    @Select("select * from user where " +
+            "username like concat('%',#{target},'%') or " +
+            "phone like concat('%',#{target},'%') or " +
+            "email like concat('%',#{target},'%')")
     List<User> getAllUsersByTarget(String target);
 
 }

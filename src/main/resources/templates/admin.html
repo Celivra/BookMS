@@ -168,7 +168,7 @@
     <div id="books" class="content-section">
         <h3>📚 图书管理</h3>
         <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
-        <form action="/getBooks" class="search-form" >
+        <form action="/getBooks" class="search-form" style="float: right; height: 10px;">
             <input type="text" name="target" placeholder="🔍搜索图书" class="search-input"/>
         </form>
         <div class="book-list">
@@ -225,7 +225,7 @@
     <div id="users" class="content-section">
         <h3>👥 用户管理</h3>
         <form action="/getUsers" class="search-form">
-            <input type="text" name="target" placeholder="🔍 输入用户名" class="search-input" />
+            <input type="text" name="target" placeholder="🔍 输入关键字" class="search-input" />
         </form>
         <div class="user-list">
             <div class="user-card" th:each="user : ${users}"

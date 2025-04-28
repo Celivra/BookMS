@@ -47,8 +47,8 @@ public class PageController {
         //获取当前用户的所有借阅信息
         List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
 
-        req.getSession().setAttribute("borrowInfo", borrowInfos);
         //将获取到的所有数据放到model里，供前端调用
+        model.addAttribute("borrowInfo", borrowInfos);
         model.addAttribute("userbooks", userbooks);
         return "dashboard";
     }

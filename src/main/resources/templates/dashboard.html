@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/common/overlay.css">
     <link rel="stylesheet" type="text/css" href="css/common/framework.css">
     <link rel="stylesheet" type="text/css" href="css/common/searchText.css">
+    <link rel="stylesheet" type="text/css" href="css/common/borrowRecord.css">
     <script th:inline="javascript">
         let activeSection = [[${activeSection}]];
     </script>
@@ -55,7 +56,7 @@
     <h2>用户菜单</h2>
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
     <button class="nav-btn" onclick="showSection('mybook')">📚 已借到的图书</button>
-    <button class="nav-btn" onclick="showSection('records')">📝 借阅记录</button>
+    <button class="nav-btn" onclick="showSection('borrow')">📝 借阅记录</button>
     <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
     <button class="nav-btn" onclick="logout()">🔓 退出登录</button>
 </div>
@@ -85,12 +86,25 @@
         </div>
     </div>
 
-    <div id="records" class="content-section">
+    <div id="borrow" class="content-section">
         <h3>📝 借阅记录</h3>
-        <div th:each="borrinfo : ${session.borrowInfo}">
-            <p th:text="${borrinfo}"></p>
+        <div class="borrow-list">
+            <div class="borrow-card" th:each="borrinfo : ${borrowInfo}">
+                <div class="borrow-main">
+                    <div class="borrow-title">
+                        <span th:text="'书名：' + ${borrinfo.bookName}"></span> -
+                        <span th:text="'作者：' + ${borrinfo.author}"></span>
+                    </div>
+                    <div class="borrow-meta">
+                        <span th:text="'借阅日期：' + ${borrinfo.borrowDate}"></span>
+                        <span th:if="${borrinfo.returnDate}" th:text="'应还日期：' + ${borrinfo.returnDate}"></span>
+                        <span th:if="${borrinfo.returnDate} == null">尚未归还</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 
     <div id="mybook" class="content-section">
         <h3>📚 已借到的图书</h3>

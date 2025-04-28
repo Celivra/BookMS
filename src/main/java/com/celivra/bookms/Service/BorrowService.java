@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -81,6 +82,7 @@ public class BorrowService {
             //将信息添加到信息表
             borrowInfos.add(new BorrowInfo(book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }
+        Collections.reverse(borrowInfos);
         return borrowInfos;
     }
     public List<BorrowInfoAdmin> getAllBorrows() {
@@ -96,6 +98,7 @@ public class BorrowService {
             //将信息添加到list里
             borrowInfos.add(new BorrowInfoAdmin(user.getUsername(), book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }
+        Collections.reverse(borrowInfos);
         return borrowInfos;
     }
 }

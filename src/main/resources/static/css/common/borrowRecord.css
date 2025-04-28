@@ -1,0 +1,38 @@
+.borrow-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.borrow-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px 26px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.borrow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.borrow-main {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.borrow-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #333;
+}
+
+.borrow-meta {
+    font-size: 14px;
+    color: #777;
+    display: flex;
+    gap: 20px;
+}

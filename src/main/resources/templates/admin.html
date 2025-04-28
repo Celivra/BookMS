@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/common/overlay.css">
     <link rel="stylesheet" type="text/css" href="css/common/framework.css">
     <link rel="stylesheet" type="text/css" href="css/common/searchText.css">
+    <link rel="stylesheet" type="text/css" href="css/common/borrowRecord.css">
     <script th:inline="javascript">
         let activeSection = [[${activeSection}]];
     </script>
@@ -203,8 +204,21 @@
 
     <div id="borrow" class="content-section">
         <h3>📖 借阅记录</h3>
-        <div th:each="borrowinfo : ${borrowInfo}">
-            <div th:text="${borrowinfo}" style="margin: 10px;"></div>
+        <div class="borrow-list">
+            <div class="borrow-card" th:each="borrowinfo : ${borrowInfo}">
+                <div class="borrow-main">
+                    <div class="borrow-title">
+                        <span th:text="${borrowinfo.username}"></span>:
+                        <span th:text="'书名：' + ${borrowinfo.bookName}"></span> -
+                        <span th:text="${borrowinfo.bookAuthor}"></span>
+                    </div>
+                    <div class="borrow-meta">
+                        <span th:text="'借阅日期：' + ${borrowinfo.borrowDate}"></span>
+                        <span th:if="${borrowinfo.returnDate}" th:text="'应还日期：' + ${borrowinfo.returnDate}"></span>
+                        <span th:if="${borrowinfo.returnDate} == null">尚未归还</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

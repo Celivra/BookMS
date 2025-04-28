@@ -113,3 +113,7 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2025-04-22 22:43:05
+Usage: mysqldump [OPTIONS] database [tables]
+OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
+OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
+For more options, use mysqldump --help

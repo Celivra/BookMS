@@ -12,6 +12,9 @@ function showSection(id) {
 function logout(){
     document.getElementById('logout').style.display='flex';
 }
+function openOverlay(id){
+    document.getElementById(id).style.display='flex';
+}
 function closeOverlay(id){
     document.getElementById(id).style.display='none';
 }

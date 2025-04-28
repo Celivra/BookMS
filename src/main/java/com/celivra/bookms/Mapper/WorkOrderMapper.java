@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface WorkOrderMapper {
-    @Insert("insert into workorder(ordername, rank, content) values(#{orderName}, #{rank}, #{content})")
+    @Insert("insert into workorder(ordername, rank, content, userid) values(#{orderName}, #{rank}, #{content}, #{userId})")
     boolean addWorkOrder(WorkOrder workOrder);
 
-    @Update("update workorder set id = #{id}, ordername = ${orderName}, rank = #{rank}, content = #{content}, reply = #{reply}")
+    @Update("update workorder set id = #{id}, ordername = ${orderName}, rank = #{rank}, content = #{content}, reply = #{reply}, userid = #{userId}")
     boolean updateWorkOrder(WorkOrder workOrder);
 }

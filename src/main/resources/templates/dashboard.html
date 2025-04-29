@@ -51,14 +51,14 @@
         <button onclick="closeOverlay('Borrowed')">❌ 关闭</button>
     </div>
 </div>
-<div id="addWorkOrder" class="overlay" style="display: none;">
+<div id="addTicket" class="overlay" style="display: none;">
     <div class="overlay-content">
         <p>创建工单</p>
-        <form action="/addWorkOrder" method="post">
-            <label for="ordername">工单名:</label>
-            <input id="ordername" name="orderName" type="text"/>
+        <form action="/addTicket" method="post">
+            <label for="ticketname">工单名:</label>
+            <input id="ticketname" name="ticketName" type="text"/>
             <label for="rank">级别:</label>
-            <select id="rank" name="orderrank">
+            <select id="rank" name="ticketRank">
                 <option>高</option>
                 <option>中</option>
                 <option>低</option>
@@ -67,7 +67,7 @@
             <textarea id="content" name="content"></textarea>
             <button>提交</button>
         </form>
-        <button onclick="closeOverlay('addWorkOrder')">关闭</button>
+        <button onclick="closeOverlay('addTicket')">关闭</button>
     </div>
 </div>
 
@@ -76,7 +76,7 @@
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
     <button class="nav-btn" onclick="showSection('mybook')">📚 已借到的图书</button>
     <button class="nav-btn" onclick="showSection('borrow')">📝 借阅记录</button>
-    <button class="nav-btn" onclick="showSection('order')">💼 提交工单</button>
+    <button class="nav-btn" onclick="showSection('ticket')">💼 提交工单</button>
     <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
     <button class="nav-btn" onclick="logout()">🔓 退出登录</button>
 </div>
@@ -145,10 +145,10 @@
             </div>
         </div>
     </div>
-    <div id="order" class="content-section">
+    <div id="ticket" class="content-section">
         <div class="ticket-header">
             <h3>💼 工单界面</h3>
-            <button class="new-ticket-btn" onclick="openOverlay('addWorkOrder')">创建工单</button>
+            <button class="new-ticket-btn" onclick="openOverlay('addTicket')">创建工单</button>
             <div class="ticket-table">
                 <table>
                     <thead>

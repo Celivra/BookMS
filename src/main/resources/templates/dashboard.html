@@ -74,11 +74,11 @@
 <div id="showTicket" class="overlay" style="display: none;">
     <div class="overlay-content">
         <h2>工单</h2>
-        <p>内容:</p><br>
-        <textarea id="showTicket-content" disabled>content</textarea><br>
+        <p style="text-align: left">内容:</p><br>
+        <textarea id="showTicket-content" style="width: 90%; height: 100px" disabled>content</textarea><br>
 
-        <p>回复:</p><br>
-        <textarea id="showTicket-reply" disabled>reply</textarea><br>
+        <p style="text-align: left">回复:</p><br>
+        <textarea id="showTicket-reply" style="width: 90%; height: 100px" disabled>reply</textarea><br>
 
         <button onclick="closeOverlay('showTicket')">关闭</button>
     </div>
@@ -194,7 +194,7 @@
                                         data-name=${ticket.ticketName},
                                         data-rank=${ticket.ticketRank},
                                         data-reply=${ticket.reply},
-                                        date-content=${ticket.content},
+                                        data-content=${ticket.content},
                                         data-status=${ticket.status}"
                                onclick="viewTicket(this)">查看</span>
                             <span class="close-link">关闭</span>

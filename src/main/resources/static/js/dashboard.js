@@ -81,7 +81,8 @@ window.onload = function () {
 function viewTicket(e){
     // document.getElementById("showTicket-name").innerText = e.dataset.name;
     // document.getElementById("showTicket-rank").innerText = e.dataset.rank;
-    document.getElementById("showTicket-content").value = e.dataset.content;
+    document.getElementById("showTicket-content").innerText = e.dataset.content;
+    console.log(e.dataset.content);
     const r = document.getElementById("showTicket-reply");
     if(e.dataset.reply === undefined){
         r.innerText="尚未回复";

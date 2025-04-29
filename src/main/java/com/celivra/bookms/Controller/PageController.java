@@ -1,17 +1,17 @@
 package com.celivra.bookms.Controller;
 
-import com.celivra.bookms.Entity.Book;
-import com.celivra.bookms.Entity.BorrowInfo;
-import com.celivra.bookms.Entity.BorrowInfoAdmin;
-import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Entity.*;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
 import com.celivra.bookms.Service.UserService;
+import com.celivra.bookms.Service.WorkOrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.ArrayList;
 import java.util.List;
 
 //页面跳转
@@ -24,6 +24,8 @@ public class PageController {
     BorrowService borrowService;
     @Autowired
     UserService userService;
+    @Autowired
+    private WorkOrderService workOrderService;
 
     //控制台页面
     @GetMapping("/")
@@ -46,8 +48,10 @@ public class PageController {
         List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
         //获取当前用户的所有借阅信息
         List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
+        List<WorkOrder> workOrderList = workOrderService.getAllWorkOrders(user.getId());
 
         //将获取到的所有数据放到model里，供前端调用
+        model.addAttribute("WorkOrder", workOrderList);
         model.addAttribute("borrowInfo", borrowInfos);
         model.addAttribute("userbooks", userbooks);
         return "dashboard";

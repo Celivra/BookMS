@@ -56,9 +56,9 @@
         <p>创建工单</p>
         <form action="/addWorkOrder" method="post">
             <label for="ordername">工单名:</label>
-            <input id="ordername" name="ordername" type="text"/>
+            <input id="ordername" name="orderName" type="text"/>
             <label for="rank">级别:</label>
-            <select id="rank" name="rank">
+            <select id="rank" name="orderrank">
                 <option>高</option>
                 <option>中</option>
                 <option>低</option>
@@ -146,8 +146,42 @@
         </div>
     </div>
     <div id="order" class="content-section">
-        <h3>💼 工单界面</h3>
-        <button onclick="openOverlay('addWorkOrder')">创建工单</button>
+        <div class="ticket-header">
+            <h3>💼 工单界面</h3>
+            <button class="new-ticket-btn" onclick="openOverlay('addWorkOrder')">创建工单</button>
+            <div class="ticket-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>主题</th>
+                        <th>工单级别</th>
+                        <th>工单状态</th>
+                        <th>创建时间</th>
+                        <th>最后回复</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ticket, iterStat : ${tickets}">
+                        <td th:text="${iterStat.index + 1}">1</td>
+                        <td th:text="${ticket.title}">主题</td>
+                        <td th:text="${ticket.level}">高</td>
+                        <td>
+                            <span class="status-dot"></span>
+                            <span th:text="${ticket.status}">处理中</span>
+                        </td>
+                        <td th:text="${ticket.createTime}">2025/04/14 13:50:01</td>
+                        <td th:text="${ticket.lastReply}">2025/04/16 09:54:02</td>
+                        <td>
+                            <a href="#" class="view-link">查看</a>
+                            <a href="#" class="close-link">关闭</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <div id="profile" class="content-section">

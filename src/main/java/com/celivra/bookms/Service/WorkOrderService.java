@@ -6,6 +6,8 @@ import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WorkOrderService {
     @Autowired
@@ -17,5 +19,13 @@ public class WorkOrderService {
 
     public boolean updateWorkOrder(WorkOrder workOrder) {
         return workOrderMapper.updateWorkOrder(workOrder);
+    }
+
+    public List<WorkOrder> getAllWorkOrders(Long userId) {
+        return workOrderMapper.getWorkOrders(userId.toString());
+    }
+
+    public List<WorkOrder> getNoReplyWorkOrder() {
+        return workOrderMapper.getNoReplyWorkOrders();
     }
 }

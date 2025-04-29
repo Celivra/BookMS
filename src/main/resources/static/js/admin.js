@@ -92,3 +92,8 @@ window.onload = function () {
         showSection(activeSection);
     }
 };
+
+function viewTicket(e){
+    document.getElementById("showTicket-content").innerText = e.dataset.content;
+    document.getElementById("showTicket").style.display = "flex";
+}

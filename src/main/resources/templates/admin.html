@@ -138,7 +138,21 @@
         <button onclick="closeOverlay('deleteBook')">❌ 取消</button>
     </div>
 </div>
+<div id="showTicket" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <h2>工单</h2>
+        <p style="text-align: left">内容:</p><br>
+        <textarea id="showTicket-content" style="width: 90%; height: 100px" disabled>content</textarea><br>
 
+        <form action="/replyTicket" method="post">
+            <p style="text-align: left">回复:</p><br>
+            <textarea id="showTicket-reply" name="reply" style="width: 90%; height: 100px" ></textarea><br>
+            <button style="float: left; margin-left: 18%;">回复</button>
+        </form>
+
+        <button onclick="closeOverlay('showTicket')">关闭</button>
+    </div>
+</div>
 <div id="logout" class="overlay" style="display: none;">
     <div class="overlay-content">
         <p>确认要登出吗？</p>
@@ -154,6 +168,7 @@
     <button class="nav-btn" onclick="showSection('books')">📚 图书管理</button>
     <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
     <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
+    <button class="nav-btn" onclick="showSection('ticket')">💼 处理工单</button>
     <button class="nav-btn" onclick="showSection('settings')">⚙️ 管理员账户管理</button>
     <button class="nav-btn" onclick="logout()">🔓 退出登录</button>
 </div>
@@ -252,6 +267,51 @@
         </div>
     </div>
 
+    <div id="ticket" class="content-section">
+        <div class="ticket-header">
+            <h3>💼 工单界面</h3>
+        </div>
+        <div class="ticket-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>主题</th>
+                    <th>工单级别</th>
+                    <th>工单状态</th>
+                    <th>创建时间</th>
+                    <th>用户</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ticket, iterStat : ${tickets}">
+                    <td th:text="${iterStat.index + 1}">1</td>
+                    <td th:text="${ticket.ticketName}">主题</td>
+                    <td th:text="${ticket.ticketRank}">高</td>
+                    <td>
+                        <div th:unless="${ticket.status}">
+                            <span class="status-dot-waiting"></span>
+                            <span >处理中</span>
+                        </div>
+                        <div th:if="${ticket.status}">
+                            <span class="status-dot-complete"></span>
+                            <span>已完成</span>
+                        </div>
+                    </td>
+                    <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
+                    <td th:text="${ticket.userId}">user id</td>
+                    <td>
+                        <span class="view-link"
+                              th:attr="data-id=${ticket.id},
+                                       data-content=${ticket.content}"
+                                  onclick="viewTicket(this)">查看</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <div id="settings" class="content-section">
         <h3>⚙️ 管理员账户管理</h3>

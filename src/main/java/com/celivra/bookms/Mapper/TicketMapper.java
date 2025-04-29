@@ -24,6 +24,6 @@ public interface TicketMapper {
     List<Ticket> getAllTicket(String userId);
 
     //查找未回复的工单
-    @Select("select * from ticket where reply is NULL")
+    @Select("select * from ticket")
     List<Ticket> getNoReplyTicket();
 }

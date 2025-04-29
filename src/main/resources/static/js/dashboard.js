@@ -79,8 +79,6 @@ window.onload = function () {
 };
 
 function viewTicket(e){
-    // document.getElementById("showTicket-name").innerText = e.dataset.name;
-    // document.getElementById("showTicket-rank").innerText = e.dataset.rank;
     document.getElementById("showTicket-content").innerText = e.dataset.content;
     console.log(e.dataset.content);
     const r = document.getElementById("showTicket-reply");

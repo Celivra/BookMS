@@ -36,8 +36,10 @@ public class PageController {
         if(req.getSession().getAttribute("admin") != null){
             List<User> userList = userService.getAllUsers();
             List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
+            List<Ticket> ticketList = ticketService.getNoReplyTicket();
             model.addAttribute("users", userList);
             model.addAttribute("borrowInfo", borrowInfoAdmins);
+            model.addAttribute("tickets", ticketList);
             return "admin";
         }
 

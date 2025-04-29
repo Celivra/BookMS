@@ -53,7 +53,7 @@
 </div>
 <div id="addTicket" class="overlay" style="display: none;">
     <div class="overlay-content">
-        <h3>创建工单</h3>
+        <h2>创建工单</h2>
         <form action="/addTicket" method="post">
             <label for="ticketname">工单名:</label>
             <input id="ticketname" name="ticketName" type="text" style="width: 80%;"/><br>
@@ -63,12 +63,24 @@
                 <option>中</option>
                 <option>低</option>
             </select>
-            <br><br>
+            <br>
             <label for="content">内容:</label>
             <textarea id="content" name="content" style="height: 200px; width: 90%;"></textarea>
             <button style="float: left; margin-left: 21%;">提交</button>
         </form>
         <button onclick="closeOverlay('addTicket')">关闭</button>
+    </div>
+</div>
+<div id="showTicket" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <h2>工单</h2>
+        <p>内容:</p><br>
+        <textarea id="showTicket-content" disabled>content</textarea><br>
+
+        <p>回复:</p><br>
+        <textarea id="showTicket-reply" disabled>reply</textarea><br>
+
+        <button onclick="closeOverlay('showTicket')">关闭</button>
     </div>
 </div>
 
@@ -177,8 +189,15 @@
                         <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
                         <td th:text="${ticket.replyDate}">2025/04/16 09:54:02</td>
                         <td>
-                            <a href="#" class="view-link">查看</a>
-                            <a href="#" class="close-link">关闭</a>
+                            <span class="view-link"
+                               th:attr="data-id=${ticket.id},
+                                        data-name=${ticket.ticketName},
+                                        data-rank=${ticket.ticketRank},
+                                        data-reply=${ticket.reply},
+                                        date-content=${ticket.content},
+                                        data-status=${ticket.status}"
+                               onclick="viewTicket(this)">查看</span>
+                            <span class="close-link">关闭</span>
                         </td>
                     </tr>
                     </tbody>

@@ -77,3 +77,17 @@ window.onload = function () {
         showSection(activeSection);
     }
 };
+
+function viewTicket(e){
+    // document.getElementById("showTicket-name").innerText = e.dataset.name;
+    // document.getElementById("showTicket-rank").innerText = e.dataset.rank;
+    document.getElementById("showTicket-content").value = e.dataset.content;
+    const r = document.getElementById("showTicket-reply");
+    if(e.dataset.reply === undefined){
+        r.innerText="尚未回复";
+    }else {
+        r.innerText = e.dataset.reply;
+    }
+
+    document.getElementById("showTicket").style.display = "flex";
+}

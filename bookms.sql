@@ -33,7 +33,7 @@ CREATE TABLE `book` (
   `isbn` varchar(255) DEFAULT NULL,
   `publishedDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算计','电子工业出版社',9,'我大C++天下无敌啊！','1234567890123','2025-04-09'),(2,'JavaEE从精通到忘记','从先生','🐔算计','103出版社',17,'JavaEE就tm不是给人学的啊tmd','0987654321321','2004-04-08'),(5,'能力额','捏','数学','捏出版社',1145,'123123123','8976712418927','1999-01-09'),(6,'你妈','你妈','你妈','你妈出版社',123,'123213123123','7834657834634','2025-04-09');
+INSERT INTO `book` VALUES (1,'C++从入门到入坟','捏','🐔算机','电子工业出版社',9,'我大C++天下无敌啊！','1231231123123','1112-02-03'),(2,'JavaEE从精通到忘记','从先生','🐔算机','103出版社',17,'JavaEE就tm不是给人学的啊tmd','0987654321321','2004-04-08'),(5,'能力额','捏','数学','捏出版社',1145,'123123123','8976712418927','1999-01-09'),(6,'你妈2222','22你妈','你妈','你妈出版社',222123,'123213123123','7834657831111','3333-12-11'),(10,'23123','123213','1231234','455',5,'10rifjf','1231452365465','2025-04-11');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,8 +71,42 @@ CREATE TABLE `borrow` (
 
 LOCK TABLES `borrow` WRITE;
 /*!40000 ALTER TABLE `borrow` DISABLE KEYS */;
-INSERT INTO `borrow` VALUES (2,2,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(3,1,'2025-04-19',NULL);
+INSERT INTO `borrow` VALUES (2,2,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,2,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-17'),(2,1,'2025-04-17','2025-04-18'),(2,2,'2025-04-17','2025-04-17'),(3,1,'2025-04-19',NULL),(2,1,'2025-04-23','2025-04-23'),(2,1,'2025-04-23','2025-04-23'),(2,2,'2025-04-23','2025-04-23'),(2,6,'2025-04-23','2025-04-23'),(2,1,'2025-04-24','2025-04-24'),(2,1,'2025-04-25',NULL);
 /*!40000 ALTER TABLE `borrow` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ticket`
+--
+
+DROP TABLE IF EXISTS `ticket`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ticket` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `ticketname` varchar(255) DEFAULT NULL,
+  `ticketrank` varchar(2) DEFAULT NULL,
+  `content` longtext,
+  `reply` varchar(255) DEFAULT NULL,
+  `userid` bigint DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `createDate` date DEFAULT NULL,
+  `replyDate` date DEFAULT NULL,
+  `isclosed` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `workorder___fk` (`userid`),
+  CONSTRAINT `workorder___fk` FOREIGN KEY (`userid`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ticket`
+--
+
+LOCK TABLES `ticket` WRITE;
+/*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (1,'hello','高','test',NULL,2,1,'2025-04-29',NULL,0),(2,'world','中','5yuhgf',NULL,2,1,'2025-04-29',NULL,0),(3,'bgfd','高','erfgbnbf',NULL,2,1,'2025-04-29',NULL,0);
+/*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -90,7 +124,7 @@ CREATE TABLE `user` (
   `email` varchar(255) DEFAULT NULL,
   `power` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +133,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'admin','123','18766971045','52xiaozhai@gmail.com',10),(2,'test','123','13573302175','celivra@gmail.com',1),(3,'hahha','123','10086','wuji@kun.com',1);
+INSERT INTO `user` VALUES (1,'admin','123','1876697104522','52xhai@gmail.com',10),(2,'test','123','13573113123','celivra@gmail.co',0),(3,'hahha','123','10086','wuji@kun.com',1),(6,'yuanyu','123','12344','a@qq.com',10),(10,'nie','nienie','10086','1165936315@qq.com',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -112,16 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-22 22:43:05
-Usage: mysqldump [OPTIONS] database [tables]
-OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
-OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
-For more options, use mysqldump --help
-Usage: mysqldump [OPTIONS] database [tables]
-OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
-OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
-For more options, use mysqldump --help
-Usage: mysqldump [OPTIONS] database [tables]
-OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
-OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
-For more options, use mysqldump --help
+-- Dump completed on 2025-04-29 12:00:10

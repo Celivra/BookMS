@@ -27,4 +27,11 @@ public class TicketController {
         reAModel.addFlashAttribute("activeSection", "ticket");
         return "redirect:/";
     }
+
+    @PostMapping("/closeTicket")
+    public String closeTicket(RedirectAttributes reAModel) {
+
+        reAModel.addFlashAttribute("activeSection", "ticket");
+        return "redirect:/";
+    }
 }

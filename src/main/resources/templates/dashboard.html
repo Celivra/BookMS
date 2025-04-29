@@ -163,11 +163,18 @@
                         <td th:text="${ticket.ticketName}">主题</td>
                         <td th:text="${ticket.ticketRank}">高</td>
                         <td>
-                            <span class="status-dot"></span>
-                            <span >处理中</span>
+                            <div th:unless="${ticket.status}">
+                                <span class="status-dot-waiting"></span>
+                                <span >处理中</span>
+                            </div>
+                            <div th:if="${ticket.status}">
+                                <span class="status-dot-complete"></span>
+                                <span>已完成</span>
+                            </div>
+
                         </td>
-                        <td >2025/04/14 13:50:01</td>
-                        <td >2025/04/16 09:54:02</td>
+                        <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
+                        <td th:text="${ticket.replyDate}">2025/04/16 09:54:02</td>
                         <td>
                             <a href="#" class="view-link">查看</a>
                             <a href="#" class="close-link">关闭</a>

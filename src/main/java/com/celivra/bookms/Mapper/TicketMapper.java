@@ -14,10 +14,14 @@ public interface TicketMapper {
             "values(#{ticketName}, #{ticketRank}, #{content}, #{userId}, #{createDate}, #{replyDate}, #{status}, #{isClosed})")
     boolean addTicket(Ticket ticket);
 
-    @Update("update ticket set id = #{id}, ticketname = #{ticketName}, ticketrank = #{ticketRank}, " +
-                              "content = #{content}, reply = #{reply}, userid = #{userId}, " +
-                              "status = #{status}, createDate = #{createDate}, replyDate = #{replyDate}, isclosed = {isClosed}")
+    @Update("update ticket set ticketname = #{ticketName}, ticketrank = #{ticketRank}, " +
+            "content = #{content}, reply = #{reply}, userid = #{userId}, " +
+            "status = #{status}, createDate = #{createDate}, replyDate = #{replyDate}, isclosed = #{isClosed} " +
+            "where id = #{id}")
     boolean updateTicket(Ticket ticket);
+
+    @Select("select * from ticket where id = #{id}")
+    Ticket getTicketById(String id);
 
     //根据用户id查找工单
     @Select("select * from ticket where userid = #{userId}")

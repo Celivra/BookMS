@@ -20,6 +20,10 @@ public class TicketService {
         return ticketMapper.updateTicket(ticket);
     }
 
+    public Ticket getTicketById(String id) {
+        return ticketMapper.getTicketById(id);
+    }
+
     public List<Ticket> getAllTicket(Long userId) {
         return ticketMapper.getAllTicket(userId.toString());
     }

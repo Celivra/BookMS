@@ -146,6 +146,7 @@
 
         <form action="/replyTicket" method="post">
             <p style="text-align: left">回复:</p><br>
+            <input id="showTicket-id" name="id" type="hidden"/>
             <textarea id="showTicket-reply" name="reply" style="width: 90%; height: 100px" ></textarea><br>
             <button style="float: left; margin-left: 18%;">回复</button>
         </form>
@@ -303,9 +304,9 @@
                     <td th:text="${ticket.userId}">user id</td>
                     <td>
                         <span class="view-link"
-                              th:attr="data-id=${ticket.id},
-                                       data-content=${ticket.content}"
-                                  onclick="viewTicket(this)">查看</span>
+                              th:attr="data-id=${ticket.id}, data-content=${ticket.content}"
+                              onclick="viewTicket(this)">查看
+                        </span>
                     </td>
                 </tr>
                 </tbody>

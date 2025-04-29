@@ -12,19 +12,19 @@ public class TicketService {
     @Autowired
     TicketMapper ticketMapper;
 
-    public boolean addWorkOrder(Ticket ticket) {
+    public boolean addTicket(Ticket ticket) {
         return ticketMapper.addTicket(ticket);
     }
 
-    public boolean updateWorkOrder(Ticket ticket) {
+    public boolean updateTicket(Ticket ticket) {
         return ticketMapper.updateTicket(ticket);
     }
 
-    public List<Ticket> getAllWorkOrders(Long userId) {
-        return ticketMapper.getTicket(userId.toString());
+    public List<Ticket> getAllTicket(Long userId) {
+        return ticketMapper.getAllTicket(userId.toString());
     }
 
-    public List<Ticket> getNoReplyWorkOrder() {
+    public List<Ticket> getNoReplyTicket() {
         return ticketMapper.getNoReplyTicket();
     }
 }

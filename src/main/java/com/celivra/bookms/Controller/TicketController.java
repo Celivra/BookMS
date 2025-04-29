@@ -23,7 +23,7 @@ public class TicketController {
 
         User user = (User) request.getSession().getAttribute("user");
         Ticket ticket = new Ticket(ticketName, ticketRank, content, user.getId());
-        ticketService.addWorkOrder(ticket);
+        ticketService.addTicket(ticket);
         reAModel.addFlashAttribute("activeSection", "ticket");
         return "redirect:/";
     }

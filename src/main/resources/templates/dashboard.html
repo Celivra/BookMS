@@ -149,30 +149,25 @@
         <div class="ticket-header">
             <h3>💼 工单界面</h3>
             <button class="new-ticket-btn" onclick="openOverlay('addTicket')">创建工单</button>
+        </div>
             <div class="ticket-table">
                 <table>
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>主题</th>
-                        <th>工单级别</th>
-                        <th>工单状态</th>
-                        <th>创建时间</th>
-                        <th>最后回复</th>
-                        <th>操作</th>
+                        <th>#</th> <th>主题</th> <th>工单级别</th> <th>工单状态</th> <th>创建时间</th> <th>最后回复</th> <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="ticket, iterStat : ${tickets}">
                         <td th:text="${iterStat.index + 1}">1</td>
-                        <td th:text="${ticket.title}">主题</td>
-                        <td th:text="${ticket.level}">高</td>
+                        <td th:text="${ticket.ticketName}">主题</td>
+                        <td th:text="${ticket.ticketRank}">高</td>
                         <td>
                             <span class="status-dot"></span>
-                            <span th:text="${ticket.status}">处理中</span>
+                            <span >处理中</span>
                         </td>
-                        <td th:text="${ticket.createTime}">2025/04/14 13:50:01</td>
-                        <td th:text="${ticket.lastReply}">2025/04/16 09:54:02</td>
+                        <td >2025/04/14 13:50:01</td>
+                        <td >2025/04/16 09:54:02</td>
                         <td>
                             <a href="#" class="view-link">查看</a>
                             <a href="#" class="close-link">关闭</a>

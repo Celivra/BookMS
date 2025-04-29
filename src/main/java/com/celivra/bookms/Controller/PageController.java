@@ -47,10 +47,10 @@ public class PageController {
         List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
         //获取当前用户的所有借阅信息
         List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
-        List<Ticket> ticketList = ticketService.getAllWorkOrders(user.getId());
+        List<Ticket> ticketList = ticketService.getAllTicket(user.getId());
 
         //将获取到的所有数据放到model里，供前端调用
-        model.addAttribute("WorkOrder", ticketList);
+        model.addAttribute("tickets", ticketList);
         model.addAttribute("borrowInfo", borrowInfos);
         model.addAttribute("userbooks", userbooks);
         return "dashboard";

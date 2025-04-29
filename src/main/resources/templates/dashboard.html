@@ -53,19 +53,20 @@
 </div>
 <div id="addTicket" class="overlay" style="display: none;">
     <div class="overlay-content">
-        <p>创建工单</p>
+        <h3>创建工单</h3>
         <form action="/addTicket" method="post">
             <label for="ticketname">工单名:</label>
-            <input id="ticketname" name="ticketName" type="text"/>
+            <input id="ticketname" name="ticketName" type="text" style="width: 80%;"/><br>
             <label for="rank">级别:</label>
-            <select id="rank" name="ticketRank">
+            <select id="rank" name="ticketRank" style="width: 15%;">
                 <option>高</option>
                 <option>中</option>
                 <option>低</option>
             </select>
+            <br><br>
             <label for="content">内容:</label>
-            <textarea id="content" name="content"></textarea>
-            <button>提交</button>
+            <textarea id="content" name="content" style="height: 200px; width: 90%;"></textarea>
+            <button style="float: left; margin-left: 21%;">提交</button>
         </form>
         <button onclick="closeOverlay('addTicket')">关闭</button>
     </div>
@@ -183,7 +184,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
     </div>
 
     <div id="profile" class="content-section">

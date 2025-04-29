@@ -70,6 +70,8 @@
 .overlay-content button:hover {
     background-color: #498fd3;
 }
+.overlay-content textarea,
+.overlay-content select,
 .overlay-content input {
     width: 100%;
     padding: 8px 10px;

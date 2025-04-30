@@ -11,6 +11,13 @@ public class Ticket {
     private LocalDate createDate, replyDate;
     private boolean status, isClosed; //status  false:waiting true:complete
 
+    public boolean getStatus() {
+        return status;
+    }
+    public boolean isClosed() {
+        return isClosed;
+    }
+
     public Ticket(Long id, String ticketName, String ticketRank, String content, String reply, Long userId,boolean status, LocalDate createDate, LocalDate replyDate, boolean isClosed) {
         this.id = id;
         this.userId = userId;

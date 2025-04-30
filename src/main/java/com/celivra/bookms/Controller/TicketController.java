@@ -35,14 +35,19 @@ public class TicketController {
     @PostMapping("/closeTicket")
     public String closeTicket(@RequestParam String id, RedirectAttributes reAModel, HttpServletRequest request) {
         Ticket ticket = ticketService.getTicketById(id);
+        if(ticket == null) {
+            reAModel.addFlashAttribute("CantFindTicket", "找不到工单");
+            reAModel.addFlashAttribute("activeSection", "ticket");
+            return "redirect:/";
+        }
         User user = (User) request.getSession().getAttribute("user");
         if(!user.getId().equals(ticket.getUserId())) {
             reAModel.addFlashAttribute("CantCloseTicket", "这不是你可以关闭的工单");
         }
         if(!ticket.isClosed()) {
             ticket.setClosed(true);
+            ticket.setStatus(true);
             ticketService.updateTicket(ticket);
-            reAModel.addFlashAttribute("TicketIsClosed", "已经被关闭了");
         }
         reAModel.addFlashAttribute("activeSection", "ticket");
         return "redirect:/";

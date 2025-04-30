@@ -83,7 +83,13 @@
         <button onclick="closeOverlay('showTicket')">关闭</button>
     </div>
 </div>
-
+<div id="TicketErrorMsg" class="overlay" th:if="${CantCloseTicket} or ${CantFindTicket}" >
+    <div class="overlay-content">
+        <p th:if="${CantCloseTicket}" th:text="${CantCloseTicket}"></p>
+        <p th:if="${CantFindTicket}" th:text="${CantFindTicket}"></p>
+        <button onclick="closeOverlay('TicketErrorMsg')">关闭</button>
+    </div>
+</div>
 <div class="sidebar">
     <h2>用户菜单</h2>
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
@@ -196,8 +202,12 @@
                                         data-reply=${ticket.reply},
                                         data-content=${ticket.content},
                                         data-status=${ticket.status}"
-                               onclick="viewTicket(this)">查看</span>
-                            <span class="close-link">关闭</span>
+                               onclick="viewTicket(this)" style="height: 28.5px; float: left; line-height: 28.5px;">查看</span>
+                            <form th:unless="${ticket.status}" action="closeTicket" method="post">
+                                <input name="id" th:value="${ticket.id}" type="hidden" />
+                                <button class="ticket-close-btn">关闭</button>
+                            </form>
+                            <button th:if="${ticket.status}" class="ticket-close-btn" disabled>关闭</button>
                         </td>
                     </tr>
                     </tbody>

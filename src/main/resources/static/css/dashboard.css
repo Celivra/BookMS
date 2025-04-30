@@ -169,3 +169,11 @@
 .close-link:hover {
     text-decoration: underline;
 }
+.ticket-close-btn{
+    background-color: red !important;
+    color: white !important; ;
+    padding: 5px 10px !important;
+}
+.ticket-close-btn:hover {
+    background-color: #cd0000 !important;
+}

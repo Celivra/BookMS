@@ -3,12 +3,9 @@ package com.celivra.bookms.Controller;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Entity.Ticket;
 import com.celivra.bookms.Service.TicketService;
-import com.celivra.bookms.Util.DateUtil;
-import com.fasterxml.jackson.core.TreeCodec;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -19,8 +16,6 @@ import java.time.LocalDate;
 public class TicketController {
     @Autowired
     TicketService ticketService;
-    @Autowired
-    private TreeCodec treeCodec;
 
     @PostMapping("/addTicket")
     public String addWorkOrder(@RequestParam String ticketName,

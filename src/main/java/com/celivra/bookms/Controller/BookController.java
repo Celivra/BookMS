@@ -50,18 +50,9 @@ public class BookController {
     public String updateBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
         //获取要修改的书籍信息
         Book originbook = bookService.getBookById(book.getId().toString());
-        //修改信息
-        originbook.setBookName(book.getBookName());
-        originbook.setAuthor(book.getAuthor());
-        originbook.setBookType(book.getBookType());
-        originbook.setPublisher(book.getPublisher());
-        originbook.setBookNumber(book.getBookNumber());
-        originbook.setDescription(book.getDescription());
-        originbook.setISBN(book.getISBN());
-        originbook.setPublishedDate(book.getPublishedDate());
         //更新
+        bookService.updateBook(originbook, book);
         reAModel.addFlashAttribute("activeSection", "books");
-        bookService.updateBook(originbook);
         return "redirect:/";
     }
 

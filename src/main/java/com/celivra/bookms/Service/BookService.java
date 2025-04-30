@@ -41,8 +41,16 @@ public class BookService {
     }
 
     //更新图书
-    public boolean updateBook(Book book){
-        return bookMapper.updateBookInfo(book);
+    public boolean updateBook(Book originBook, Book newbook) {
+        originBook.setBookName(newbook.getBookName());
+        originBook.setAuthor(newbook.getAuthor());
+        originBook.setBookType(newbook.getBookType());
+        originBook.setPublisher(newbook.getPublisher());
+        originBook.setBookNumber(newbook.getBookNumber());
+        originBook.setDescription(newbook.getDescription());
+        originBook.setISBN(newbook.getISBN());
+        originBook.setPublishedDate(newbook.getPublishedDate());
+        return bookMapper.updateBookInfo(originBook);
     }
 
     //获取所有图书

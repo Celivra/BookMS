@@ -13,6 +13,8 @@ public class TicketService {
     TicketMapper ticketMapper;
 
     public boolean addTicket(Ticket ticket) {
+        if(ticket.getTicketName()== null || ticket.getTicketName().trim().isEmpty() ||
+           ticket.getContent() == null || ticket.getContent().trim().isEmpty()) return false;
         return ticketMapper.addTicket(ticket);
     }
 

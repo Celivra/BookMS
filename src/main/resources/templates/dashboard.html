@@ -83,10 +83,11 @@
         <button onclick="closeOverlay('showTicket')">关闭</button>
     </div>
 </div>
-<div id="TicketErrorMsg" class="overlay" th:if="${CantCloseTicket} or ${CantFindTicket}" >
+<div id="TicketErrorMsg" class="overlay" th:if="${CantCloseTicket} or ${CantFindTicket} or ${TicketIsNull}" >
     <div class="overlay-content">
         <p th:if="${CantCloseTicket}" th:text="${CantCloseTicket}"></p>
         <p th:if="${CantFindTicket}" th:text="${CantFindTicket}"></p>
+        <p th:if="${TicketIsNull}" th:text="${TicketIsNull}"></p>
         <button onclick="closeOverlay('TicketErrorMsg')">关闭</button>
     </div>
 </div>

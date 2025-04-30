@@ -3,6 +3,7 @@ package com.celivra.bookms.Controller;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Entity.Ticket;
 import com.celivra.bookms.Service.TicketService;
+import com.celivra.bookms.Util.DateUtil;
 import com.fasterxml.jackson.core.TreeCodec;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.time.LocalDate;
 
 @Controller
 public class TicketController {
@@ -24,10 +27,11 @@ public class TicketController {
                                @RequestParam String ticketRank,
                                @RequestParam String content,
                                HttpServletRequest request, RedirectAttributes reAModel) {
-
         User user = (User) request.getSession().getAttribute("user");
         Ticket ticket = new Ticket(ticketName, ticketRank, content, user.getId());
-        ticketService.addTicket(ticket);
+        if(!ticketService.addTicket(ticket)){
+            reAModel.addFlashAttribute("TicketIsNull", "内容不可以为空！");
+        }
         reAModel.addFlashAttribute("activeSection", "ticket");
         return "redirect:/";
     }
@@ -60,6 +64,7 @@ public class TicketController {
         ticket.setReply(reply);
         ticket.setStatus(true);//complete
         ticket.setClosed(true);//closed the ticket
+        ticket.setReplyDate(LocalDate.now());
         ticketService.updateTicket(ticket);
         reAModel.addFlashAttribute("activeSection", "ticket");
         return "redirect:/";

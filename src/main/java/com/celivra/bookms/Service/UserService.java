@@ -18,7 +18,7 @@ public class UserService {
     //添加用户
     //1：成功  2:用户已存在  0:数据库错误 3:用户名格式不正确
     public int addUser(User user) {
-        User CheckUser = userMapper.findByUsername(user.getUsername());
+        User CheckUser = userMapper.getByUsername(user.getUsername());
         if(CheckUser != null) return 2;
         return userMapper.addUser(user)?1:0;
     }
@@ -31,12 +31,12 @@ public class UserService {
         return userMapper.getAllUsers();
     }
     //根据用户名查找
-    public User findByUsername(String username) {
-        return userMapper.findByUsername(username);
+    public User getByUsername(String username) {
+        return userMapper.getByUsername(username);
     }
     //根据id查找
-    public User findByUserId(String userId) {
-        return userMapper.findByUserId(userId);
+    public User getByUserId(String userId) {
+        return userMapper.getByUserId(userId);
     }
     //删除用户
     public boolean deleteUser(String userId) {

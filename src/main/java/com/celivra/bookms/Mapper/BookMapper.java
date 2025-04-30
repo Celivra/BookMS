@@ -16,11 +16,11 @@ public interface BookMapper {
 
     //根据ISBN获得书籍信息
     @Select("select * from book where isbn = #{isbn}")
-    Book findBookByISBN(String isbn);
+    Book getBookByISBN(String isbn);
 
     //根据书籍id获取书籍信息
     @Select("select * from book where id=#{bookId}")
-    Book findBookById(String bookId);
+    Book getBookById(String bookId);
     //更新书籍信息
     @Update("update book set id = #{id}, bookname = #{bookName}, author = #{author}," +
             "booktype = #{bookType}, publisher = #{publisher}, booknumber = #{bookNumber}, description = #{description}," +
@@ -38,5 +38,5 @@ public interface BookMapper {
             "booknumber like concat('%', #{target}, '%') or " +
             "description like concat('%', #{target}, '%') or " +
             "isbn like concat('%', #{target}, '%')")
-    List<Book> findBookByTarget(String target);
+    List<Book> getBookByTarget(String target);
 }

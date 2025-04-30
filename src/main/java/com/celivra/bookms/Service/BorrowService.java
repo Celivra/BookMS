@@ -37,7 +37,7 @@ public class BorrowService {
         if(!borrowMapper.updateBorrow(borrow)) return false;
 
         //获取当前要还的书籍信息
-        Book book = bookMapper.findBookById(bookid);
+        Book book = bookMapper.getBookById(bookid);
         //修改书籍数量
         book.setBookNumber(book.getBookNumber() + 1);
         //更新书籍
@@ -48,7 +48,7 @@ public class BorrowService {
     //添加借阅记录
     public boolean borrowBook(String bookid, User user) {
         //根据bookid获取选中的书籍信息
-        Book book = bookMapper.findBookById(bookid);
+        Book book = bookMapper.getBookById(bookid);
         //如果已经借过这本书
         Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
         if (CheckBorrow != null) {
@@ -78,7 +78,7 @@ public class BorrowService {
         //枚举每一个borrow记录
         for (Borrow borrow : borrows) {
             //获取被借阅的书籍的信息
-            Book book = bookMapper.findBookById(borrow.getBookid().toString());
+            Book book = bookMapper.getBookById(borrow.getBookid().toString());
             //将信息添加到信息表
             borrowInfos.add(new BorrowInfo(book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }
@@ -93,8 +93,8 @@ public class BorrowService {
 
         for (Borrow borrow : borrows) {
             //根据记录生成user跟book的数据
-            User user = userMapper.findByUserId(borrow.getUserid().toString());
-            Book book = bookMapper.findBookById(borrow.getBookid().toString());
+            User user = userMapper.getByUserId(borrow.getUserid().toString());
+            Book book = bookMapper.getBookById(borrow.getBookid().toString());
             //将信息添加到list里
             borrowInfos.add(new BorrowInfoAdmin(user.getUsername(), book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }

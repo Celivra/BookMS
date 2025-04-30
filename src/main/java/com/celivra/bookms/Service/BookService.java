@@ -20,7 +20,7 @@ public class BookService {
     //1：添加成功 0:系统原因添加失败 2：因为是相同的书籍, 添加失败
     public int addBook(Book book) {
         //通过要添加的书籍的isbn从数据库里搜索。
-        Book check = bookMapper.findBookByISBN(book.getISBN());
+        Book check = bookMapper.getBookByISBN(book.getISBN());
         //如果存在名字相同的书籍且isbn相同，则判定为同一本书，返回2
         if(check != null) return 2;
 
@@ -36,8 +36,8 @@ public class BookService {
     }
 
     //根据id查找图书
-    public Book findBookById(String bookId){
-        return bookMapper.findBookById(bookId);
+    public Book getBookById(String bookId){
+        return bookMapper.getBookById(bookId);
     }
 
     //更新图书
@@ -50,7 +50,7 @@ public class BookService {
         return bookMapper.getAllBooks();
     }
     //根据关键字查找图书
-    public List<Book> findAllBookByTarget(String target) {
-        return bookMapper.findBookByTarget(target);
+    public List<Book> getAllBookByTarget(String target) {
+        return bookMapper.getBookByTarget(target);
     }
 }

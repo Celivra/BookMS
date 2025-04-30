@@ -34,7 +34,7 @@ public class UserController {
                          HttpServletRequest request, RedirectAttributes reAttributes) {
 
         //根据用户名获取用户数据
-        User user = userService.findByUsername(username);
+        User user = userService.getByUsername(username);
 
         if(user == null){
             reAttributes.addFlashAttribute("NoUsername", "没有这个用户!");
@@ -79,7 +79,7 @@ public class UserController {
         if(userId == null){
             user = (User) request.getSession().getAttribute("user");
         }else{
-            user = userService.findByUserId(userId);
+            user = userService.getByUserId(userId);
         }
         //如果newPassword为null则认为没有传password，所以不设置password
         //其他的一样

@@ -9,10 +9,10 @@ import java.util.List;
 public interface UserMapper {
     //根据username获取用户信息
     @Select("select * from user where username = #{username}")
-    User findByUsername(String username);
+    User getByUsername(String username);
 
     @Select("select * from user where id = #{userId}")
-    User findByUserId(String userId);
+    User getByUserId(String userId);
 
     @Insert("insert into user(username, password, phone, email, power)" +
             "values(#{username}, #{password}, #{phone}, #{email}, #{power})")

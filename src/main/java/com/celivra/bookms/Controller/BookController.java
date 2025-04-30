@@ -49,7 +49,7 @@ public class BookController {
     @PostMapping("/updateBook")
     public String updateBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
         //获取要修改的书籍信息
-        Book originbook = bookService.findBookById(book.getId().toString());
+        Book originbook = bookService.getBookById(book.getId().toString());
         //修改信息
         originbook.setBookName(book.getBookName());
         originbook.setAuthor(book.getAuthor());
@@ -69,7 +69,7 @@ public class BookController {
     public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
         //根据target对books的各个字段进行查找
         List<Book> books = null;
-        if(target != null) books = bookService.findAllBookByTarget(target);
+        if(target != null) books = bookService.getAllBookByTarget(target);
         else books = bookService.getAllBooks();
         model.addAttribute("books", books);
 

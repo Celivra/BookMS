@@ -177,3 +177,6 @@
 .ticket-close-btn:hover {
     background-color: #cd0000 !important;
 }
+.ticket-close-btn:disabled{
+    background-color: #8c4444 !important;
+}

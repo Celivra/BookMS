@@ -93,7 +93,13 @@ public class UserController {
             reAttributes.addFlashAttribute("UpdatePasswd", "检测到密码更改，请重新登入。");
             return "redirect:/login";
         }
-        reAttributes.addFlashAttribute("activeSection", "users");
+        //获取一下user属性，看看是不是普通用户调用的这个controller
+        User thisUser = (User)request.getSession().getAttribute("user");
+        if(thisUser != null){
+            reAttributes.addFlashAttribute("activeSection", "profile");
+        }else{
+            reAttributes.addFlashAttribute("activeSection", "users");
+        }
         return "redirect:/";
     }
 

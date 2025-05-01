@@ -51,6 +51,12 @@
         <button onclick="closeOverlay('Borrowed')">❌ 关闭</button>
     </div>
 </div>
+<div id="Returned" th:if="${Returned}" class="overlay">
+    <div class="overlay-content">
+        <p th:text="${Returned}"> </p>
+        <button onclick="closeOverlay('Returned')">❌ 关闭</button>
+    </div>
+</div>
 <div id="addTicket" class="overlay" style="display: none;">
     <div class="overlay-content">
         <h2>创建工单</h2>

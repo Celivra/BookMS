@@ -96,5 +96,6 @@ window.onload = function () {
 function viewTicket(e){
     document.getElementById("showTicket-id").value = e.dataset.id;
     document.getElementById("showTicket-content").innerText = e.dataset.content;
+    document.getElementById("showTicket-reply").innerText = e.dataset.reply===undefined?"":e.dataset.reply;
     document.getElementById("showTicket").style.display = "flex";
 }

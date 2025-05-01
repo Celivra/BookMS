@@ -304,7 +304,9 @@
                     <td th:text="${ticket.userId}">user id</td>
                     <td>
                         <span class="view-link"
-                              th:attr="data-id=${ticket.id}, data-content=${ticket.content}"
+                              th:attr="data-id=${ticket.id},
+                                       data-content=${ticket.content},
+                                       data-reply=${ticket.reply}"
                               onclick="viewTicket(this)">查看
                         </span>
                     </td>

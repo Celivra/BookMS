@@ -14,6 +14,172 @@
     <title>图书管理系统 - 控制台</title>
 </head>
 <body>
+<div class="sidebar">
+    <h2>功能菜单</h2>
+    <button class="nav-btn active" onclick="showSection('dashboard')">📊 控制台首页</button>
+    <button class="nav-btn" onclick="showSection('books')">📚 图书管理</button>
+    <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
+    <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
+    <button class="nav-btn" onclick="showSection('ticket')">💼 处理工单</button>
+    <button class="nav-btn" onclick="showSection('settings')">⚙️ 管理员账户管理</button>
+    <button class="nav-btn" onclick="logout()">🔓 退出登录</button>
+</div>
+
+<div class="main-content">
+    <div id="dashboard" class="content-section active">
+        <h3>📊 控制台首页</h3>
+        <div>
+            <h2>欢迎登录图书管理系统。</h2>
+            <p>这里是管理员控制界面</p>
+        </div>
+    </div>
+
+    <div id="books" class="content-section">
+        <h3>📚 图书管理</h3>
+        <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
+        <form action="/getBooks" class="search-form" style="float: right; height: 10px;">
+            <input type="text" name="target" placeholder="🔍搜索图书" class="search-input"/>
+        </form>
+        <div class="book-list">
+            <div class="book-card" th:each="book : ${books}"
+                 th:attr="
+                 data-id=${book.id},
+                 data-isbn=${book.ISBN},
+                 data-title=${book.bookName},
+                 data-author=${book.author},
+                 data-type=${book.bookType},
+                 data-publisher=${book.publisher},
+                 data-publishedDate=${book.publishedDate},
+                 data-number=${book.bookNumber},
+                 data-desc=${book.description}" >
+                <div class="book-info">
+                    <div class="book-title" >
+                        <span th:text="${book.bookName} "></span>
+                        <span>-</span>
+                        <span th:text="${book.author}">作者</span>
+                    </div>
+                    <div class="book-meta">
+                        <span th:text="'类型：' + ${book.bookType}">类型</span>
+                        <span th:text="'出版社：' + ${book.publisher}">出版社</span>
+                        <span th:text="'出版时间：' + ${book.publishedDate}">出版社</span>
+                        <span th:text="'数量：' + ${book.bookNumber}">数量</span>
+                        <span th:text="'ISBN：' + ${book.ISBN}">ISBN</span>
+                    </div>
+                </div>
+                <div class="book-actions">
+                    <button class="action-btn" onclick="ClickBookCard(this)" >✏️ 编辑</button>
+                    <button class="action-btn danger" onclick="ClickDeleteBook(this)">🗑 删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="borrow" class="content-section">
+        <h3>📖 借阅记录</h3>
+        <div class="borrow-list">
+            <div class="borrow-card" th:each="borrowinfo : ${borrowInfo}">
+                <div class="borrow-main">
+                    <div class="borrow-title">
+                        <span th:text="${borrowinfo.username}"></span>:
+                        <span th:text="'书名：' + ${borrowinfo.bookName}"></span> -
+                        <span th:text="${borrowinfo.bookAuthor}"></span>
+                    </div>
+                    <div class="borrow-meta">
+                        <span th:text="'借阅日期：' + ${borrowinfo.borrowDate}"></span>
+                        <span th:if="${borrowinfo.returnDate}" th:text="'应还日期：' + ${borrowinfo.returnDate}"></span>
+                        <span th:if="${borrowinfo.returnDate} == null">尚未归还</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="users" class="content-section">
+        <h3>👥 用户管理</h3>
+        <form action="/getUsers" class="search-form">
+            <input type="text" name="target" placeholder="🔍 输入关键字" class="search-input" />
+        </form>
+        <div class="user-list">
+            <div class="user-card" th:each="user : ${users}"
+                 th:attr="data-id=${user.id},
+                          data-username=${user.username},
+                          data-phone=${user.phone},
+                          data-email=${user.email},
+                          data-power=${user.power}">
+                <div class="user-info">
+                    <div class="user-name" th:text="${user.username}">用户名</div>
+                    <div class="user-meta">
+                        <span th:text="'手机号：' + ${user.phone}">手机号</span>
+                        <span th:text="'邮箱：' + ${user.email}">邮箱</span>
+                    </div>
+                </div>
+                <div class="user-actions">
+                    <button class="action-btn" onclick="ClickUser(this)">🔧 编辑</button>
+                    <button class="action-btn danger" onclick="ClickDeleteUser(this)">❌ 删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ticket" class="content-section">
+        <div class="ticket-header">
+            <h3>💼 工单界面</h3>
+        </div>
+        <div class="ticket-table">
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>主题</th>
+                    <th>工单级别</th>
+                    <th>工单状态</th>
+                    <th>创建时间</th>
+                    <th>用户</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ticket, iterStat : ${tickets}">
+                    <td th:text="${iterStat.index + 1}">1</td>
+                    <td th:text="${ticket.ticketName}">主题</td>
+                    <td th:text="${ticket.ticketRank}">高</td>
+                    <td>
+                        <div th:unless="${ticket.status}">
+                            <span class="status-dot-waiting"></span>
+                            <span >处理中</span>
+                        </div>
+                        <div th:if="${ticket.status}">
+                            <span class="status-dot-complete"></span>
+                            <span>已完成</span>
+                        </div>
+                    </td>
+                    <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
+                    <td th:text="${ticket.userId}">user id</td>
+                    <td>
+                        <span class="view-link"
+                              th:attr="data-id=${ticket.id},
+                                       data-content=${ticket.content},
+                                       data-reply=${ticket.reply}"
+                              onclick="viewTicket(this)">查看
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="settings" class="content-section">
+        <h3>⚙️ 管理员账户管理</h3>
+        <button onclick="toggleChangePassword()">修改密码</button>
+        <form id="changePassword" action="/changeAdminPassword" method="post" style="display: none;">
+            <input id="password1" type="password" placeholder="新密码" /><br>
+            <input id="password2" name="newPasswd" type="password" placeholder="确认密码" /><br>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+</div>
+
 <!-- 添加图书遮罩层 -->
 <div id="bookOverlay" class="overlay" style="display: none;">
     <div class="overlay-content" style="text-align: left; padding: 25px 100px; width: 550px; height: 680px;">
@@ -163,171 +329,8 @@
         <button onclick="closeOverlay('logout')">❌ 取消</button>
     </div>
 </div>
-<div class="sidebar">
-    <h2>功能菜单</h2>
-    <button class="nav-btn active" onclick="showSection('dashboard')">📊 控制台首页</button>
-    <button class="nav-btn" onclick="showSection('books')">📚 图书管理</button>
-    <button class="nav-btn" onclick="showSection('borrow')">📖 借阅记录</button>
-    <button class="nav-btn" onclick="showSection('users')">👤 用户管理</button>
-    <button class="nav-btn" onclick="showSection('ticket')">💼 处理工单</button>
-    <button class="nav-btn" onclick="showSection('settings')">⚙️ 管理员账户管理</button>
-    <button class="nav-btn" onclick="logout()">🔓 退出登录</button>
-</div>
-
-<div class="main-content">
-    <div id="dashboard" class="content-section active">
-        <h3>📊 控制台首页</h3>
-        <h2>欢迎登录图书管理系统。</h2>
-        <p>这里是管理员控制界面</p>
-    </div>
-
-    <div id="books" class="content-section">
-        <h3>📚 图书管理</h3>
-        <button class="add-book-btn" onclick="toggleAddBook()">➕ 添加书籍</button>
-        <form action="/getBooks" class="search-form" style="float: right; height: 10px;">
-            <input type="text" name="target" placeholder="🔍搜索图书" class="search-input"/>
-        </form>
-        <div class="book-list">
-            <div class="book-card" th:each="book : ${books}"
-                 th:attr="
-                 data-id=${book.id},
-                 data-isbn=${book.ISBN},
-                 data-title=${book.bookName},
-                 data-author=${book.author},
-                 data-type=${book.bookType},
-                 data-publisher=${book.publisher},
-                 data-publishedDate=${book.publishedDate},
-                 data-number=${book.bookNumber},
-                 data-desc=${book.description}" >
-                <div class="book-info">
-                    <div class="book-title" >
-                        <span th:text="${book.bookName} "></span>
-                        <span>-</span>
-                        <span th:text="${book.author}">作者</span>
-                    </div>
-                    <div class="book-meta">
-                        <span th:text="'类型：' + ${book.bookType}">类型</span>
-                        <span th:text="'出版社：' + ${book.publisher}">出版社</span>
-                        <span th:text="'出版时间：' + ${book.publishedDate}">出版社</span>
-                        <span th:text="'数量：' + ${book.bookNumber}">数量</span>
-                        <span th:text="'ISBN：' + ${book.ISBN}">ISBN</span>
-                    </div>
-                </div>
-                <div class="book-actions">
-                    <button class="action-btn" onclick="ClickBookCard(this)" >✏️ 编辑</button>
-                    <button class="action-btn danger" onclick="ClickDeleteBook(this)">🗑 删除</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="borrow" class="content-section">
-        <h3>📖 借阅记录</h3>
-        <div class="borrow-list">
-            <div class="borrow-card" th:each="borrowinfo : ${borrowInfo}">
-                <div class="borrow-main">
-                    <div class="borrow-title">
-                        <span th:text="${borrowinfo.username}"></span>:
-                        <span th:text="'书名：' + ${borrowinfo.bookName}"></span> -
-                        <span th:text="${borrowinfo.bookAuthor}"></span>
-                    </div>
-                    <div class="borrow-meta">
-                        <span th:text="'借阅日期：' + ${borrowinfo.borrowDate}"></span>
-                        <span th:if="${borrowinfo.returnDate}" th:text="'应还日期：' + ${borrowinfo.returnDate}"></span>
-                        <span th:if="${borrowinfo.returnDate} == null">尚未归还</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="users" class="content-section">
-        <h3>👥 用户管理</h3>
-        <form action="/getUsers" class="search-form">
-            <input type="text" name="target" placeholder="🔍 输入关键字" class="search-input" />
-        </form>
-        <div class="user-list">
-            <div class="user-card" th:each="user : ${users}"
-                 th:attr="data-id=${user.id},
-                          data-username=${user.username},
-                          data-phone=${user.phone},
-                          data-email=${user.email},
-                          data-power=${user.power}">
-                <div class="user-info">
-                    <div class="user-name" th:text="${user.username}">用户名</div>
-                    <div class="user-meta">
-                        <span th:text="'手机号：' + ${user.phone}">手机号</span>
-                        <span th:text="'邮箱：' + ${user.email}">邮箱</span>
-                    </div>
-                </div>
-                <div class="user-actions">
-                    <button class="action-btn" onclick="ClickUser(this)">🔧 编辑</button>
-                    <button class="action-btn danger" onclick="ClickDeleteUser(this)">❌ 删除</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="ticket" class="content-section">
-        <div class="ticket-header">
-            <h3>💼 工单界面</h3>
-        </div>
-        <div class="ticket-table">
-            <table>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>主题</th>
-                    <th>工单级别</th>
-                    <th>工单状态</th>
-                    <th>创建时间</th>
-                    <th>用户</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="ticket, iterStat : ${tickets}">
-                    <td th:text="${iterStat.index + 1}">1</td>
-                    <td th:text="${ticket.ticketName}">主题</td>
-                    <td th:text="${ticket.ticketRank}">高</td>
-                    <td>
-                        <div th:unless="${ticket.status}">
-                            <span class="status-dot-waiting"></span>
-                            <span >处理中</span>
-                        </div>
-                        <div th:if="${ticket.status}">
-                            <span class="status-dot-complete"></span>
-                            <span>已完成</span>
-                        </div>
-                    </td>
-                    <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
-                    <td th:text="${ticket.userId}">user id</td>
-                    <td>
-                        <span class="view-link"
-                              th:attr="data-id=${ticket.id},
-                                       data-content=${ticket.content},
-                                       data-reply=${ticket.reply}"
-                              onclick="viewTicket(this)">查看
-                        </span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div id="settings" class="content-section">
-        <h3>⚙️ 管理员账户管理</h3>
-        <button onclick="toggleChangePassword()">修改密码</button>
-        <form id="changePassword" action="/changeAdminPassword" method="post" style="display: none;">
-            <input id="password1" type="password" placeholder="新密码" /><br>
-            <input id="password2" name="newPasswd" type="password" placeholder="确认密码" /><br>
-            <button type="submit">提交</button>
-        </form>
-    </div>
-</div>
-
 <script src="js/admin.js"> </script>
+<script src="js/dashboardCommon.js"> </script>
 <script src="js/common.js"> </script>
 </body>
 </html>

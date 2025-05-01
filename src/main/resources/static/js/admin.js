@@ -1,9 +1,3 @@
-function toggleChangeUsername(){
-    const cUnameForm = document.getElementById("changeUsername");
-    const cPasswdForm = document.getElementById("changePassword");
-    cPasswdForm.style.display = 'none';
-    cUnameForm.style.display = cUnameForm.style.display === 'none'? 'block':'none';
-}
 function toggleChangePassword(){
     const cPasswdForm = document.getElementById("changePassword");
     cPasswdForm.style.display = cPasswdForm.style.display === 'none'? 'block':'none';
@@ -87,11 +81,6 @@ function ClickUser(el){
     toggleUpdateUser({id, username, phone, email, power})
 
 }
-window.onload = function () {
-    if (typeof activeSection !== "undefined" && activeSection !== null) {
-        showSection(activeSection);
-    }
-};
 
 function viewTicket(e){
     document.getElementById("showTicket-id").value = e.dataset.id;

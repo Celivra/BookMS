@@ -72,11 +72,7 @@ function ClickBookCard(el, BorR){
     console.log("first:"+publisheddate);
     toggleBookDetail({bookid, isbn, title, author, type, publisher, publisheddate, number, desc}, BorR);
 }
-window.onload = function () {
-    if (typeof activeSection !== "undefined" && activeSection !== null) {
-        showSection(activeSection);
-    }
-};
+
 
 function viewTicket(e){
     document.getElementById("showTicket-content").innerText = e.dataset.content;

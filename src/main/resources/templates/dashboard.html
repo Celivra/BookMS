@@ -14,89 +14,6 @@
     </script>
 </head>
 <body>
-<div id="overlay" class="overlay" style="display: none;">
-    <div id="overlay-content" class="overlay-content">
-        <h2 id="overlay-title">书名</h2>
-        <p id="overlay-author">作者：xxx</p>
-        <p id="overlay-type">类型：xxx</p>
-        <p id="overlay-ISBN">ISBN：xxx</p>
-        <p id="overlay-publisher">出版社：xxx</p>
-        <p id="overlay-publishedDate">出版日期：xxx</p>
-        <p id="overlay-number">剩余数量：xxx</p>
-        <p id="overlay-desc">简介：xxx</p>
-        <form id="borrowForm" action="/borrowBook" method="post" style="float: left; padding-left: 17%;">
-            <input id="borrowBookId" name="bookid" type="hidden" />
-            <button id="borrowButton">📖 借阅</button>
-        </form>
-        <form id="returnForm" action="/returnBook" method="post" style="float: left; padding-left: 17%;">
-            <input id="returnbookid" name="bookid" type="hidden" />
-            <button id="returnbutton">📖 归还</button>
-        </form>
-        <button onclick="closeOverlay('overlay')">❌ 关闭</button>
-    </div>
-</div>
-<div id="logout" class="overlay" style="display: none;">
-    <div class="overlay-content">
-        <p>确认要登出吗？</p>
-        <a th:href="@{/logout}" style="text-decoration: none;">
-            <button>✅ 确认</button>
-        </a>
-        <button onclick="closeOverlay('logout')">❌ 取消</button>
-    </div>
-</div>
-<!-- 提示框：借阅失败（已借阅） -->
-<div id="Borrowed" th:if="${Borrowed}" class="overlay">
-    <div class="overlay-content">
-        <p> 借阅失败：您已经借阅过该书</p>
-        <button onclick="closeOverlay('Borrowed')">❌ 关闭</button>
-    </div>
-</div>
-<div id="Returned" th:if="${Returned}" class="overlay">
-    <div class="overlay-content">
-        <p th:text="${Returned}"> </p>
-        <button onclick="closeOverlay('Returned')">❌ 关闭</button>
-    </div>
-</div>
-<div id="addTicket" class="overlay" style="display: none;">
-    <div class="overlay-content">
-        <h2>创建工单</h2>
-        <form action="/addTicket" method="post">
-            <label for="ticketname">工单名:</label>
-            <input id="ticketname" name="ticketName" type="text" style="width: 80%;"/><br>
-            <label for="rank">级别:</label>
-            <select id="rank" name="ticketRank" style="width: 15%;">
-                <option>高</option>
-                <option>中</option>
-                <option>低</option>
-            </select>
-            <br>
-            <label for="content">内容:</label>
-            <textarea id="content" name="content" style="height: 200px; width: 90%;"></textarea>
-            <button style="float: left; margin-left: 21%;">提交</button>
-        </form>
-        <button onclick="closeOverlay('addTicket')">关闭</button>
-    </div>
-</div>
-<div id="showTicket" class="overlay" style="display: none;">
-    <div class="overlay-content">
-        <h2>工单</h2>
-        <p style="text-align: left">内容:</p><br>
-        <textarea id="showTicket-content" style="width: 90%; height: 100px" disabled>content</textarea><br>
-
-        <p style="text-align: left">回复:</p><br>
-        <textarea id="showTicket-reply" style="width: 90%; height: 100px" disabled>reply</textarea><br>
-
-        <button onclick="closeOverlay('showTicket')">关闭</button>
-    </div>
-</div>
-<div id="TicketErrorMsg" class="overlay" th:if="${CantCloseTicket} or ${CantFindTicket} or ${TicketIsNull}" >
-    <div class="overlay-content">
-        <p th:if="${CantCloseTicket}" th:text="${CantCloseTicket}"></p>
-        <p th:if="${CantFindTicket}" th:text="${CantFindTicket}"></p>
-        <p th:if="${TicketIsNull}" th:text="${TicketIsNull}"></p>
-        <button onclick="closeOverlay('TicketErrorMsg')">关闭</button>
-    </div>
-</div>
 <div class="sidebar">
     <h2>用户菜单</h2>
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
@@ -248,7 +165,91 @@
     </div>
 </div>
 
+<div id="overlay" class="overlay" style="display: none;">
+    <div id="overlay-content" class="overlay-content">
+        <h2 id="overlay-title">书名</h2>
+        <p id="overlay-author">作者：xxx</p>
+        <p id="overlay-type">类型：xxx</p>
+        <p id="overlay-ISBN">ISBN：xxx</p>
+        <p id="overlay-publisher">出版社：xxx</p>
+        <p id="overlay-publishedDate">出版日期：xxx</p>
+        <p id="overlay-number">剩余数量：xxx</p>
+        <p id="overlay-desc">简介：xxx</p>
+        <form id="borrowForm" action="/borrowBook" method="post" style="float: left; padding-left: 17%;">
+            <input id="borrowBookId" name="bookid" type="hidden" />
+            <button id="borrowButton">📖 借阅</button>
+        </form>
+        <form id="returnForm" action="/returnBook" method="post" style="float: left; padding-left: 17%;">
+            <input id="returnbookid" name="bookid" type="hidden" />
+            <button id="returnbutton">📖 归还</button>
+        </form>
+        <button onclick="closeOverlay('overlay')">❌ 关闭</button>
+    </div>
+</div>
+<div id="logout" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <p>确认要登出吗？</p>
+        <a th:href="@{/logout}" style="text-decoration: none;">
+            <button>✅ 确认</button>
+        </a>
+        <button onclick="closeOverlay('logout')">❌ 取消</button>
+    </div>
+</div>
+<!-- 提示框：借阅失败（已借阅） -->
+<div id="Borrowed" th:if="${Borrowed}" class="overlay">
+    <div class="overlay-content">
+        <p> 借阅失败：您已经借阅过该书</p>
+        <button onclick="closeOverlay('Borrowed')">❌ 关闭</button>
+    </div>
+</div>
+<div id="Returned" th:if="${Returned}" class="overlay">
+    <div class="overlay-content">
+        <p th:text="${Returned}"> </p>
+        <button onclick="closeOverlay('Returned')">❌ 关闭</button>
+    </div>
+</div>
+<div id="addTicket" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <h2>创建工单</h2>
+        <form action="/addTicket" method="post">
+            <label for="ticketname">工单名:</label>
+            <input id="ticketname" name="ticketName" type="text" style="width: 80%;"/><br>
+            <label for="rank">级别:</label>
+            <select id="rank" name="ticketRank" style="width: 15%;">
+                <option>高</option>
+                <option>中</option>
+                <option>低</option>
+            </select>
+            <br>
+            <label for="content">内容:</label>
+            <textarea id="content" name="content" style="height: 200px; width: 90%;"></textarea>
+            <button style="float: left; margin-left: 21%;">提交</button>
+        </form>
+        <button onclick="closeOverlay('addTicket')">关闭</button>
+    </div>
+</div>
+<div id="showTicket" class="overlay" style="display: none;">
+    <div class="overlay-content">
+        <h2>工单</h2>
+        <p style="text-align: left">内容:</p><br>
+        <textarea id="showTicket-content" style="width: 90%; height: 100px" disabled>content</textarea><br>
+
+        <p style="text-align: left">回复:</p><br>
+        <textarea id="showTicket-reply" style="width: 90%; height: 100px" disabled>reply</textarea><br>
+
+        <button onclick="closeOverlay('showTicket')">关闭</button>
+    </div>
+</div>
+<div id="TicketErrorMsg" class="overlay" th:if="${CantCloseTicket} or ${CantFindTicket} or ${TicketIsNull}" >
+    <div class="overlay-content">
+        <p th:if="${CantCloseTicket}" th:text="${CantCloseTicket}"></p>
+        <p th:if="${CantFindTicket}" th:text="${CantFindTicket}"></p>
+        <p th:if="${TicketIsNull}" th:text="${TicketIsNull}"></p>
+        <button onclick="closeOverlay('TicketErrorMsg')">关闭</button>
+    </div>
+</div>
 <script src="js/dashboard.js"> </script>
+<script src="js/dashboardCommon.js"> </script>
 <script src="js/common.js"> </script>
 </body>
 </html>

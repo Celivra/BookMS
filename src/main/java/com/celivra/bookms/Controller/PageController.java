@@ -17,6 +17,7 @@ import java.util.List;
 @Controller
 public class PageController {
 
+    /*===========实例化Service对象===============*/
     @Autowired
     BookService bookService;
     @Autowired
@@ -25,15 +26,21 @@ public class PageController {
     UserService userService;
     @Autowired
     private TicketService ticketService;
+    /*===============实例化结束=================*/
 
     //控制台页面
     @GetMapping("/")
     public String dashboard(HttpServletRequest req, Model model) {
-        //加载/页面时获取所有书籍的信息
+
+        /*======================获取所有图书===========================*/
         List<Book> bookList = bookService.getAllBooks();
         model.addAttribute("books", bookList);
-        //  如果是admin用户则跳转到admin的页面
-        if(req.getSession().getAttribute("admin") != null){
+        /*====================获取所有图书结束==========================*/
+
+        User user = (User) req.getSession().getAttribute("user");
+
+        /*======================根据当前用户判断是否为管理员用户,并添加属性===========================*/
+        if(user == null){
             List<User> userList = userService.getAllUsers();
             List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
             List<Ticket> ticketList = ticketService.getNoReplyTicket();
@@ -42,20 +49,15 @@ public class PageController {
             model.addAttribute("tickets", ticketList);
             return "admin";
         }
-
-        //获取当前用户的信息
-        User user = (User) req.getSession().getAttribute("user");
-        //将当前用户所借到的书全部读取下来
+        /*---------------------若不是管理员用户则添加普通用户页面需要的属性-------------------------*/
         List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
-        //获取当前用户的所有借阅信息
         List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
         List<Ticket> ticketList = ticketService.getAllTicket(user.getId());
-
-        //将获取到的所有数据放到model里，供前端调用
         model.addAttribute("tickets", ticketList);
         model.addAttribute("borrowInfo", borrowInfos);
         model.addAttribute("userbooks", userbooks);
         return "dashboard";
+        /*=================================添加属性结束======================================*/
     }
     //登入界面
     @GetMapping("/login")
@@ -72,7 +74,8 @@ public class PageController {
     //登出
     @GetMapping("/logout")
     public String logout(HttpServletRequest req){
-        //首先判断session里是否存在admin或者user的attribute，如果存在就设为null
+
+        /*======================如果存在xx属性，就将xx设为null===========================*/
         if(req.getSession().getAttribute("admin") != null){
             req.getSession().setAttribute("admin", null);
         }
@@ -80,6 +83,6 @@ public class PageController {
             req.getSession().setAttribute("user", null);
         }
         return "redirect:/";
+        /*================================清除结束===================================*/
     }
-
 }

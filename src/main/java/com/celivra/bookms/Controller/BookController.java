@@ -5,6 +5,7 @@ import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
 import com.celivra.bookms.Service.TicketService;
 import com.celivra.bookms.Service.UserService;
+import com.fasterxml.jackson.core.TreeCodec;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import java.util.List;
 //有关书籍操作的接口
 @Controller
 public class BookController {
+
+    /*===========实例化Service对象===============*/
     @Autowired
     BookService bookService;
     @Autowired
@@ -25,10 +28,12 @@ public class BookController {
     UserService userService;
     @Autowired
     TicketService ticketService;
+    /*===============实例化结束=================*/
 
     @PostMapping("/addBook")
     public String addBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
         int flag = bookService.addBook(book);
+        /*========================根据插入图书的返回值添加属性=================================*/
         if(flag == 2){
             reAModel.addFlashAttribute("AddSameBook","已经有一本同样的书籍存在!");
         }else if(flag == 0){
@@ -36,6 +41,8 @@ public class BookController {
         }else{
             reAModel.addFlashAttribute("AddBookSuccess","添加图书成功");
         }
+        /*===============================添加属性结束===================================*/
+
         reAModel.addFlashAttribute("activeSection", "books");
         return "redirect:/";
     }
@@ -49,25 +56,28 @@ public class BookController {
 
     @PostMapping("/updateBook")
     public String updateBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
-        //获取要修改的书籍信息
+        /*=========================根据bookId获取书籍信息==============================*/
         Book originbook = bookService.getBookById(book.getId().toString());
-        //更新
+        /*-----------------------------更新操作----------------------------------*/
         bookService.updateBook(originbook, book);
+        /*===========================更新图书结束================================*/
+
         reAModel.addFlashAttribute("activeSection", "books");
         return "redirect:/";
     }
 
     @GetMapping("/getBooks")
     public String getBooks(@RequestParam(value = "target",required = false) String target, HttpServletRequest request, Model model) {
-        //根据target对books的各个字段进行查找
+        /*===============================查找图书=======================================*/
         List<Book> books = null;
         if(target != null) books = bookService.getAllBookByTarget(target);
         else books = bookService.getAllBooks();
         model.addAttribute("books", books);
+        /*=============================查找图书结束====================================*/
 
-        // 获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
-        // 获取当前用户所借的书
+
+        /*=========================根据当前用户添加指定的属性====================================*/
         if(user != null){
             List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
             List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
@@ -77,14 +87,15 @@ public class BookController {
             model.addAttribute("userbooks", userbooks);
             return "dashboard";
         }
+        /*---------------------------添加管理员所需要的属性----------------------------------*/
         List<User> userList = userService.getAllUsers();
         List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
         List<Ticket> ticketList = ticketService.getNoReplyTicket();
         model.addAttribute("users", userList);
         model.addAttribute("borrowInfo", borrowInfoAdmins);
-        model.addAttribute("activeSection", "books");
         model.addAttribute("tickets", ticketList);
+        model.addAttribute("activeSection", "books");
         return "admin";
+        /*================================添加属性结束====================================*/
     }
-
 }

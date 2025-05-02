@@ -5,7 +5,6 @@ import com.celivra.bookms.Service.BorrowService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -13,20 +12,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //有关借阅的接口
 @Controller
 public class BorrowController {
+
+    /*===========实例化Service对象===============*/
     @Autowired
     BorrowService borrowService;
+    /*===============实例化结束=================*/
 
     //归还图书
     @PostMapping("/returnBook")
     public String returnBook(@RequestParam String bookid, HttpServletRequest request, RedirectAttributes reAModel) {
-        //获取当前用户的信息
         User user = (User) request.getSession().getAttribute("user");
-        //调用归还图书的Service
-        boolean success = borrowService.returnBook(bookid, user.getId().toString());
-        //如果成功就添加一个“Returned”属性，供前端进行判断
-        if(success) {
+
+        /*======================进行归还操作，根据返回值添加flash属性===========================*/
+        if(borrowService.returnBook(bookid, user.getId().toString())) {
             reAModel.addFlashAttribute("Returned", "归还成功");
         }
+        /*===============================归还操作结束===================================*/
+
         reAModel.addFlashAttribute("activeSection", "mybook");
         return "redirect:/";
     }
@@ -34,12 +36,11 @@ public class BorrowController {
     @PostMapping("/borrowBook")
     public String borrow(@RequestParam String bookid, HttpServletRequest request, RedirectAttributes reAttributes) {
         User user = (User) request.getSession().getAttribute("user");
-        //添加一条借阅记录
-        boolean success = borrowService.borrowBook(bookid, user);
-        if (!success) {
-            //添加flash attribute，当第一次读取后接着删除
+        /*=========================进行借阅操作，如果成功则添加属性==============================*/
+        if (!borrowService.borrowBook(bookid, user)) {
             reAttributes.addFlashAttribute("Borrowed", true);
         }
+        /*===============================借阅操作结束=================================*/
         return "redirect:/";
     }
 }

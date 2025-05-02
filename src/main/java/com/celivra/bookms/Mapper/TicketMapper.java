@@ -25,7 +25,7 @@ public interface TicketMapper {
 
     //根据用户id查找工单
     @Select("select * from ticket where userid = #{userId}")
-    List<Ticket> getAllTicket(String userId);
+    List<Ticket> getAllTicketByUserId(String userId);
 
     //查找未回复的工单
     @Select("select * from ticket")

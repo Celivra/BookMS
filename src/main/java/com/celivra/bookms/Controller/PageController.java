@@ -52,7 +52,7 @@ public class PageController {
         /*---------------------若不是管理员用户则添加普通用户页面需要的属性-------------------------*/
         List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
         List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
-        List<Ticket> ticketList = ticketService.getAllTicket(user.getId());
+        List<Ticket> ticketList = ticketService.getAllTicketByUserId(user.getId());
         model.addAttribute("tickets", ticketList);
         model.addAttribute("borrowInfo", borrowInfos);
         model.addAttribute("userbooks", userbooks);

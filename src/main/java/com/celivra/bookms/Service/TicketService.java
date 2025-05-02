@@ -33,8 +33,8 @@ public class TicketService {
         return ticketMapper.getTicketById(id);
     }
 
-    public List<Ticket> getAllTicket(Long userId) {
-        return ticketMapper.getAllTicket(userId.toString());
+    public List<Ticket> getAllTicketByUserId(Long userId) {
+        return ticketMapper.getAllTicketByUserId(userId.toString());
     }
 
     public List<Ticket> getAllTicket() {

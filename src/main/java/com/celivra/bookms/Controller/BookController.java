@@ -1,10 +1,9 @@
 package com.celivra.bookms.Controller;
 
-import com.celivra.bookms.Entity.Book;
-import com.celivra.bookms.Entity.BorrowInfoAdmin;
-import com.celivra.bookms.Entity.User;
+import com.celivra.bookms.Entity.*;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
+import com.celivra.bookms.Service.TicketService;
 import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,8 @@ public class BookController {
     BorrowService borrowService;
     @Autowired
     UserService userService;
+    @Autowired
+    TicketService ticketService;
 
     @PostMapping("/addBook")
     public String addBook(@ModelAttribute Book book, RedirectAttributes reAModel) {
@@ -69,14 +70,21 @@ public class BookController {
         // 获取当前用户所借的书
         if(user != null){
             List<Book> userbooks = borrowService.getUserBorrowedBooks(user.getId().toString());
+            List<BorrowInfo> borrowInfos = borrowService.getAllUserBorrows(user.getId().toString());
+            List<Ticket> ticketList = ticketService.getAllTicket(user.getId());
+            model.addAttribute("tickets", ticketList);
+            model.addAttribute("borrowInfo", borrowInfos);
             model.addAttribute("userbooks", userbooks);
             return "dashboard";
         }
         List<User> userList = userService.getAllUsers();
         List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
+        List<Ticket> ticketList = ticketService.getNoReplyTicket();
         model.addAttribute("users", userList);
         model.addAttribute("borrowInfo", borrowInfoAdmins);
         model.addAttribute("activeSection", "books");
+        model.addAttribute("tickets", ticketList);
         return "admin";
     }
+
 }

@@ -5,7 +5,6 @@ import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
 import com.celivra.bookms.Service.TicketService;
 import com.celivra.bookms.Service.UserService;
-import com.fasterxml.jackson.core.TreeCodec;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,7 +89,7 @@ public class BookController {
         /*---------------------------添加管理员所需要的属性----------------------------------*/
         List<User> userList = userService.getAllUsers();
         List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
-        List<Ticket> ticketList = ticketService.getNoReplyTicket();
+        List<Ticket> ticketList = ticketService.getAllTicket();
         model.addAttribute("users", userList);
         model.addAttribute("borrowInfo", borrowInfoAdmins);
         model.addAttribute("tickets", ticketList);

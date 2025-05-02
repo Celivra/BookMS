@@ -30,7 +30,7 @@ public class TicketService {
         return ticketMapper.getAllTicket(userId.toString());
     }
 
-    public List<Ticket> getNoReplyTicket() {
-        return ticketMapper.getNoReplyTicket();
+    public List<Ticket> getAllTicket() {
+        return ticketMapper.getAllTicket();
     }
 }

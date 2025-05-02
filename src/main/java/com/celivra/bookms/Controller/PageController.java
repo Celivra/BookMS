@@ -43,7 +43,7 @@ public class PageController {
         if(user == null){
             List<User> userList = userService.getAllUsers();
             List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
-            List<Ticket> ticketList = ticketService.getNoReplyTicket();
+            List<Ticket> ticketList = ticketService.getAllTicket();
             model.addAttribute("users", userList);
             model.addAttribute("borrowInfo", borrowInfoAdmins);
             model.addAttribute("tickets", ticketList);

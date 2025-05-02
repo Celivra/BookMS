@@ -171,7 +171,7 @@ public class UserController {
         /*===========================将admin所需要的属性添加================================*/
         List<Book> books = bookService.getAllBooks();
         List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
-        List<Ticket> ticketList = ticketService.getNoReplyTicket();
+        List<Ticket> ticketList = ticketService.getAllTicket();
         model.addAttribute("users", userList);
         model.addAttribute("borrowInfo", borrowInfoAdmins);
         model.addAttribute("books", books);

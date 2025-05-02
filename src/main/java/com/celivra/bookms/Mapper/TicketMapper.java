@@ -29,5 +29,5 @@ public interface TicketMapper {
 
     //查找未回复的工单
     @Select("select * from ticket")
-    List<Ticket> getNoReplyTicket();
+    List<Ticket> getAllTicket();
 }

@@ -1,10 +1,7 @@
 package com.celivra.bookms.Mapper;
 
 import com.celivra.bookms.Entity.Ticket;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,6 +16,9 @@ public interface TicketMapper {
             "status = #{status}, createDate = #{createDate}, replyDate = #{replyDate}, isclosed = #{isClosed} " +
             "where id = #{id}")
     boolean updateTicket(Ticket ticket);
+
+    @Delete("delete from ticket where userid = #{userId}")
+    boolean deleteTicket(String userId);
 
     @Select("select * from ticket where id = #{id}")
     Ticket getTicketById(String id);

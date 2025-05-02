@@ -2,6 +2,7 @@ package com.celivra.bookms.Service;
 
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Mapper.BorrowMapper;
+import com.celivra.bookms.Mapper.TicketMapper;
 import com.celivra.bookms.Mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private BorrowMapper borrowMapper;
+    @Autowired
+    private TicketMapper ticketMapper;
     /*===================实例化结束===================*/
 
     //添加用户
@@ -50,6 +53,7 @@ public class UserService {
 
         /*=======================首先删除关于这个用户在其他表的数据============================*/
         borrowMapper.deleteBorrowByUser(userId);
+        ticketMapper.deleteTicket(userId);
         /*==============================然后可删该用户=====================================*/
         return userMapper.deleteUser(userId);
     }

@@ -2,9 +2,11 @@ package com.celivra.bookms.Controller;
 
 import com.celivra.bookms.Entity.Book;
 import com.celivra.bookms.Entity.BorrowInfoAdmin;
+import com.celivra.bookms.Entity.Ticket;
 import com.celivra.bookms.Entity.User;
 import com.celivra.bookms.Service.BookService;
 import com.celivra.bookms.Service.BorrowService;
+import com.celivra.bookms.Service.TicketService;
 import com.celivra.bookms.Service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class UserController {
     BookService bookService;
     @Autowired
     BorrowService borrowService;
+    @Autowired
+    private TicketService ticketService;
     /*===============实例化结束=================*/
 
     //登入操作
@@ -167,10 +171,12 @@ public class UserController {
         /*===========================将admin所需要的属性添加================================*/
         List<Book> books = bookService.getAllBooks();
         List<BorrowInfoAdmin> borrowInfoAdmins = borrowService.getAllBorrows();
+        List<Ticket> ticketList = ticketService.getNoReplyTicket();
         model.addAttribute("users", userList);
         model.addAttribute("borrowInfo", borrowInfoAdmins);
-        model.addAttribute("activeSection", "users");
         model.addAttribute("books", books);
+        model.addAttribute("tickets", ticketList);
+        model.addAttribute("activeSection", "users");
         /*===============================属性添加结束=====================================*/
         return "admin";
     }

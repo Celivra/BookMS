@@ -10,16 +10,23 @@ import java.util.List;
 
 @Service
 public class UserService {
+
+    /*==================实例化Mapper===================*/
     @Autowired
     private UserMapper userMapper;
     @Autowired
     private BorrowMapper borrowMapper;
+    /*===================实例化结束===================*/
 
     //添加用户
     //1：成功  2:用户已存在  0:数据库错误 3:用户名格式不正确
     public int addUser(User user) {
+
+        /*==============================判断用户是否存在====================================*/
         User CheckUser = userMapper.getByUsername(user.getUsername());
         if(CheckUser != null) return 2;
+        /*=================================判断结束=======================================*/
+
         return userMapper.addUser(user)?1:0;
     }
     //更新用户
@@ -40,7 +47,10 @@ public class UserService {
     }
     //删除用户
     public boolean deleteUser(String userId) {
+
+        /*=======================首先删除关于这个用户在其他表的数据============================*/
         borrowMapper.deleteBorrowByUser(userId);
+        /*==============================然后可删该用户=====================================*/
         return userMapper.deleteUser(userId);
     }
 

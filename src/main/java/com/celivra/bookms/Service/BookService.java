@@ -11,26 +11,26 @@ import java.util.*;
 @Service
 public class BookService {
 
+    /*==================实例化Mapper===================*/
     @Autowired
     private BookMapper bookMapper;
     @Autowired
     private BorrowMapper borrowMapper;
+    /*===================实例化结束===================*/
 
     //添加图书
     //1：添加成功 0:系统原因添加失败 2：因为是相同的书籍, 添加失败
     public int addBook(Book book) {
-        //通过要添加的书籍的isbn从数据库里搜索。
+        /*==================检查是存在isbn相同的书籍===================*/
         Book check = bookMapper.getBookByISBN(book.getISBN());
-        //如果存在名字相同的书籍且isbn相同，则判定为同一本书，返回2
         if(check != null) return 2;
+        /*=========================检查结束=========================*/
 
-        //若没有找到，则正常插入
         return bookMapper.addBook(book)?1:0;
     }
 
     //删除图书
     public boolean deleteBook(String bookId) {
-        //要把有关这本书的所有借阅记录删除
         borrowMapper.deleteBorrowByBook(bookId);
         return bookMapper.deleteBook(bookId);
     }
@@ -42,6 +42,7 @@ public class BookService {
 
     //更新图书
     public boolean updateBook(Book originBook, Book newbook) {
+        /*=============将源书籍的信息全都修改为新书的信息================*/
         originBook.setBookName(newbook.getBookName());
         originBook.setAuthor(newbook.getAuthor());
         originBook.setBookType(newbook.getBookType());
@@ -50,6 +51,8 @@ public class BookService {
         originBook.setDescription(newbook.getDescription());
         originBook.setISBN(newbook.getISBN());
         originBook.setPublishedDate(newbook.getPublishedDate());
+        /*======================修改结束============================*/
+
         return bookMapper.updateBookInfo(originBook);
     }
 

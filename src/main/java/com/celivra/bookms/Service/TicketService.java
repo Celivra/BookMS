@@ -9,12 +9,19 @@ import java.util.List;
 
 @Service
 public class TicketService {
+
+    /*==================实例化Mapper===================*/
     @Autowired
     TicketMapper ticketMapper;
+    /*===================实例化结束===================*/
 
     public boolean addTicket(Ticket ticket) {
+
+        /*========================判断添加的各个工单属性是否为空==============================*/
         if(ticket.getTicketName()== null || ticket.getTicketName().trim().isEmpty() ||
            ticket.getContent() == null || ticket.getContent().trim().isEmpty()) return false;
+        /*=================================判断结束=======================================*/
+
         return ticketMapper.addTicket(ticket);
     }
 

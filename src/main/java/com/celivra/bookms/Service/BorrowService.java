@@ -14,12 +14,15 @@ import java.util.List;
 
 @Service
 public class BorrowService {
+
+    /*==================实例化Mapper===================*/
     @Autowired
     private BookMapper bookMapper;
     @Autowired
     private BorrowMapper borrowMapper;
     @Autowired
     private UserMapper userMapper;
+    /*===================实例化结束===================*/
 
     //根据用户获取借阅信息
     public List<Book> getUserBorrowedBooks(String userId) {
@@ -28,76 +31,74 @@ public class BorrowService {
 
     //归还图书
     public boolean returnBook(String bookid, String userid) {
-        //获取当前借阅记录
+
+        /*==================获取借阅记录并将归还时间设为当前时间,更新借阅记录===================*/
         Borrow borrow = borrowMapper.getBorrowByUserAndBook(userid, bookid);
-        //设置返回日期为当前日期
         borrow.setReturnDate(DateUtil.getCurrentDate());
-
-        //判断是否更新成功
         if(!borrowMapper.updateBorrow(borrow)) return false;
+        /*===============================更新借阅记录结束=================================*/
 
-        //获取当前要还的书籍信息
+
+        /*=============================将归还的书籍的数量+1================================*/
         Book book = bookMapper.getBookById(bookid);
-        //修改书籍数量
         book.setBookNumber(book.getBookNumber() + 1);
-        //更新书籍
         bookMapper.updateBookInfo(book);
+        /*===============================更新书籍数量结束=================================*/
         return true;
     }
 
     //添加借阅记录
     public boolean borrowBook(String bookid, User user) {
-        //根据bookid获取选中的书籍信息
+        /*===========================判断是否已经借过当前的图书了============================*/
         Book book = bookMapper.getBookById(bookid);
-        //如果已经借过这本书
         Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
         if (CheckBorrow != null) {
             return false;
         }
+        /*===================================判断结束====================================*/
 
-        //建立借阅记录
+
+        /*==========================添加借阅记录并将借阅的书籍数量-1==========================*/
         Borrow borrow = new Borrow(user.getId(), book.getId(), DateUtil.getCurrentDate(), null);
-        //将记录插入到数据库里
         if(!borrowMapper.insertBorrow(borrow)) return false;
 
         book.setBookNumber(book.getBookNumber() - 1);
         bookMapper.updateBookInfo(book);
+        /*================================添加借阅记录结束=================================*/
         return true;
     }
 
     /**
-     * 因为数据库借阅表里只记录了用户id和书籍id
-     * 该函数根据借阅记录转换为可读的借阅信息
+     因为数据库借阅表里只记录了用户id和书籍id
+     该函数根据借阅记录转换为可读的借阅信息
      **/
     //列出这个用户的所有借阅记录
     public List<BorrowInfo> getAllUserBorrows(String userid) {
-        //获取所有借阅记录
+
+        /*=================获取用户所有的借阅记录，根据每一条借阅记录创建bInfo===================*/
         List<Borrow> borrows = borrowMapper.getAllUserBorrows(userid);
-        //建立借阅信息线性表
         List<BorrowInfo> borrowInfos = new ArrayList<>();
-        //枚举每一个borrow记录
         for (Borrow borrow : borrows) {
-            //获取被借阅的书籍的信息
             Book book = bookMapper.getBookById(borrow.getBookid().toString());
-            //将信息添加到信息表
             borrowInfos.add(new BorrowInfo(book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }
+        /*====================================创建结束====================================*/
+
         Collections.reverse(borrowInfos);
         return borrowInfos;
     }
+    //管理员
     public List<BorrowInfoAdmin> getAllBorrows() {
-        //最后保存的结果
-        List<BorrowInfoAdmin> borrowInfos = new ArrayList<>();
-        //读取所有借阅记录
-        List<Borrow> borrows = borrowMapper.getAllBorrows();
 
+        /*================================与上一个函数一致==================================*/
+        List<BorrowInfoAdmin> borrowInfos = new ArrayList<>();
+        List<Borrow> borrows = borrowMapper.getAllBorrows();
         for (Borrow borrow : borrows) {
-            //根据记录生成user跟book的数据
             User user = userMapper.getByUserId(borrow.getUserid().toString());
             Book book = bookMapper.getBookById(borrow.getBookid().toString());
-            //将信息添加到list里
             borrowInfos.add(new BorrowInfoAdmin(user.getUsername(), book.getBookName(), book.getAuthor(), borrow.getBorrowDate(), borrow.getReturnDate()));
         }
+        /*=====================================结束======================================*/
         Collections.reverse(borrowInfos);
         return borrowInfos;
     }

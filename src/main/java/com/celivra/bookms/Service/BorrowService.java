@@ -34,6 +34,7 @@ public class BorrowService {
 
         /*==================获取借阅记录并将归还时间设为当前时间,更新借阅记录===================*/
         Borrow borrow = borrowMapper.getBorrowByUserAndBook(userid, bookid);
+        if(borrow == null) return false;
         borrow.setReturnDate(DateUtil.getCurrentDate());
         if(!borrowMapper.updateBorrow(borrow)) return false;
         /*===============================更新借阅记录结束=================================*/
@@ -47,25 +48,26 @@ public class BorrowService {
         return true;
     }
 
-    //添加借阅记录
-    public boolean borrowBook(String bookid, User user) {
+    //添加借阅记录 0:借阅失败 1:借阅成功 2:已经借阅过
+    public int borrowBook(String bookid, User user) {
         /*===========================判断是否已经借过当前的图书了============================*/
         Book book = bookMapper.getBookById(bookid);
+        if(book == null) return 0;
         Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
         if (CheckBorrow != null) {
-            return false;
+            return 2;
         }
         /*===================================判断结束====================================*/
 
 
         /*==========================添加借阅记录并将借阅的书籍数量-1==========================*/
         Borrow borrow = new Borrow(user.getId(), book.getId(), DateUtil.getCurrentDate(), null);
-        if(!borrowMapper.insertBorrow(borrow)) return false;
+        if(!borrowMapper.insertBorrow(borrow)) return 0;
 
         book.setBookNumber(book.getBookNumber() - 1);
         bookMapper.updateBookInfo(book);
         /*================================添加借阅记录结束=================================*/
-        return true;
+        return 1;
     }
 
     /**

@@ -198,16 +198,19 @@
         <button onclick="closeOverlay('logout')">❌ 取消</button>
     </div>
 </div>
-<!-- 提示框：借阅失败（已借阅） -->
-<div id="Borrowed" th:if="${Borrowed}" class="overlay">
+<!-- 提示框：借阅 -->
+<div id="Borrowed" th:if="${Borrowed} or ${CantBorrow} or ${SuccessBorrow}" class="overlay">
     <div class="overlay-content">
-        <p> 借阅失败：您已经借阅过该书</p>
+        <p th:if="${Borrowed}" th:text="${Borrowed}"></p>
+        <p th:if="${CantBorrow}" th:text="${CantBorrow}"></p>
+        <p th:if="${SuccessBorrow}" th:text="${SuccessBorrow}"></p>
         <button onclick="closeOverlay('Borrowed')">❌ 关闭</button>
     </div>
 </div>
-<div id="Returned" th:if="${Returned}" class="overlay">
+<div id="Returned" th:if="${Returned} or ${CantReturn}" class="overlay">
     <div class="overlay-content">
-        <p th:text="${Returned}"> </p>
+        <p th:if="${Returned}" th:text="${Returned}"> </p>
+        <p th:if="${CantReturn}" th:text="${CantReturn}"> </p>
         <button onclick="closeOverlay('Returned')">❌ 关闭</button>
     </div>
 </div>

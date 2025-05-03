@@ -40,15 +40,26 @@ public class BookService {
         return bookMapper.getBookById(bookId);
     }
 
+    public Book getBookByISBN(String isbn){
+        return bookMapper.getBookByISBN(isbn);
+    }
+
     //更新图书
     public boolean updateBook(Book originBook, Book newbook) {
         /*=============将源书籍的信息全都修改为新书的信息================*/
+
         originBook.setBookName(newbook.getBookName());
         originBook.setAuthor(newbook.getAuthor());
         originBook.setBookType(newbook.getBookType());
         originBook.setPublisher(newbook.getPublisher());
         originBook.setBookNumber(newbook.getBookNumber());
         originBook.setDescription(newbook.getDescription());
+
+        /*----------如果要修改的isbn已经存在，则结束修改操作-------------*/
+        if(getBookByISBN(newbook.getISBN()) != null){
+            return false;
+        }
+
         originBook.setISBN(newbook.getISBN());
         originBook.setPublishedDate(newbook.getPublishedDate());
         /*======================修改结束============================*/

@@ -297,6 +297,12 @@
         <button onclick="closeOverlay('deleteUser')">❌ 取消</button>
     </div>
 </div>
+<div id="updateBook" class="overlay" th:if="${CantUpdateBook}">
+    <div class="overlay-content">
+        <p th:text="${CantUpdateBook}"></p>
+        <button onclick="closeOverlay('updateBook')">❌ 取消</button>
+    </div>
+</div>
 <div id="deleteBook" class="overlay" style="display: none;">
     <div class="overlay-content">
         <p>确认要删除吗？</p>

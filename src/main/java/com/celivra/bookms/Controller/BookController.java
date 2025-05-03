@@ -58,7 +58,9 @@ public class BookController {
         /*=========================根据bookId获取书籍信息==============================*/
         Book originbook = bookService.getBookById(book.getId().toString());
         /*-----------------------------更新操作----------------------------------*/
-        bookService.updateBook(originbook, book);
+        if(!bookService.updateBook(originbook, book)){
+            reAModel.addFlashAttribute("CantUpdateBook", "修改图书失败");
+        }
         /*===========================更新图书结束================================*/
 
         reAModel.addFlashAttribute("activeSection", "books");

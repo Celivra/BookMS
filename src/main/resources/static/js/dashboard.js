@@ -1,3 +1,4 @@
+//(打开|关闭)&(编辑信息|修改密码)窗口
 function toggleEditUserForm(flag){
     const form = document.getElementById('editForm');
     const passwdform = document.getElementById('editPasswordForm');
@@ -11,19 +12,19 @@ function toggleEditUserForm(flag){
 }
 //显示借阅书籍跟归还书籍的界面
 function toggleBookDetail(bookData, BorR) {
-    //显示哪一个form
+    /*==================================显示归还或者借阅窗口===========================================*/
     document.getElementById('borrowForm').style.display = BorR==='borrow'?'block':'none';
     document.getElementById('returnForm').style.display = BorR==='return'?'block':'none';
-
-    //当显示returnform时关闭哪些标签
     document.getElementById('overlay-number').style.display = BorR==='borrow'?'block':'none';
+    /*======================================显示操作结束=============================================*/
 
-    // 填充内容
+    /*====================================插入各个属性的值============================================*/
     document.getElementById('overlay-title').innerText = "《"+bookData.title+"》";
     document.getElementById('overlay-ISBN').innerText = "ISBN:"+bookData.isbn;
     document.getElementById('overlay-author').innerText = "作者：" + bookData.author;
     document.getElementById('overlay-type').innerText = "类型：" + bookData.type;
     document.getElementById('overlay-publisher').innerText = "出版社：" + bookData.publisher;
+    /*-------------------------------------将日期分开设置--------------------------------------------*/
     const dateStr =  bookData.publisheddate;
     console.log("second:"+dateStr);
     if (dateStr) {
@@ -33,16 +34,20 @@ function toggleBookDetail(bookData, BorR) {
     } else {
         document.getElementById("overlay-publishedDate").innerText = "出版日期：暂无";
     }
+    /*--------------------------------------插入日期结束--------------------------------------------*/
     document.getElementById('overlay-number').innerText = "所剩数量：" + bookData.number;
     document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
 
     document.getElementById('borrowBookId').value = bookData.bookid;
     document.getElementById('returnbookid').value = bookData.bookid;
+    /*======================================插属性值结束============================================*/
 
-    // 显示遮罩层
     document.getElementById('overlay').style.display = 'flex';
+
+    /*=========================判断如果书籍的数量为0，则关闭借阅书籍的按钮================================*/
     const borrowbutton =  document.getElementById('borrowButton');
     borrowbutton.disabled = (bookData.number == 0);
+    /*========================================判断结束==============================================*/
 }
 //判断输入的两个密码是否相同
 document.querySelector("#editPasswordForm form").addEventListener("submit", function (e) {

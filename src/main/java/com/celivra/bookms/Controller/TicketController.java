@@ -17,7 +17,7 @@ public class TicketController {
 
     /*===========实例化Service对象===============*/
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
     /*===============实例化结束=================*/
 
     @PostMapping("/addTicket")

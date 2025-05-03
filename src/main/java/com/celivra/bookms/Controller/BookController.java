@@ -20,13 +20,13 @@ public class BookController {
 
     /*===========实例化Service对象===============*/
     @Autowired
-    BookService bookService;
+    private BookService bookService;
     @Autowired
-    BorrowService borrowService;
+    private BorrowService borrowService;
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    TicketService ticketService;
+    private TicketService ticketService;
     /*===============实例化结束=================*/
 
     @PostMapping("/addBook")

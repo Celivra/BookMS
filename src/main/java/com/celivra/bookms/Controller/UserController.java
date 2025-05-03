@@ -26,11 +26,11 @@ public class UserController {
 
     /*===========实例化Service对象===============*/
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    BookService bookService;
+    private BookService bookService;
     @Autowired
-    BorrowService borrowService;
+    private BorrowService borrowService;
     @Autowired
     private TicketService ticketService;
     /*===============实例化结束=================*/

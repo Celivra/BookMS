@@ -11,9 +11,6 @@ public class Ticket {
     private LocalDate createDate, replyDate;
     private boolean status, isClosed; //status  false:waiting true:complete
 
-    public boolean getStatus() {
-        return status;
-    }
     public boolean isClosed() {
         return isClosed;
     }

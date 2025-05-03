@@ -12,7 +12,7 @@ public class TicketService {
 
     /*==================实例化Mapper===================*/
     @Autowired
-    TicketMapper ticketMapper;
+    private TicketMapper ticketMapper;
     /*===================实例化结束===================*/
 
     public boolean addTicket(Ticket ticket) {

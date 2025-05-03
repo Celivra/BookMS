@@ -15,7 +15,7 @@ public class BorrowController {
 
     /*===========实例化Service对象===============*/
     @Autowired
-    BorrowService borrowService;
+    private BorrowService borrowService;
     /*===============实例化结束=================*/
 
     //归还图书

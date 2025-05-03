@@ -19,11 +19,11 @@ public class PageController {
 
     /*===========实例化Service对象===============*/
     @Autowired
-    BookService bookService;
+    private BookService bookService;
     @Autowired
-    BorrowService borrowService;
+    private BorrowService borrowService;
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
     private TicketService ticketService;
     /*===============实例化结束=================*/

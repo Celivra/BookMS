@@ -279,11 +279,9 @@
     </div>
 </div>
 
-<div id="addBookMsg" th:if="${AddBookSuccess} or ${AddBookError} or ${AddSameBook}" class="overlay" style="font-size: 20px;">
+<div id="addBookMsg" th:if="${AddBook}" class="overlay" style="font-size: 20px;">
     <div class="overlay-content">
-        <p th:if="${AddBookSuccess}" th:text="${AddBookSuccess}"></p>
-        <p th:if="${AddBookError}" th:text="${AddBookError}" style="color:red;"></p>
-        <p th:if="${AddSameBook}" th:text="${AddSameBook}" style="color:red;"></p>
+        <p th:if="${AddBook}" th:text="${AddBook}"></p>
         <button onclick="closeOverlay('addBookMsg')">关闭</button>
     </div>
 </div>
@@ -297,9 +295,9 @@
         <button onclick="closeOverlay('deleteUser')">❌ 取消</button>
     </div>
 </div>
-<div id="updateBook" class="overlay" th:if="${CantUpdateBook}">
+<div id="updateBook" class="overlay" th:if="${UpdateBook}">
     <div class="overlay-content">
-        <p th:text="${CantUpdateBook}"></p>
+        <p th:text="${UpdateBook}"></p>
         <button onclick="closeOverlay('updateBook')">❌ 取消</button>
     </div>
 </div>

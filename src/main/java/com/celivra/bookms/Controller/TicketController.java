@@ -32,7 +32,7 @@ public class TicketController {
         Ticket ticket = new Ticket(ticketName, ticketRank, content, user.getId());
         /*-------------------------------如果创建成功就添加属性-----------------------------------*/
         if(!ticketService.addTicket(ticket)){
-            reAModel.addFlashAttribute("TicketIsNull", "内容不可以为空！");
+            reAModel.addFlashAttribute("Ticket", "内容不可以为空！");
         }
         /*==================================创建工单结束========================================*/
 
@@ -45,7 +45,7 @@ public class TicketController {
         /*====================为确保安全，首先判断传来的id对应的工单是否存在==========================*/
         Ticket ticket = ticketService.getTicketById(id);
         if(ticket == null) {
-            reAModel.addFlashAttribute("CantFindTicket", "找不到工单");
+            reAModel.addFlashAttribute("Ticket", "找不到工单");
             reAModel.addFlashAttribute("activeSection", "ticket");
             return "redirect:/";
         }
@@ -54,7 +54,7 @@ public class TicketController {
 
         /*-----------------------判断当前所关闭的工单是否是该用户所创建的-----------------------------*/
         if(!user.getId().equals(ticket.getUserId())) {
-            reAModel.addFlashAttribute("CantCloseTicket", "这不是你可以关闭的工单");
+            reAModel.addFlashAttribute("Ticket", "这不是你可以关闭的工单");
         }
         /*=================================安全判断结束=========================================*/
 

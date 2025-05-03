@@ -34,11 +34,11 @@ public class BookController {
         int flag = bookService.addBook(book);
         /*========================根据插入图书的返回值添加属性=================================*/
         if(flag == 2){
-            reAModel.addFlashAttribute("AddSameBook","已经有一本同样的书籍存在!");
+            reAModel.addFlashAttribute("AddBook","已经有一本同样的书籍存在!");
         }else if(flag == 0){
-            reAModel.addFlashAttribute("AddBookError","因为系统原因添加失败!");
+            reAModel.addFlashAttribute("AddError","因为系统原因添加失败!");
         }else{
-            reAModel.addFlashAttribute("AddBookSuccess","添加图书成功");
+            reAModel.addFlashAttribute("AddBook","添加图书成功");
         }
         /*===============================添加属性结束===================================*/
 
@@ -59,7 +59,7 @@ public class BookController {
         Book originbook = bookService.getBookById(book.getId().toString());
         /*-----------------------------更新操作----------------------------------*/
         if(!bookService.updateBook(originbook, book)){
-            reAModel.addFlashAttribute("CantUpdateBook", "修改图书失败");
+            reAModel.addFlashAttribute("UpdateBook", "修改图书失败");
         }
         /*===========================更新图书结束================================*/
 

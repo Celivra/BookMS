@@ -199,18 +199,15 @@
     </div>
 </div>
 <!-- 提示框：借阅 -->
-<div id="Borrowed" th:if="${Borrowed} or ${CantBorrow} or ${SuccessBorrow}" class="overlay">
+<div id="Borrowed" th:if="${BorrowBook}" class="overlay">
     <div class="overlay-content">
-        <p th:if="${Borrowed}" th:text="${Borrowed}"></p>
-        <p th:if="${CantBorrow}" th:text="${CantBorrow}"></p>
-        <p th:if="${SuccessBorrow}" th:text="${SuccessBorrow}"></p>
+        <p th:if="${BorrowBook}" th:text="${BorrowBook}"></p>
         <button onclick="closeOverlay('Borrowed')">❌ 关闭</button>
     </div>
 </div>
-<div id="Returned" th:if="${Returned} or ${CantReturn}" class="overlay">
+<div id="Returned" th:if="${ReturnBook}" class="overlay">
     <div class="overlay-content">
-        <p th:if="${Returned}" th:text="${Returned}"> </p>
-        <p th:if="${CantReturn}" th:text="${CantReturn}"> </p>
+        <p th:if="${ReturnBook}" th:text="${ReturnBook}"> </p>
         <button onclick="closeOverlay('Returned')">❌ 关闭</button>
     </div>
 </div>
@@ -246,12 +243,10 @@
         <button onclick="closeOverlay('showTicket')">关闭</button>
     </div>
 </div>
-<div id="TicketErrorMsg" class="overlay" th:if="${CantCloseTicket} or ${CantFindTicket} or ${TicketIsNull}" >
+<div id="TicketMsg" class="overlay" th:if="${Ticket}" >
     <div class="overlay-content">
-        <p th:if="${CantCloseTicket}" th:text="${CantCloseTicket}"></p>
-        <p th:if="${CantFindTicket}" th:text="${CantFindTicket}"></p>
-        <p th:if="${TicketIsNull}" th:text="${TicketIsNull}"></p>
-        <button onclick="closeOverlay('TicketErrorMsg')">关闭</button>
+        <p th:if="${Ticket}" th:text="${Ticket}"></p>
+        <button onclick="closeOverlay('TicketMsg')">关闭</button>
     </div>
 </div>
 </body>

@@ -25,9 +25,9 @@ public class BorrowController {
 
         /*======================进行归还操作，根据返回值添加flash属性===========================*/
         if(borrowService.returnBook(bookid, user.getId().toString())) {
-            reAModel.addFlashAttribute("Returned", "归还成功");
+            reAModel.addFlashAttribute("ReturnBook", "归还成功");
         }else{
-            reAModel.addFlashAttribute("CantReturn", "归还失败");
+            reAModel.addFlashAttribute("ReturnBook", "归还失败");
         }
         /*===============================归还操作结束===================================*/
 
@@ -41,11 +41,11 @@ public class BorrowController {
         /*=========================进行借阅操作，如果成功则添加属性==============================*/
         int check = borrowService.borrowBook(bookid, user);
         if (check == 2) {
-            reAttributes.addFlashAttribute("Borrowed", "已经借阅过了");
+            reAttributes.addFlashAttribute("BorrowBook", "已经借阅过了");
         }else if(check == 0){
-            reAttributes.addFlashAttribute("CantBorrow", "借阅失败");
+            reAttributes.addFlashAttribute("BorrowBook", "借阅失败");
         }else{
-            reAttributes.addFlashAttribute("SuccessBorrow", "借阅成功!");
+            reAttributes.addFlashAttribute("BorrowBook", "借阅成功!");
         }
         /*===============================借阅操作结束=================================*/
         return "redirect:/";

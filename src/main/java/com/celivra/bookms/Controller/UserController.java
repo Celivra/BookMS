@@ -45,11 +45,11 @@ public class UserController {
 
         /*===========================验证获取到的用户================================*/
         if(user == null){
-            reAttributes.addFlashAttribute("NoUsername", "没有这个用户!");
+            reAttributes.addFlashAttribute("doLogin", "没有这个用户!");
             return "redirect:/login";
         }
         if(!user.getPassword().equals(password)) {
-            reAttributes.addFlashAttribute("PasswordError", "密码错误!");
+            reAttributes.addFlashAttribute("doLogin", "密码错误!");
             return "redirect:/login";
         }
         /*==============================验证结束===================================*/

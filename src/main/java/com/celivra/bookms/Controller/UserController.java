@@ -73,7 +73,7 @@ public class UserController {
         /*==================将传来的user传给userService进行处理========================*/
         int returnValue = userService.addUser(user);
         /*-------------------------根据返回值添加属性---------------------------------*/
-        String key = returnValue==1?"RegSuccess":"RegUserIsExist";
+        String key = "doRegister";
         String value = returnValue == 1? "注册成功":"用户已存在";
         reAttributes.addFlashAttribute(key, value);
         /*===========================添加用户结束==================================*/

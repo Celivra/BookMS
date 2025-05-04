@@ -19,8 +19,7 @@
         <input name="phone" type="text" placeholder="手机号" required />
         <input name="email" type="email" placeholder="邮箱" required />
         <div class="RegMsg">
-            <div id="RegSuccess" th:if="${RegSuccess}" th:text="${RegSuccess}">注册成功</div>
-            <div id="RegUserIsExist" th:if="${RegUserIsExist}" th:text="${RegUserIsExist}">这个用户名已经被注册过了</div>
+            <div id="RegSuccess" th:if="${doRegister}" th:text="${doRegister}"></div>
         </div>
         <button type="submit">注册</button>
     </form>

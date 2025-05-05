@@ -147,11 +147,11 @@
                     <td th:text="${ticket.ticketName}">主题</td>
                     <td th:text="${ticket.ticketRank}">高</td>
                     <td>
-                        <div th:unless="${ticket.status}">
+                        <div th:unless="${ticket.isClosed}">
                             <span class="status-dot-waiting"></span>
                             <span >处理中</span>
                         </div>
-                        <div th:if="${ticket.status}">
+                        <div th:if="${ticket.isClosed}">
                             <span class="status-dot-complete"></span>
                             <span>已完成</span>
                         </div>

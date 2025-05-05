@@ -109,11 +109,11 @@
                         <td th:text="${ticket.ticketName}">主题</td>
                         <td th:text="${ticket.ticketRank}">高</td>
                         <td>
-                            <div th:unless="${ticket.status}">
+                            <div th:unless="${ticket.isClosed}">
                                 <span class="status-dot-waiting"></span>
                                 <span >处理中</span>
                             </div>
-                            <div th:if="${ticket.status}">
+                            <div th:if="${ticket.isClosed}">
                                 <span class="status-dot-complete"></span>
                                 <span>已完成</span>
                             </div>
@@ -124,17 +124,14 @@
                         <td>
                             <span class="view-link"
                                th:attr="data-id=${ticket.id},
-                                        data-name=${ticket.ticketName},
-                                        data-rank=${ticket.ticketRank},
                                         data-reply=${ticket.reply},
-                                        data-content=${ticket.content},
-                                        data-status=${ticket.status}"
+                                        data-content=${ticket.content}"
                                onclick="viewTicket(this)" style="height: 28.5px; float: left; line-height: 28.5px;">查看</span>
-                            <form th:unless="${ticket.status}" action="closeTicket" method="post">
+                            <form th:unless="${ticket.isClosed}" action="closeTicket" method="post">
                                 <input name="id" th:value="${ticket.id}" type="hidden" />
                                 <button class="ticket-close-btn">关闭</button>
                             </form>
-                            <button th:if="${ticket.status}" class="ticket-close-btn" disabled>关闭</button>
+                            <button th:if="${ticket.isClosed}" class="ticket-close-btn" disabled>关闭</button>
                         </td>
                     </tr>
                     </tbody>

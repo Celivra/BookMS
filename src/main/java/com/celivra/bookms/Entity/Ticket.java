@@ -9,13 +9,13 @@ public class Ticket {
     private Long id, userId;
     private String ticketName, ticketRank, content, reply;
     private LocalDate createDate, replyDate;
-    private boolean status, isClosed; //status  false:waiting true:complete
+    private boolean isClosed; //status  false:waiting true:complete
 
     public boolean isClosed() {
         return isClosed;
     }
 
-    public Ticket(Long id, String ticketName, String ticketRank, String content, String reply, Long userId,boolean status, LocalDate createDate, LocalDate replyDate, boolean isClosed) {
+    public Ticket(Long id, String ticketName, String ticketRank, String content, String reply, Long userId, LocalDate createDate, LocalDate replyDate, boolean isClosed) {
         this.id = id;
         this.userId = userId;
         this.ticketName = ticketName;
@@ -24,7 +24,6 @@ public class Ticket {
         this.reply = reply;
         this.createDate = createDate;
         this.replyDate = replyDate;
-        this.status = status;
         this.isClosed = isClosed;
     }
 
@@ -35,7 +34,6 @@ public class Ticket {
         this.userId = userid;
         this.createDate = LocalDate.now();
         this.replyDate = null;
-        this.status = false;
         this.isClosed = false;
     }
 }

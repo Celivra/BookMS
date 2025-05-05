@@ -7,13 +7,13 @@ import java.util.List;
 
 @Mapper
 public interface TicketMapper {
-    @Insert("insert into ticket(ticketname, ticketrank, content, userid, createDate, replyDate, status, isclosed) " +
-            "values(#{ticketName}, #{ticketRank}, #{content}, #{userId}, #{createDate}, #{replyDate}, #{status}, #{isClosed})")
+    @Insert("insert into ticket(ticketname, ticketrank, content, userid, createDate, replyDate, isclosed) " +
+            "values(#{ticketName}, #{ticketRank}, #{content}, #{userId}, #{createDate}, #{replyDate}, #{isClosed})")
     boolean addTicket(Ticket ticket);
 
     @Update("update ticket set ticketname = #{ticketName}, ticketrank = #{ticketRank}, " +
             "content = #{content}, reply = #{reply}, userid = #{userId}, " +
-            "status = #{status}, createDate = #{createDate}, replyDate = #{replyDate}, isclosed = #{isClosed} " +
+            "createDate = #{createDate}, replyDate = #{replyDate}, isclosed = #{isClosed} " +
             "where id = #{id}")
     boolean updateTicket(Ticket ticket);
 

@@ -63,7 +63,6 @@ public class TicketController {
         /*===================================关闭工单==========================================*/
         if(!ticket.isClosed()) {
             ticket.setClosed(true);
-            ticket.setStatus(true);
             ticketService.updateTicket(ticket);
         }
         /*=================================关闭工单结束========================================*/
@@ -77,7 +76,6 @@ public class TicketController {
         /*==================根据id获取工单，将工单的reply设置为传来的reply=========================*/
         Ticket ticket = ticketService.getTicketById(id);
         ticket.setReply(reply);
-        ticket.setStatus(true);//complete
         ticket.setClosed(true);//closed the ticket
         ticket.setReplyDate(LocalDate.now());
         ticketService.updateTicket(ticket);

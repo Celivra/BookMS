@@ -151,7 +151,7 @@
             <form action="/updateUser" method="post">
                 <input name="newPhone" type="text" placeholder="新手机号" th:value="${session.user.phone}" /><br>
                 <input name="newEmail" type="email" placeholder="新邮箱" th:value="${session.user.email}" /><br>
-                <button onclick="alert('信息已提交！');">提交</button>
+                <button>提交</button>
             </form>
         </div>
         <div id="editPasswordForm" class="info-edit-form" style="display: none;">
@@ -184,6 +184,12 @@
             <button id="returnbutton">📖 归还</button>
         </form>
         <button onclick="closeOverlay('overlay')">❌ 关闭</button>
+    </div>
+</div>
+<div id="updateUser" class="overlay" th:if="${UpdateUser}">
+    <div class="overlay-content">
+        <p th:text="${UpdateUser}" style="font-size: 18px;"></p>
+        <button onclick="closeOverlay('updateUser')">❌ 取消</button>
     </div>
 </div>
 <div id="logout" class="overlay" style="display: none;">

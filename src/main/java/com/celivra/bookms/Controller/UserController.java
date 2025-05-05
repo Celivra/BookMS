@@ -113,7 +113,13 @@ public class UserController {
         /*===================================赋新值结束=======================================*/
 
 
-        userService.updateUser(user);
+        /*==================================更新用户数据======================================*/
+        if(userService.updateUser(user)){
+            reAttributes.addFlashAttribute("UpdateUser", "更新成功");
+        }else{
+            reAttributes.addFlashAttribute("UpdateUser", "更新失败");
+        }
+        /*====================================更新结束=======================================*/
 
         /*============================检测是否更新密码，退出登入=================================*/
         if(newPassword != null){
@@ -132,6 +138,7 @@ public class UserController {
         }else{
             reAttributes.addFlashAttribute("activeSection", "users");
         }
+
         /*=================================添加属性结束======================================*/
 
         return "redirect:/";

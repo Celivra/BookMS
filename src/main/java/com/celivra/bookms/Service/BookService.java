@@ -55,11 +55,6 @@ public class BookService {
         originBook.setBookNumber(newbook.getBookNumber());
         originBook.setDescription(newbook.getDescription());
 
-        /*----------如果要修改的isbn已经存在，则结束修改操作-------------*/
-        if(getBookByISBN(newbook.getISBN()) != null){
-            return false;
-        }
-
         originBook.setISBN(newbook.getISBN());
         originBook.setPublishedDate(newbook.getPublishedDate());
         /*======================修改结束============================*/

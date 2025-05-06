@@ -152,17 +152,16 @@ public class UserController {
     }
     //更新admin密码
     @PostMapping("/changeAdminPassword")
-    public String changeAdminPassword(@RequestParam String newPasswd, HttpServletRequest request){
+    public String changeAdminPassword(@RequestParam String newPasswd, HttpServletRequest request, RedirectAttributes reAttributes) {
         User user = (User) request.getSession().getAttribute("admin");
 
         /*=======================修改密码，并将新的user添加到属性==============================*/
         user.setPassword(newPasswd);
-        if(userService.updateUser(user)) {
-            request.getSession().setAttribute("admin", user);
-        }
+        userService.updateUser(user);
         /*================================修改密码结束=====================================*/
-
-        return "redirect:/";
+        request.getSession().removeAttribute("admin");
+        reAttributes.addFlashAttribute("UpdatePasswd", "检测到密码更改，请重新登入。");
+        return "redirect:/login";
     }
 
     @GetMapping("/getUsers")

@@ -56,11 +56,8 @@ public class UserController {
 
 
         /*==========================判断是否为管理员账户==============================*/
-        if(user.getPower() == 10){
-            request.getSession().setAttribute("admin", user);
-        }else {
-            request.getSession().setAttribute("user", user);
-        }
+        String userAttribute = (user.getPower() == 10)?"admin":"user";
+        request.getSession().setAttribute(userAttribute, user);
         /*==============================判断结束====================================*/
 
         return "redirect:/";
@@ -104,7 +101,6 @@ public class UserController {
         /*==================================获取用户信息结束===================================*/
 
 
-
         /*============================判断每个参数是否有传参然后赋值==============================*/
         if(newPassword != null) user.setPassword(newPassword);
         if(newPhone != null) user.setPhone(newPhone);
@@ -138,7 +134,6 @@ public class UserController {
         }else{
             reAttributes.addFlashAttribute("activeSection", "users");
         }
-
         /*=================================添加属性结束======================================*/
 
         return "redirect:/";

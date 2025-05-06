@@ -54,7 +54,7 @@ public class BookService {
         originBook.setPublisher(newbook.getPublisher());
         originBook.setBookNumber(newbook.getBookNumber());
         originBook.setDescription(newbook.getDescription());
-
+        if(!newbook.getISBN().equals(originBook.getISBN()) && bookMapper.getBookByISBN(newbook.getISBN())!=null) return false;
         originBook.setISBN(newbook.getISBN());
         originBook.setPublishedDate(newbook.getPublishedDate());
         /*======================修改结束============================*/

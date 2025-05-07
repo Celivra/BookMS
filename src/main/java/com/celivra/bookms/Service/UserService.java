@@ -51,6 +51,8 @@ public class UserService {
     //删除用户
     public boolean deleteUser(String userId) {
 
+        if(userMapper.getByUserId(userId) == null) return false;
+
         /*=======================首先删除关于这个用户在其他表的数据============================*/
         borrowMapper.deleteBorrowByUser(userId);
         ticketMapper.deleteTicket(userId);

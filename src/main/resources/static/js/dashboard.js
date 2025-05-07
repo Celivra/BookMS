@@ -26,7 +26,6 @@ function toggleBookDetail(bookData, BorR) {
     document.getElementById('overlay-publisher').innerText = "出版社：" + bookData.publisher;
     /*-------------------------------------将日期分开设置--------------------------------------------*/
     const dateStr =  bookData.publisheddate;
-    console.log("second:"+dateStr);
     if (dateStr) {
         const [year, month, day] = dateStr.split("-");
         document.getElementById("overlay-publishedDate").innerText =
@@ -74,14 +73,12 @@ function ClickBookCard(el, BorR){
     const publisheddate = el.dataset.publisheddate;
     const number = el.dataset.number;
     const desc = el.dataset.desc;
-    console.log("first:"+publisheddate);
     toggleBookDetail({bookid, isbn, title, author, type, publisher, publisheddate, number, desc}, BorR);
 }
 
 
 function viewTicket(e){
     document.getElementById("showTicket-content").innerText = e.dataset.content;
-    console.log(e.dataset.content);
     const r = document.getElementById("showTicket-reply");
     if(e.dataset.reply === undefined){
         r.innerText="尚未回复";

@@ -54,9 +54,7 @@ public class BorrowService {
         Book book = bookMapper.getBookById(bookid);
         if(book == null) return 0;
         Borrow CheckBorrow= borrowMapper.getBorrowByUserAndBook(user.getId().toString(), bookid);
-        if (CheckBorrow != null) {
-            return 2;
-        }
+        if (CheckBorrow != null) return 2;
         /*===================================判断结束====================================*/
 
 

@@ -38,7 +38,7 @@ function toggleBookDetail(bookData, BorR) {
     document.getElementById('overlay-desc').innerText = "简介：" + bookData.desc;
 
     document.getElementById('borrowBookId').value = bookData.bookid;
-    document.getElementById('returnbookid').value = bookData.bookid;
+    document.getElementById('returnBookId').value = bookData.bookid;
     /*======================================插属性值结束============================================*/
 
     document.getElementById('overlay').style.display = 'flex';

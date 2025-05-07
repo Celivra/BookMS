@@ -20,26 +20,26 @@ public class BorrowController {
 
     //归还图书
     @PostMapping("/returnBook")
-    public String returnBook(@RequestParam String bookid, HttpServletRequest request, RedirectAttributes reAModel) {
+    public String returnBook(@RequestParam String bookId, HttpServletRequest request, RedirectAttributes reAModel) {
         User user = (User) request.getSession().getAttribute("user");
 
         /*======================进行归还操作，根据返回值添加flash属性===========================*/
-        if(borrowService.returnBook(bookid, user.getId().toString())) {
+        if(borrowService.returnBook(bookId, user.getId().toString())) {
             reAModel.addFlashAttribute("ReturnBook", "归还成功");
         }else{
             reAModel.addFlashAttribute("ReturnBook", "归还失败");
         }
         /*===============================归还操作结束===================================*/
 
-        reAModel.addFlashAttribute("activeSection", "mybook");
+        reAModel.addFlashAttribute("activeSection", "myBook");
         return "redirect:/";
     }
     //借阅图书
     @PostMapping("/borrowBook")
-    public String borrow(@RequestParam String bookid, HttpServletRequest request, RedirectAttributes reAttributes) {
+    public String borrow(@RequestParam String bookId, HttpServletRequest request, RedirectAttributes reAttributes) {
         User user = (User) request.getSession().getAttribute("user");
         /*=========================进行借阅操作，如果成功则添加属性==============================*/
-        int check = borrowService.borrowBook(bookid, user);
+        int check = borrowService.borrowBook(bookId, user);
         if (check == 2) {
             reAttributes.addFlashAttribute("BorrowBook", "已经借阅过了");
         }else if(check == 0){

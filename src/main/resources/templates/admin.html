@@ -80,17 +80,17 @@
     <div id="borrow" class="content-section">
         <h3>📖 借阅记录</h3>
         <div class="borrow-list">
-            <div class="borrow-card" th:each="borrowinfo : ${borrowInfo}">
+            <div class="borrow-card" th:each="borrowInfo : ${borrowInfo}">
                 <div class="borrow-main">
                     <div class="borrow-title">
-                        <span th:text="${borrowinfo.username}"></span>:
-                        <span th:text="'书名：' + ${borrowinfo.bookName}"></span> -
-                        <span th:text="${borrowinfo.bookAuthor}"></span>
+                        <span th:text="${borrowInfo.username}"></span>:
+                        <span th:text="'书名：' + ${borrowInfo.bookName}"></span> -
+                        <span th:text="${borrowInfo.bookAuthor}"></span>
                     </div>
                     <div class="borrow-meta">
-                        <span th:text="'借阅日期：' + ${borrowinfo.borrowDate}"></span>
-                        <span th:if="${borrowinfo.returnDate}" th:text="'应还日期：' + ${borrowinfo.returnDate}"></span>
-                        <span th:if="${borrowinfo.returnDate} == null">尚未归还</span>
+                        <span th:text="'借阅日期：' + ${borrowInfo.borrowDate}"></span>
+                        <span th:if="${borrowInfo.returnDate}" th:text="'应还日期：' + ${borrowInfo.returnDate}"></span>
+                        <span th:if="${borrowInfo.returnDate} == null">尚未归还</span>
                     </div>
                 </div>
             </div>
@@ -181,34 +181,34 @@
 <div id="addBookOverlay" class="overlay" style="display: none;">
     <div class="overlay-content" style="text-align: left; padding: 25px 100px; width: 550px; height: 680px;">
 
-        <h2 id="addbookh2">📖 添加图书</h2>
-        <h2 id="changebookh2">📖 修改图书</h2>
+        <h2 id="addBookH2">📖 添加图书</h2>
+        <h2 id="changeBookH2">📖 修改图书</h2>
         <form id="changeBookForm" th:action="@{/updateBook}" method="post">
-            <input id="changebook-id" type="hidden" name="id" >
+            <input id="changeBook-id" type="hidden" name="id" >
 
             <label>ISBN：</label>
-            <input id="changebook-isbn" type="text" name="ISBN" required maxlength="13"/>
+            <input id="changeBook-isbn" type="text" name="ISBN" required maxlength="13"/>
 
             <label>书名：</label>
-            <input id="changebook-name" type="text" name="bookName" required />
+            <input id="changeBook-name" type="text" name="bookName" required />
 
             <label>作者：</label>
-            <input id="changebook-author" type="text" name="author" required />
+            <input id="changeBook-author" type="text" name="author" required />
 
             <label>类型：</label>
-            <input id="changebook-type" type="text" name="bookType" required />
+            <input id="changeBook-type" type="text" name="bookType" required />
 
             <label>出版社：</label>
-            <input id="changebook-publisher" type="text" name="publisher" required />
+            <input id="changeBook-publisher" type="text" name="publisher" required />
 
             <label>出版时间：</label>
-            <input id="changebook-publisheddate" type="date" name="publishedDate" required />
+            <input id="changeBook-publishedDate" type="date" name="publishedDate" required />
 
             <label>数量：</label>
-            <input id="changebook-number" type="number" name="bookNumber" min="0" required />
+            <input id="changeBook-number" type="number" name="bookNumber" min="0" required />
 
             <label>描述：</label>
-            <input id="changebook-desc" type="text" name="description" required />
+            <input id="changeBook-desc" type="text" name="description" required />
             <div class="form-actions">
                 <button type="submit" class="confirm-btn">✅ 修改</button>
                 <button type="button" class="cancel-btn" onclick="closeOverlay('addBookOverlay')">❌ 取消</button>

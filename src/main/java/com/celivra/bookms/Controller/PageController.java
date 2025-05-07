@@ -55,7 +55,7 @@ public class PageController {
         List<Ticket> ticketList = ticketService.getAllTicketByUserId(user.getId());
         model.addAttribute("tickets", ticketList);
         model.addAttribute("borrowInfo", borrowInfos);
-        model.addAttribute("userbooks", userbooks);
+        model.addAttribute("userBooks", userbooks);
         return "dashboard";
         /*=================================添加属性结束======================================*/
     }

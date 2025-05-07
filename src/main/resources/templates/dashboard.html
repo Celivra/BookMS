@@ -20,7 +20,7 @@
 <div class="sidebar">
     <h2>用户菜单</h2>
     <button class="nav-btn active" onclick="showSection('books')">📚 图书目录</button>
-    <button class="nav-btn" onclick="showSection('mybook')">📚 已借到的图书</button>
+    <button class="nav-btn" onclick="showSection('myBook')">📚 已借到的图书</button>
     <button class="nav-btn" onclick="showSection('borrow')">📝 借阅记录</button>
     <button class="nav-btn" onclick="showSection('ticket')">💼 提交工单</button>
     <button class="nav-btn" onclick="showSection('profile')">👤 我的信息</button>
@@ -55,16 +55,16 @@
     <div id="borrow" class="content-section">
         <h3>📝 借阅记录</h3>
         <div class="borrow-list">
-            <div class="borrow-card" th:each="borrinfo : ${borrowInfo}">
+            <div class="borrow-card" th:each="bInfo : ${borrowInfo}">
                 <div class="borrow-main">
                     <div class="borrow-title">
-                        <span th:text="'书名：' + ${borrinfo.bookName}"></span> -
-                        <span th:text="'作者：' + ${borrinfo.author}"></span>
+                        <span th:text="'书名：' + ${bInfo.bookName}"></span> -
+                        <span th:text="'作者：' + ${bInfo.author}"></span>
                     </div>
                     <div class="borrow-meta">
-                        <span th:text="'借阅日期：' + ${borrinfo.borrowDate}"></span>
-                        <span th:if="${borrinfo.returnDate}" th:text="'应还日期：' + ${borrinfo.returnDate}"></span>
-                        <span th:if="${borrinfo.returnDate} == null">尚未归还</span>
+                        <span th:text="'借阅日期：' + ${bInfo.borrowDate}"></span>
+                        <span th:if="${bInfo.returnDate}" th:text="'应还日期：' + ${bInfo.returnDate}"></span>
+                        <span th:if="${bInfo.returnDate} == null">尚未归还</span>
                     </div>
                 </div>
             </div>
@@ -72,10 +72,10 @@
     </div>
 
 
-    <div id="mybook" class="content-section">
+    <div id="myBook" class="content-section">
         <h3>📚 已借到的图书</h3>
         <div class="book-list">
-            <div class="book-card" th:each="book : ${userbooks}"
+            <div class="book-card" th:each="book : ${userBooks}"
                  th:attr="data-id=${book.id},
                           data-isbn=${book.ISBN},
                           data-title=${book.bookName},
@@ -175,12 +175,12 @@
         <p id="overlay-number"></p>
         <p id="overlay-desc"></p>
         <form id="borrowForm" action="/borrowBook" method="post" style="float: left; padding-left: 17%;">
-            <input id="borrowBookId" name="bookid" type="hidden" />
+            <input id="borrowBookId" name="bookId" type="hidden" />
             <button id="borrowButton">📖 借阅</button>
         </form>
         <form id="returnForm" action="/returnBook" method="post" style="float: left; padding-left: 17%;">
-            <input id="returnbookid" name="bookid" type="hidden" />
-            <button id="returnbutton">📖 归还</button>
+            <input id="returnBookId" name="bookId" type="hidden" />
+            <button id="returnButton">📖 归还</button>
         </form>
         <button onclick="closeOverlay('overlay')">❌ 关闭</button>
     </div>
@@ -217,8 +217,8 @@
     <div class="overlay-content">
         <h2>创建工单</h2>
         <form action="/addTicket" method="post">
-            <label for="ticketname">工单名:</label>
-            <input id="ticketname" name="ticketName" type="text" style="width: 80%;"/><br>
+            <label for="ticketName">工单名:</label>
+            <input id="ticketName" name="ticketName" type="text" style="width: 80%;"/><br>
             <label for="rank">级别:</label>
             <select id="rank" name="ticketRank" style="width: 15%;">
                 <option>高</option>

@@ -59,14 +59,14 @@
                     <div class="book-title" >
                         <span th:text="${book.bookName} "></span>
                         <span>-</span>
-                        <span th:text="${book.author}">作者</span>
+                        <span th:text="${book.author}"></span>
                     </div>
                     <div class="book-meta">
-                        <span th:text="'类型：' + ${book.bookType}">类型</span>
-                        <span th:text="'出版社：' + ${book.publisher}">出版社</span>
-                        <span th:text="'出版时间：' + ${book.publishedDate}">出版社</span>
-                        <span th:text="'数量：' + ${book.bookNumber}">数量</span>
-                        <span th:text="'ISBN：' + ${book.ISBN}">ISBN</span>
+                        <span th:text="'类型：' + ${book.bookType}"></span>
+                        <span th:text="'出版社：' + ${book.publisher}"></span>
+                        <span th:text="'出版时间：' + ${book.publishedDate}"></span>
+                        <span th:text="'数量：' + ${book.bookNumber}"></span>
+                        <span th:text="'ISBN：' + ${book.ISBN}"></span>
                     </div>
                 </div>
                 <div class="book-actions">
@@ -110,10 +110,10 @@
                           data-email=${user.email},
                           data-power=${user.power}">
                 <div class="user-info">
-                    <div class="user-name" th:text="${user.username}">用户名</div>
+                    <div class="user-name" th:text="${user.username}"></div>
                     <div class="user-meta">
-                        <span th:text="'手机号：' + ${user.phone}">手机号</span>
-                        <span th:text="'邮箱：' + ${user.email}">邮箱</span>
+                        <span th:text="'手机号：' + ${user.phone}"></span>
+                        <span th:text="'邮箱：' + ${user.email}"></span>
                     </div>
                 </div>
                 <div class="user-actions">
@@ -137,9 +137,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="ticket, iterStat : ${tickets}">
-                    <td th:text="${iterStat.index + 1}">1</td>
-                    <td th:text="${ticket.ticketName}">主题</td>
-                    <td th:text="${ticket.ticketRank}">高</td>
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${ticket.ticketName}"></td>
+                    <td th:text="${ticket.ticketRank}"></td>
                     <td>
                         <div th:unless="${ticket.isClosed}">
                             <span class="status-dot-waiting"></span>
@@ -150,8 +150,8 @@
                             <span>已完成</span>
                         </div>
                     </td>
-                    <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
-                    <td th:text="${ticket.userId}">user id</td>
+                    <td th:text="${ticket.createDate}"></td>
+                    <td th:text="${ticket.userId}"></td>
                     <td>
                         <span class="view-link"
                               th:attr="data-id=${ticket.id},

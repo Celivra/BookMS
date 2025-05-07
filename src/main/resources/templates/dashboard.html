@@ -117,7 +117,6 @@
                                 <span class="status-dot-complete"></span>
                                 <span>已完成</span>
                             </div>
-
                         </td>
                         <td th:text="${ticket.createDate}">2025/04/14 13:50:01</td>
                         <td th:text="${ticket.replyDate}">2025/04/16 09:54:02</td>
@@ -167,14 +166,14 @@
 
 <div id="overlay" class="overlay" style="display: none;">
     <div id="overlay-content" class="overlay-content">
-        <h2 id="overlay-title">书名</h2>
-        <p id="overlay-author">作者：xxx</p>
-        <p id="overlay-type">类型：xxx</p>
-        <p id="overlay-ISBN">ISBN：xxx</p>
-        <p id="overlay-publisher">出版社：xxx</p>
-        <p id="overlay-publishedDate">出版日期：xxx</p>
-        <p id="overlay-number">剩余数量：xxx</p>
-        <p id="overlay-desc">简介：xxx</p>
+        <h2 id="overlay-title"></h2>
+        <p id="overlay-author"></p>
+        <p id="overlay-type"></p>
+        <p id="overlay-ISBN"></p>
+        <p id="overlay-publisher"></p>
+        <p id="overlay-publishedDate"></p>
+        <p id="overlay-number"></p>
+        <p id="overlay-desc"></p>
         <form id="borrowForm" action="/borrowBook" method="post" style="float: left; padding-left: 17%;">
             <input id="borrowBookId" name="bookid" type="hidden" />
             <button id="borrowButton">📖 借阅</button>
@@ -238,10 +237,10 @@
     <div class="overlay-content">
         <h2>工单</h2>
         <p style="text-align: left">内容:</p><br>
-        <textarea id="showTicket-content" style="width: 90%; height: 100px" disabled>content</textarea><br>
+        <textarea id="showTicket-content" style="width: 90%; height: 100px" disabled></textarea><br>
 
         <p style="text-align: left">回复:</p><br>
-        <textarea id="showTicket-reply" style="width: 90%; height: 100px" disabled>reply</textarea><br>
+        <textarea id="showTicket-reply" style="width: 90%; height: 100px" disabled></textarea><br>
 
         <button onclick="closeOverlay('showTicket')">关闭</button>
     </div>

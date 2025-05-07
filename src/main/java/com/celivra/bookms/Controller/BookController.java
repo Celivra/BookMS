@@ -48,7 +48,9 @@ public class BookController {
 
     @PostMapping("/deleteBook")
     public String deleteBook(@RequestParam String bookId, RedirectAttributes reAModel) {
-        bookService.deleteBook(bookId);
+        if(!bookService.deleteBook(bookId)){
+            reAModel.addFlashAttribute("DeleteBook", "删除失败");
+        }
         reAModel.addFlashAttribute("activeSection", "books");
         return "redirect:/";
     }

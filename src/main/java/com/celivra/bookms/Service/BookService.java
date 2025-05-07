@@ -31,6 +31,9 @@ public class BookService {
 
     //删除图书
     public boolean deleteBook(String bookId) {
+        Book book = bookMapper.getBookById(bookId);
+        if(book == null) return false;
+
         borrowMapper.deleteBorrowByBook(bookId);
         return bookMapper.deleteBook(bookId);
     }
